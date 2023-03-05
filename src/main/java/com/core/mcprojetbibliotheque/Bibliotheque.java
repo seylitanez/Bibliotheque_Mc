@@ -1,4 +1,8 @@
 package com.core.mcprojetbibliotheque;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Bibliotheque {
     private List<Livre> livres;
     private List<Abonne> abonnes;

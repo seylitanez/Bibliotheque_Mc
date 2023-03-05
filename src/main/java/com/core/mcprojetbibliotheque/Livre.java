@@ -1,5 +1,7 @@
 package com.core.mcprojetbibliotheque;
 
+import java.util.List;
+
 public class Livre {
     private String titre;
     private String auteur;
