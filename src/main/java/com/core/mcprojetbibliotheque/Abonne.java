@@ -26,5 +26,7 @@ public abstract class Abonne {
         public void setNbEmprunts(int nbEmprunts) {
             this.nbEmprunts = nbEmprunts;
         }
+          public abstract boolean peutEmprunter();
+}
 
-    }
+
