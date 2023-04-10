@@ -1,6 +1,6 @@
 package com.core.mcprojetbibliotheque.Model;
 import java.util.Date;
-class Abonne {
+public class Abonne {
     private String nom,prenom,password,categorie;
     private Date dateInscription;
     private int nombreLivresEmpruntes;
