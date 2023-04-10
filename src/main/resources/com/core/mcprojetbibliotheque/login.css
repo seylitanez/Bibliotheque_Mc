@@ -1,0 +1,25 @@
+.inscrire:hover{
+    -fx-background-color:#d89b5a;
+    -fx-text-fill: white;
+    -fx-font-family: "Agency FB";
+    -fx-font-size: 17px;
+}
+.inscrire{
+    -fx-background-color:#ffff;
+    -fx-text-fill: #d89b5a;
+    -fx-font-family: "Niagara Solid";
+    -fx-font-family: "Agency FB";
+    -fx-font-size: 17px;
+}
+.username{
+    -fx-font-family: "Niagara Solid";
+}
+.password{
+    -fx-font-family: "Niagara Solid";
+}
+.login{
+    -fx-font-family: "Niagara Solid";
+}
+.connexion{
+    -fx-font-family: "Niagara Solid";
+}
