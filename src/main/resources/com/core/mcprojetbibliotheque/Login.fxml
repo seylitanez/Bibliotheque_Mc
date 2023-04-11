@@ -10,8 +10,8 @@
    <children>
       <AnchorPane layoutX="94.0" layoutY="50.0" prefHeight="358.0" prefWidth="586.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: #fcfcfc;">
          <children>
-            <TextField layoutX="378.0" layoutY="152.0" promptText="ecrire ici" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
-            <Button layoutX="350.0" layoutY="245.0" mnemonicParsing="false" style="-fx-background-color: #d89b5a;" text="Connect" textFill="WHITE">
+            <TextField fx:id="username" layoutX="378.0" layoutY="152.0" promptText="ecrire ici" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
+            <Button  layoutX="350.0" layoutY="245.0" mnemonicParsing="false" style="-fx-background-color: #d89b5a;" text="Connect" textFill="WHITE" >
                <font>
                   <Font name="Agency FB" size="17.0" />
                </font>
@@ -36,7 +36,7 @@
                   <Image url="@Student-Discussing-in-library.png" />
                </image>
             </ImageView>
-            <Button layoutX="430.0" layoutY="244.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" style="-fx-border-color: #d89b5a; -fx-border-radius: 4;" styleClass="inscrire" stylesheets="@login.css" text="s'inscrire" textFill="#d89b5a">
+            <Button fx:id="inscription" onAction="#inscrire" layoutX="430.0" layoutY="244.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" style="-fx-border-color: #d89b5a; -fx-border-radius: 4;" styleClass="inscrire" stylesheets="@login.css" text="s'inscrire" textFill="#d89b5a">
                <font>
                   <Font name="Agency FB" size="17.0" />
                </font>
@@ -60,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TextField layoutX="378.0" layoutY="192.0" promptText="ecrire ici" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
+            <TextField fx:id="password" layoutX="378.0" layoutY="192.0" promptText="ecrire ici" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
          </children></AnchorPane>
    </children>
 </AnchorPane>
