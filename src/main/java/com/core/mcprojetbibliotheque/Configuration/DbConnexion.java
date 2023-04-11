@@ -23,6 +23,9 @@ public class DbConnexion {
         this.usr=properties.getProperty("USERNAME");
         this.pwd=properties.getProperty("PASSWORD");
 
+        System.out.println(dirver);
+        System.out.println(url);
+        System.out.println(pwd);
 
 
     }

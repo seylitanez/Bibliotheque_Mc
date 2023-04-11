@@ -2,6 +2,7 @@ module com.core.mcprojetbibliotheque {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires org.apache.commons.io;
 
 
     opens com.core.mcprojetbibliotheque to javafx.fxml;
