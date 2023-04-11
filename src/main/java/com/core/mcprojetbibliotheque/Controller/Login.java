@@ -43,10 +43,8 @@ public class Login implements Initializable {
 //        var cnx= dbConnexion.getConnection();
 //        var preparedStatement=cnx.prepareStatement("select * from utilisateur;");
 //        ResultSet resultSet= preparedStatement.executeQuery();
-//
 //        while(resultSet.next()) {
 //        var username= resultSet.getString("username");
-//
 //        if (resultSet.isLast()){
 //            var photoStream=resultSet.getBlob("photo").getBinaryStream();
 //             image.setImage(new Image(photoStream));
