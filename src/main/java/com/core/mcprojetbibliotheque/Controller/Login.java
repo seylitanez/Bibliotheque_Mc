@@ -1,30 +1,27 @@
 package com.core.mcprojetbibliotheque.Controller;
 
-import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
+import com.core.mcprojetbibliotheque.Service.ConnectionService;
+import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.Window;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
-public class Login {
+import java.io.*;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-
+public class Login implements Initializable {
     private Stage stage;
-    private DbConnexion dbConnexion=new DbConnexion();
+    private double x,y;
+    private ConnectionService connectionService;
+    private WindowEffect effect;
+    @FXML
+    private AnchorPane main;
     @FXML
     private Button inscription;
     @FXML
@@ -32,12 +29,16 @@ public class Login {
     @FXML
     private ImageView image;
 
-    public Login() throws IOException {
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        effect=new WindowEffect(stage,main);
+        try{connectionService=new ConnectionService();
+        }catch (Exception e){e.printStackTrace();}
     }
 
-    public void connect() throws SQLException, ClassNotFoundException, FileNotFoundException {
-        System.out.println("login");
+    public Login() throws IOException {}
+
+    public void connect() throws Exception {
 ////        image.setImage(new Image());
 //        var cnx= dbConnexion.getConnection();
 //        var preparedStatement=cnx.prepareStatement("select * from utilisateur;");
@@ -51,53 +52,31 @@ public class Login {
 //             image.setImage(new Image(photoStream));
 //            }
 //        }
-
         FileChooser fileChooser=new FileChooser();
         fileChooser.setTitle("Certificat de scolarite");
-
         var file=fileChooser.showOpenDialog(Window.getWindows().get(0));
-
              image.setImage(new Image(new FileInputStream(file)));
-
-
         System.out.println(file.getPath());
-
     }
-
-
     public void exit(ActionEvent e) {
-        stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
-        stage.close();
-
-
+        effect.exit(e);
     }
-
-    public void inscrire(ActionEvent actionEvent) throws SQLException, ClassNotFoundException, FileNotFoundException {
-
+    public void dragged(MouseEvent e) {
+        effect.dragged(e);
+    }
+    public void presse(MouseEvent e) {
+        effect.pressed(e);
+    }
+    public void cache(ActionEvent e) {
+        effect.cache(e);
+    }
+    public void inscrire(ActionEvent actionEvent) throws Exception {
         var username=this.username.getText();
         var password=this.password.getText();
-
         if(!username.isEmpty() && !password.isEmpty()) {
-            try (var cnx =dbConnexion.getConnection()){
-
-
-            PreparedStatement statement = cnx.prepareStatement(AJOUT_UTILISATEUR);
-
-            statement.setString(1, username);
-            statement.setString(2, password);
-
-            statement.setBlob(3,new FileInputStream("C:\\Users\\lyes\\Desktop\\one_piece.jpg"));
-
-            statement.execute();
             //reinitialisation
             this.username.setText("");
             this.password.setText("");
-            System.out.println("utilisateur ajoute avec succes");
-
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }
         }
-
     }
 }
