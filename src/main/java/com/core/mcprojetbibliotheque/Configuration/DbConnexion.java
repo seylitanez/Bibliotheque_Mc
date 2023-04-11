@@ -13,7 +13,7 @@ public class DbConnexion {
     private String dirver,url,usr,pwd;
 
     public DbConnexion() throws IOException {
-        FileInputStream propFile=new FileInputStream("src/main/resources/application.properties");
+        FileInputStream propFile=new FileInputStream(String.valueOf(getClass().getResource("application.properties")));
         Properties properties=new Properties();
         properties.load(propFile);
         this.dirver=properties.getProperty("DATABASE_DRIVER");
@@ -21,8 +21,6 @@ public class DbConnexion {
         this.usr=properties.getProperty("USERNAME");
         this.pwd=properties.getProperty("PASSWORD");
     }
-
-
     public Connection getConnection() throws Exception {
         Class.forName(dirver);
         return DriverManager.getConnection(url,usr,pwd);
