@@ -72,6 +72,7 @@ public class Login implements Initializable {
         var username=this.username.getText();
         var password=this.password.getText();
         if(!username.isEmpty() && !password.isEmpty()) {
+            connectionService.login(username,password);
             //reinitialisation
             this.username.setText("");
             this.password.setText("");
