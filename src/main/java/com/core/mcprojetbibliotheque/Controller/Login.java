@@ -1,42 +1,45 @@
 package com.core.mcprojetbibliotheque.Controller;
 
-import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
+import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.sql.*;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
-public class Login {
+public class Login implements Initializable {
     private Stage stage;
-    private DbConnexion dbConnexion=new DbConnexion();
     @FXML
     private Button inscription;
     @FXML
     private TextField username,password;
-
-    public Login() throws IOException {
+    private ConnectionService connectionService;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            ConnectionService connectionService=new ConnectionService();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-
+    public Login() throws Exception {
+    }
     public void exit(ActionEvent e) {
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
         stage.close();
     }
-
     public void inscrire(ActionEvent actionEvent) throws Exception {
         var username=this.username.getText();
         var password=this.password.getText();
         System.out.println(username);
         if(!username.isEmpty() && !password.isEmpty()) {
-            var cnx = dbConnexion.getConnection();
-            PreparedStatement statement = cnx.prepareStatement(AJOUT_UTILISATEUR);
-            statement.setString(1, username);
-            statement.setString(2, password);
-            System.out.println("utilisateur ajoute avec succes");
+            connectionService.login(username,password);
             inscription.setText("s'inscrire");
             //reinitialisation
             this.username.setText("");
