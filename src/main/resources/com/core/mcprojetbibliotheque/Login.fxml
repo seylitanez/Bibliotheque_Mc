@@ -33,7 +33,7 @@
                </font></Label>
             <ImageView fx:id="image" fitHeight="336.0" fitWidth="427.0" layoutX="-97.0" layoutY="-49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Student-Discussing-in-library.png" />
+                  <Image url="@images/Student-Discussing-in-library.png" />
                </image>
             </ImageView>
             <Button fx:id="inscription" layoutX="430.0" layoutY="244.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="36.0" prefWidth="129.0" style="-fx-border-color: #d89b5a; -fx-border-radius: 4;" styleClass="inscrire" stylesheets="@login.css" text="s'inscrire" textFill="#d89b5a">

@@ -1,14 +1,12 @@
-.inscrire:hover{
+
+.inscrire{
     -fx-background-color:#d89b5a;
     -fx-text-fill: white;
-    -fx-font-family: "Agency FB";
-    -fx-font-size: 17px;
-
-}
-.inscrire{
-    -fx-background-color:#ffff;
-    -fx-text-fill: #d89b5a;
     -fx-font-family: "Niagara Solid";
     -fx-font-family: "Agency FB";
     -fx-font-size: 17px;
+}
+.plus{
+    -fx-border-radius:4px;
+    -fx-border-color:black;
 }

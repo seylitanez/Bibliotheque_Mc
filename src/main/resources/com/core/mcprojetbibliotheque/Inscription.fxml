@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="599.0" prefWidth="891.0" style="-fx-background-color: transparent; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.Inscription" stylesheets="inscription.css">
+<AnchorPane prefHeight="599.0" prefWidth="891.0" style="-fx-background-color: transparent; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.Inscription">
     <children>
-        <AnchorPane layoutX="44.0" layoutY="20.0" prefHeight="569.0" prefWidth="818.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;">
+        <AnchorPane layoutX="44.0" layoutY="20.0" prefHeight="569.0" prefWidth="818.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;" stylesheets="@inscription.css">
             <children>
                 <TextField layoutX="508.0" layoutY="192.0" promptText="username" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
                 <Label layoutX="429.0" layoutY="189.0" styleClass="username" stylesheets="@login.css" text="username">
@@ -26,10 +26,10 @@
                     </font></Label>
                 <ImageView fitHeight="336.0" fitWidth="427.0" layoutX="14.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@inscription.png" />
+                        <Image url="@images/inscription.png" />
                     </image>
                 </ImageView>
-                <Button layoutX="520.0" layoutY="481.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="129.0" style="-fx-border-color: #d89b5a; -fx-border-radius: 4;" styleClass="inscrire" stylesheets="@login.css" text="s'inscrire" textFill="#d89b5a">
+                <Button layoutX="466.0" layoutY="499.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="215.0" styleClass="inscrire" stylesheets="@inscription.css" text="s'inscrire" textFill="WHITE" onAction="#inscrire">
                     <font>
                         <Font name="Agency FB" size="17.0" />
                     </font>
@@ -54,10 +54,6 @@
                     </cursor>
                 </Button>
                 <TextField layoutX="508.0" layoutY="236.0" promptText="*********" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
-            <ImageView fitHeight="96.0" fitWidth="99.0" layoutX="537.0" layoutY="363.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@plus.png" />
-               </image></ImageView>
             <Label layoutX="430.0" layoutY="280.0" styleClass="password" stylesheets="@login.css" text="Email">
                <font>
                   <Font name="JetBrains Mono Bold" size="26.0" />
@@ -76,7 +72,24 @@
                   <Font name="JetBrains Mono Bold" size="26.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="509.0" layoutY="321.0" prefWidth="150.0" />
+            <ChoiceBox layoutX="509.0" layoutY="323.0" prefWidth="150.0" />
+            <Label layoutX="426.0" layoutY="320.0" styleClass="password" stylesheets="@login.css" text="Categorie">
+               <font>
+                  <Font name="JetBrains Mono Bold" size="26.0" />
+               </font>
+            </Label>
+            <BorderPane layoutX="522.0" layoutY="360.0" prefHeight="110.0" prefWidth="124.0" style="-fx-border-color: black; -fx-border-radius: 8px;">
+               <center>
+                  <ImageView fx:id="certificat" fitHeight="96.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" styleClass="plus" BorderPane.alignment="CENTER" onMouseClicked="#certificat">
+                     <image>
+                        <Image url="@images/plus.png" />
+                     </image>
+                  </ImageView>
+               </center>
+               <bottom>
+                  <Label text="Certificat de Scolarite" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
             </children></AnchorPane>
     </children>
 </AnchorPane>
