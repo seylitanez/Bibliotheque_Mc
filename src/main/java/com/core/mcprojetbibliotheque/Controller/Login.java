@@ -16,8 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Login implements Initializable {
-    private Stage stage;
-    private double x,y;
     private ConnectionService connectionService;
     private WindowEffect effect;
     @FXML
@@ -31,7 +29,7 @@ public class Login implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        effect=new WindowEffect(stage,main);
+        effect=new WindowEffect(main);
         try{connectionService=new ConnectionService();
         }catch (Exception e){e.printStackTrace();}
     }

@@ -16,8 +16,7 @@ public class WindowEffect {
     private AnchorPane main;
     private double x,y;
 
-    public WindowEffect(Stage stage, AnchorPane main) {
-        this.stage = stage;
+    public WindowEffect( AnchorPane main) {
         this.main = main;
     }
     public void exit(ActionEvent e){
