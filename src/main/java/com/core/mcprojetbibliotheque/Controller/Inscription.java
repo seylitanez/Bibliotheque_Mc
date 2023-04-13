@@ -26,14 +26,10 @@ public class Inscription implements Initializable {
     private WindowEffect effect;
     @FXML
     private AnchorPane main;
-
-
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
-
     }
-
     public void inscrire(ActionEvent actionEvent) {
         System.out.println("inscrire");
     }
@@ -59,18 +55,14 @@ public class Inscription implements Initializable {
         var file= fileChooser.showOpenDialog(Window.getWindows().get(0));
         certificat.setImage(new Image(new FileInputStream(file)));
     }
-
     public void onDragDropped(DragEvent dragEvent) throws FileNotFoundException {
         System.out.println("drag");
         var file=dragEvent.getDragboard().getFiles().get(0);
         if (file.getPath().contains(".jpg") || file.getPath().contains(".png") || file.getPath().contains(".bmp")){
-        System.out.println(file.getPath());
-        certificat.setImage(new Image(new FileInputStream(file)));
+            System.out.println(file.getPath());
+            certificat.setImage(new Image(new FileInputStream(file)));
         }
-
-
     }
-
     public void onDragOver(DragEvent dragEvent) {
         dragEvent.acceptTransferModes(TransferMode.ANY);
     }

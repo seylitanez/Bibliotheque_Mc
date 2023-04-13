@@ -4,6 +4,7 @@ module com.core.mcprojetbibliotheque {
     requires java.sql;
     requires org.apache.commons.io;
     requires AnimateFX;
+    requires net.dv8tion.jda;
 
     opens com.core.mcprojetbibliotheque to javafx.fxml;
     exports com.core.mcprojetbibliotheque;
