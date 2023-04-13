@@ -6,8 +6,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -16,6 +19,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class Inscription implements Initializable {
+    @FXML
+    private BorderPane borderPane;
     @FXML
     public ImageView certificat;
     private WindowEffect effect;
@@ -26,6 +31,7 @@ public class Inscription implements Initializable {
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
+
     }
 
     public void inscrire(ActionEvent actionEvent) {
@@ -52,5 +58,18 @@ public class Inscription implements Initializable {
         fileChooser.setTitle("Certificat de Scolarite");
         fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images","*.png","*.png","*.bmp"));
         certificat.setImage(new Image(new FileInputStream(file)));
+    }
+
+    public void onDragDropped(DragEvent dragEvent) throws FileNotFoundException {
+        System.out.println("drag");
+        var file=dragEvent.getDragboard().getFiles().get(0);
+        System.out.println(file.getPath());
+        certificat.setImage(new Image(new FileInputStream(file)));
+
+
+    }
+
+    public void onDragOver(DragEvent dragEvent) {
+        dragEvent.acceptTransferModes(TransferMode.ANY);
     }
 }

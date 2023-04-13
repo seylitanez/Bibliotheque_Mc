@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="639.0" prefWidth="1018.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestionnaireAbonnes">
+    <children>
+        <AnchorPane layoutX="18.0" layoutY="16.0" prefHeight="604.0" prefWidth="969.0" styleClass="background">
+            <children>
+                <AnchorPane layoutX="308.0" layoutY="107.0" prefHeight="369.0" prefWidth="570.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0); -fx-background-color: white; -fx-background-radius: 5px;">
+                    <children>
+                        <TableView layoutX="22.0" layoutY="70.0" prefHeight="276.0" prefWidth="514.0" style="-fx-background-color: white; -fx-border-color: #d89b5a; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-radius: 5px;">
+                            <columns>
+                                <TableColumn prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="Nom" />
+                                <TableColumn prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="prenom" />
+                                <TableColumn prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="categorie" />
+                                <TableColumn prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="email" />
+                                <TableColumn prefWidth="205.800048828125" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="statut" />
+                            </columns>
+                        </TableView>
+                        <Label layoutX="46.0" layoutY="14.0" style="-fx-text-fill: #d89b5a;" text="Liste d'attente">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
