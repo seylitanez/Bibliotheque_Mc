@@ -1,0 +1,19 @@
+.background{
+    -fx-background-color: white;
+    -fx-border-radius:4px;
+    -fx-border-color:#d89b5a;
+    -fx-background-radius:4px;
+}
+.nav{
+    -fx-background-color: #d89b5a;
+    -fx-background-radius:15px;
+}
+.nav__element:hover{
+    -fx-background-color: white;
+    -fx-text-fill:#d89b5a;
+}
+.card{
+    -fx-background-color: white;
+    -fx-border-radius:4px;
+    -fx-border-color:#d89b5a;
+}

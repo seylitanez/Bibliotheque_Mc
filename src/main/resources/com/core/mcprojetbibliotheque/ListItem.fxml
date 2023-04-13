@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="78.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.ListItem">
+   <children>
+      <ImageView fitHeight="101.0" fitWidth="113.0" layoutX="27.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
