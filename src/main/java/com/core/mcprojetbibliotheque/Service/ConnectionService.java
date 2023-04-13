@@ -19,7 +19,7 @@ public class ConnectionService {
             PreparedStatement statement = cnx.prepareStatement(AJOUT_UTILISATEUR);
             statement.setString(1, username);
             statement.setString(2, password);
-            statement.setBlob(3,new FileInputStream("C:\\Users\\lyes\\Desktop\\one_piece.jpg"));
+            statement.setBlob(3,new FileInputStream("src\\main\\resources\\com\\core\\mcprojetbibliotheque/images/Book.png"));
             statement.execute();
         }catch (Exception e){e.printStackTrace();}
         return new Abonne("","","","",new Date());
