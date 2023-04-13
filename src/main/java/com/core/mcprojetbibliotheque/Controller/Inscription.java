@@ -29,10 +29,8 @@ public class Inscription implements Initializable {
     public void certificat(MouseEvent mouseEvent) throws FileNotFoundException {
         FileChooser fileChooser=new FileChooser();
         var file= fileChooser.showOpenDialog(Window.getWindows().get(0));
-
         fileChooser.setTitle("Certificat de Scolarite");
         fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images","*.png","*.png","*.bmp"));
         certificat.setImage(new Image(new FileInputStream(file)));
-
     }
 }

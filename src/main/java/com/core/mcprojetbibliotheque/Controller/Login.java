@@ -36,25 +36,15 @@ public class Login implements Initializable {
         }catch (Exception e){e.printStackTrace();}
     }
 
-    public Login() throws IOException {}
-
     public void connect() throws Exception {
-////        image.setImage(new Image());
-//        var cnx= dbConnexion.getConnection();
-//        var preparedStatement=cnx.prepareStatement("select * from utilisateur;");
-//        ResultSet resultSet= preparedStatement.executeQuery();
-//        while(resultSet.next()) {
-//        var username= resultSet.getString("username");
-//        if (resultSet.isLast()){
-//            var photoStream=resultSet.getBlob("photo").getBinaryStream();
-//             image.setImage(new Image(photoStream));
-//            }
-//        }
-        FileChooser fileChooser=new FileChooser();
-        fileChooser.setTitle("Certificat de scolarite");
-        var file=fileChooser.showOpenDialog(Window.getWindows().get(0));
-             image.setImage(new Image(new FileInputStream(file)));
-        System.out.println(file.getPath());
+        var username=this.username.getText();
+        var password=this.password.getText();
+        if(!username.isEmpty() && !password.isEmpty()) {
+            connectionService.login(username,password);
+            //reinitialisation
+            this.username.setText("");
+            this.password.setText("");
+        }
     }
     public void exit(ActionEvent e) {
         effect.exit(e);
@@ -69,13 +59,6 @@ public class Login implements Initializable {
         effect.cache(e);
     }
     public void inscrire(ActionEvent actionEvent) throws Exception {
-        var username=this.username.getText();
-        var password=this.password.getText();
-        if(!username.isEmpty() && !password.isEmpty()) {
-            connectionService.login(username,password);
-            //reinitialisation
-            this.username.setText("");
-            this.password.setText("");
-        }
+        effect.switchStage(actionEvent,"inscription.fxml");
     }
 }

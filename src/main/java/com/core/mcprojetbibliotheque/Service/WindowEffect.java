@@ -1,7 +1,10 @@
 package com.core.mcprojetbibliotheque.Service;
 
+import com.core.mcprojetbibliotheque.HelloApplication;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -9,6 +12,7 @@ import animatefx.animation.*;
 
 public class WindowEffect {
     private Stage stage;
+    private Parent scene;
     private AnchorPane main;
     private double x,y;
 
@@ -40,5 +44,11 @@ public class WindowEffect {
     public void pressed(MouseEvent e){
         x=e.getSceneX();
         y=e.getSceneY();
+    }
+    public void switchStage(ActionEvent e,String fxml) throws Exception{
+        stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
+        scene= FXMLLoader.load(HelloApplication.class.getResource(fxml));
+        stage.getScene().setRoot(scene);
+        stage.show();
     }
 }
