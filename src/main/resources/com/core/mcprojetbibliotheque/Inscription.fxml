@@ -83,7 +83,7 @@
                   <Font name="JetBrains Mono Bold" size="26.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="509.0" layoutY="323.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="categorie" layoutX="509.0" layoutY="323.0" prefWidth="150.0" />
             <Label layoutX="426.0" layoutY="320.0" styleClass="password" stylesheets="@login.css" text="Categorie">
                <font>
                   <Font name="JetBrains Mono Bold" size="26.0" />

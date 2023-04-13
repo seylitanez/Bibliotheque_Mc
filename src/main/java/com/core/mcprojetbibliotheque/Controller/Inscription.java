@@ -26,6 +26,9 @@ public class Inscription implements Initializable {
     private WindowEffect effect;
     @FXML
     private AnchorPane main;
+
+    @FXML
+    private
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
