@@ -54,17 +54,19 @@ public class Inscription implements Initializable {
     }
     public void certificat(MouseEvent mouseEvent) throws FileNotFoundException {
         FileChooser fileChooser=new FileChooser();
-        var file= fileChooser.showOpenDialog(Window.getWindows().get(0));
         fileChooser.setTitle("Certificat de Scolarite");
-        fileChooser.setSelectedExtensionFilter(new FileChooser.ExtensionFilter("Images","*.png","*.png","*.bmp"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images","*.png","*.png","*.bmp"));
+        var file= fileChooser.showOpenDialog(Window.getWindows().get(0));
         certificat.setImage(new Image(new FileInputStream(file)));
     }
 
     public void onDragDropped(DragEvent dragEvent) throws FileNotFoundException {
         System.out.println("drag");
         var file=dragEvent.getDragboard().getFiles().get(0);
+        if (file.getPath().contains(".jpg") || file.getPath().contains(".png") || file.getPath().contains(".bmp")){
         System.out.println(file.getPath());
         certificat.setImage(new Image(new FileInputStream(file)));
+        }
 
 
     }
