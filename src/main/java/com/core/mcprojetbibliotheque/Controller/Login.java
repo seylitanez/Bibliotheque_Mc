@@ -9,9 +9,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.*;
-
-import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
