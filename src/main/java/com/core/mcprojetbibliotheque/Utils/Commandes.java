@@ -28,6 +28,7 @@ public class Commandes extends ListenerAdapter {
                     event.getJDA().getTextChannelById("1096178322393804871").sendFiles(FileUpload.fromData(file)).queue(message -> {
                         pathOut=message.getAttachments().get(0).getUrl();
                         System.out.println(message.getAttachments().get(0).getUrl());
+
                     });
             System.out.println("file sent");
         }catch (Exception e){

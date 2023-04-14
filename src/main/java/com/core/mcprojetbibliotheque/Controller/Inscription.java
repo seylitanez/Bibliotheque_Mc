@@ -1,5 +1,6 @@
 package com.core.mcprojetbibliotheque.Controller;
 
+import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
 import com.core.mcprojetbibliotheque.Service.AuthentificationService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.Commandes;
@@ -26,9 +27,12 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.SQLException;
 
 public class Inscription implements Initializable {
 
+    private DbConnexion dbConnexion;
 
     @FXML
     private TextField nom,prenom,username,email,password;
@@ -54,10 +58,15 @@ public class Inscription implements Initializable {
         categorie.getItems().add("Enseignant");
         categorie.setValue("Etudiant");
 
+        try {
+            dbConnexion=new DbConnexion();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         authentificationService=new AuthentificationService();
         effect=new WindowEffect(main);
     }
-    public void inscrire(ActionEvent actionEvent) throws InterruptedException {
+    public void inscrire(ActionEvent actionEvent) throws InterruptedException, SQLException, ClassNotFoundException {
 
         var nom=this.nom.getText();
         var prenom=this.prenom.getText();
@@ -65,12 +74,15 @@ public class Inscription implements Initializable {
         var email=this.email.getText();
         var password=this.password.getText();
 
-//        var categorie=this.categorie.getItems().get(0);
+        var categorie=this.categorie.getSelectionModel().getSelectedItem();
 
+            var connexion=dbConnexion.getConnection();
         System.out.println("chargement...");
-        String urlPhotoBaseDonne=authentificationService.inscription(nom,prenom,username,email,password,"INTERNE",certificatFile);
+        String urlPhotoBaseDonne=authentificationService.inscription(nom,prenom,username,email,password,categorie,certificatFile,connexion);
 
         System.out.println("voici url:"+urlPhotoBaseDonne);
+
+
 
 
     }
