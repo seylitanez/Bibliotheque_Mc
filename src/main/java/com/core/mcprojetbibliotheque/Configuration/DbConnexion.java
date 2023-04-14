@@ -10,7 +10,6 @@ import java.util.Properties;
 
 public class DbConnexion {
     private String driver,url,usr,pwd;
-
     public DbConnexion() throws IOException {
         FileInputStream propFile=new FileInputStream("src/main/resources/application.properties");
         Properties properties=new Properties();
@@ -20,7 +19,6 @@ public class DbConnexion {
         this.usr=properties.getProperty("USERNAME");
         this.pwd=properties.getProperty("PASSWORD");
     }
-
     public Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
         return DriverManager.getConnection(url,usr,pwd);
