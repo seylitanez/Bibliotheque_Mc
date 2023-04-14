@@ -1,5 +1,5 @@
 package com.core.mcprojetbibliotheque;
-import com.core.mcprojetbibliotheque.Model.Commandes;
+import com.core.mcprojetbibliotheque.Utils.Commandes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,12 +21,6 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.show();
-        JDABuilder jdab= JDABuilder.createDefault("MTA5NjE3NzczMzkzNzEzNTc0Ng.Gzj8qY.YIiHfiv0Tta1E5zoMlEtakrTt1gkF2BMAEDiek");
-        jdab.enableIntents(GatewayIntent.MESSAGE_CONTENT);
-        jdab.addEventListeners(new Commandes());
-        jdab.setStatus(OnlineStatus.ONLINE);
-        JDA jda=jdab.build();
-        jda.updateCommands();
     }
     public static void main(String[] args) {
         launch();

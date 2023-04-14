@@ -26,6 +26,7 @@ public class WindowEffect {
         stage=(Stage)((Node)e.getSource()).getScene().getWindow();
         afx.setOnFinished(actionEvent->	stage.close());
         afx.play();
+        System.exit(0);
     }
     public void cache(ActionEvent e) {
         AnimationFX afx=new ZoomOutDown(main);

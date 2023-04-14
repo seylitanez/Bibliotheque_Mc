@@ -10,7 +10,7 @@
     <children>
         <AnchorPane layoutX="100.0" layoutY="35.0" prefHeight="569.0" prefWidth="818.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;" stylesheets="@inscription.css">
             <children>
-                <TextField layoutX="508.0" layoutY="192.0" promptText="username" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
+                <TextField id="username" fx:id="username" layoutX="508.0" layoutY="192.0" promptText="username" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
                 <Label layoutX="429.0" layoutY="189.0" styleClass="username" stylesheets="@login.css" text="username">
                     <font>
                         <Font name="JetBrains Mono Bold" size="26.0" />
@@ -64,26 +64,26 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <TextField layoutX="508.0" layoutY="236.0" promptText="*********" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
+                <TextField id="password" fx:id="password" layoutX="508.0" layoutY="236.0" promptText="*********" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
             <Label layoutX="430.0" layoutY="280.0" styleClass="password" stylesheets="@login.css" text="Email">
                <font>
                   <Font name="JetBrains Mono Bold" size="26.0" />
                </font>
             </Label>
-            <TextField layoutX="508.0" layoutY="280.0" promptText="email@exemple.com" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
-            <TextField layoutX="509.0" layoutY="104.0" prefHeight="27.0" prefWidth="151.0" promptText="nom" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
+            <TextField id="email" fx:id="email" layoutX="508.0" layoutY="280.0" promptText="email@exemple.com" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
+            <TextField id="nom" fx:id="nom" layoutX="509.0" layoutY="104.0" prefHeight="27.0" prefWidth="151.0" promptText="nom" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
             <Label layoutX="430.0" layoutY="101.0" styleClass="username" stylesheets="@login.css" text="nom">
                <font>
                   <Font name="JetBrains Mono Bold" size="26.0" />
                </font>
             </Label>
-            <TextField layoutX="509.0" layoutY="146.0" prefHeight="27.0" prefWidth="151.0" promptText="prenom" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
+            <TextField id="prenom" fx:id="prenom" layoutX="509.0" layoutY="146.0" prefHeight="27.0" prefWidth="151.0" promptText="prenom" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
             <Label layoutX="430.0" layoutY="143.0" styleClass="username" stylesheets="@login.css" text="prenom">
                <font>
                   <Font name="JetBrains Mono Bold" size="26.0" />
                </font>
             </Label>
-            <ChoiceBox layoutX="509.0" layoutY="323.0" prefWidth="150.0" />
+            <ChoiceBox id="categorie" fx:id="categorie" layoutX="509.0" layoutY="323.0" prefWidth="150.0" />
             <Label layoutX="426.0" layoutY="320.0" styleClass="password" stylesheets="@login.css" text="Categorie">
                <font>
                   <Font name="JetBrains Mono Bold" size="26.0" />
