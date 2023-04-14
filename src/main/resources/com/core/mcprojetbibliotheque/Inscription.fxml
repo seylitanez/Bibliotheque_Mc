@@ -40,7 +40,7 @@
                      </cursor>
                   </Button>
                </children></AnchorPane>
-                <Button layoutX="466.0" layoutY="499.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="36.0" prefWidth="215.0" styleClass="inscrire" stylesheets="@inscription.css" text="s'inscrire" textFill="WHITE">
+                <Button fx:id="sInscrire" layoutX="466.0" layoutY="499.0" mnemonicParsing="false" onAction="#inscrire" prefHeight="36.0" prefWidth="215.0" styleClass="inscrire" stylesheets="@inscription.css" text="s'inscrire" textFill="WHITE">
                     <font>
                         <Font name="Agency FB" size="17.0" />
                     </font>

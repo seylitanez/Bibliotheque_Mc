@@ -7,6 +7,7 @@ import com.core.mcprojetbibliotheque.Utils.Commandes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -50,6 +51,9 @@ public class Inscription implements Initializable {
 
     private AuthentificationService authentificationService;
 
+    @FXML
+    private Button sInscrire;
+
     private File certificatFile;
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
@@ -68,19 +72,26 @@ public class Inscription implements Initializable {
     }
     public void inscrire(ActionEvent actionEvent) throws InterruptedException, SQLException, ClassNotFoundException {
 
+            sInscrire.setText("chargement");
+            sInscrire.setDisable(true);
+
+        var connexion=dbConnexion.getConnection();
+
         var nom=this.nom.getText();
         var prenom=this.prenom.getText();
         var username=this.username.getText();
         var email=this.email.getText();
         var password=this.password.getText();
-
         var categorie=this.categorie.getSelectionModel().getSelectedItem();
 
-            var connexion=dbConnexion.getConnection();
-        System.out.println("chargement...");
-        String urlPhotoBaseDonne=authentificationService.inscription(nom,prenom,username,email,password,categorie,certificatFile,connexion);
 
-        System.out.println("voici url:"+urlPhotoBaseDonne);
+
+
+        System.out.println("chargement...");
+
+        authentificationService.inscription(nom,prenom,username,email,password,categorie,certificatFile,connexion,sInscrire);
+
+
 
 
 
@@ -104,7 +115,7 @@ public class Inscription implements Initializable {
     public void certificat(MouseEvent mouseEvent) throws FileNotFoundException {
         FileChooser fileChooser=new FileChooser();
         fileChooser.setTitle("Certificat de Scolarite");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images","*.png","*.png","*.bmp"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Images","*.jpg","*.png","*.bmp"));
         certificatFile = fileChooser.showOpenDialog(Window.getWindows().get(0));
         System.out.println(certificatFile.getPath());
         certificat.setImage(new Image(new FileInputStream(certificatFile)));
