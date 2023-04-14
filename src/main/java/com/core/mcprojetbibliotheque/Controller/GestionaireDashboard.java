@@ -1,14 +1,17 @@
 package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Model.Abonne;
+import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.ListAdapter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -18,9 +21,13 @@ import java.util.Date;
 import java.util.ResourceBundle;
 
 public class GestionaireDashboard implements Initializable {
+
     private ListAdapter listAdapter;
     @FXML
     private AnchorPane acnhorePane;
+
+    private WindowEffect effect;
+
 
     @FXML
     private TableView dernieresInscriptions;
@@ -39,7 +46,7 @@ public class GestionaireDashboard implements Initializable {
     @FXML
     private TableColumn<Abonne,String> categorie;
 
-//    @FXML
+    //    @FXML
 //    private TableColumn<Abonne,String> status;
     ArrayList<Abonne> abonnes =new ArrayList<>();
 
@@ -56,6 +63,8 @@ public class GestionaireDashboard implements Initializable {
 
         return  observableList;
     }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("nom"));
@@ -74,10 +83,20 @@ public class GestionaireDashboard implements Initializable {
 
         listAdapter=new ListAdapter(listItem,new ArrayList<Abonne>());
         listAdapter.build();
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
-//            Scene scene = new Scene(fxmlLoader.load());
-//        acnhorePane.getChildren().set(0,scene.getRoot());
 
     }
+    public void exit(ActionEvent e) {
+        effect.exit(e);
+    }
+    public void dragged(MouseEvent e) {
+        effect.dragged(e);
+    }
+    public void presse(MouseEvent e) {
+        effect.pressed(e);
+    }
+    public void cache(ActionEvent e) {
+        effect.cache(e);
+    }
+
 
 }

@@ -11,7 +11,7 @@ public class DialogGenerator extends Stage {
     public DialogGenerator(String fxml) {
         try {
             fxmll=new FXMLLoader(HelloApplication.class.getResource(fxml));
-            Scene scene= new Scene(fxmll.load());
+            Scene scene=new Scene(fxmll.load());
             setScene(scene);
             scene.setFill(Color.TRANSPARENT);
             centerOnScreen();
