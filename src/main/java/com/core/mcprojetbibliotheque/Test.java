@@ -12,7 +12,7 @@ import java.io.IOException;
 public class Test extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AdlalTest.class.getResource("AbonneDashboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Test.class.getResource("AbonneDashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.TRANSPARENT);
         stage.setScene(scene);

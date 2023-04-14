@@ -1,15 +1,9 @@
 package com.core.mcprojetbibliotheque;
-import com.core.mcprojetbibliotheque.Utils.Commandes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.OnlineStatus;
-import net.dv8tion.jda.api.requests.GatewayIntent;
+import javafx.stage.*;
 
 import java.io.IOException;
 public class HelloApplication extends Application {

@@ -4,24 +4,14 @@ import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.DialogGenerator;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Window;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 public class Inscription implements Initializable {
     @FXML

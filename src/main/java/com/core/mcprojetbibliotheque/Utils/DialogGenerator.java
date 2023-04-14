@@ -3,9 +3,7 @@ package com.core.mcprojetbibliotheque.Utils;
 import com.core.mcprojetbibliotheque.HelloApplication;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.*;
 
 public class DialogGenerator extends Stage {
     private FXMLLoader fxmll;
