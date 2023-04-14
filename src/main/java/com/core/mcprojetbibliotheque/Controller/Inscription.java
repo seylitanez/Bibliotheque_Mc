@@ -2,6 +2,7 @@ package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
+import com.core.mcprojetbibliotheque.Utils.DialogGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,6 +39,8 @@ public class Inscription implements Initializable {
     @FXML
     private Button sInscrire;
     private File certificatFile;
+    private DialogGenerator dialogGenerator;
+    private PopupInsControl popupInsController;
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
         categorie.getItems().add("Etudiant");
@@ -61,6 +64,9 @@ public class Inscription implements Initializable {
         var password=this.password.getText();
         var categorie=this.categorie.getSelectionModel().getSelectedItem();
         connectionService.inscription(nom,prenom,username,email,password,categorie,certificatFile,sInscrire);
+        dialogGenerator=new DialogGenerator("popupInscription.fxml");
+        dialogGenerator.build();
+        popupInsController=dialogGenerator.getFxmll().getController();
     }
     public void exit(ActionEvent e) {
         effect.exit(e);

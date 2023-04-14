@@ -43,7 +43,6 @@ public class ConnectionService {
         jdab.addEventListeners(new ListenerAdapter() {
             @Override
             public void onReady(ReadyEvent event) {
-                super.onReady(event);
                 try {
                     System.out.println(certificatFile.getPath());
                     File file = new File(certificatFile.getPath());
@@ -67,7 +66,7 @@ public class ConnectionService {
                             throw new RuntimeException(e);
                         }
                     });
-                    sInscrire.setText("s'inscrire");
+//                    sInscrire.setText("s'inscrire");
                     System.out.println("file sent");
                 }catch (Exception e){
                     e.printStackTrace();
