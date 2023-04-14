@@ -30,16 +30,19 @@ public class Login implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
-        try{connectionService=new ConnectionService();
-        }catch (Exception e){e.printStackTrace();}
+        try{
+            connectionService=new ConnectionService();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void connect() throws Exception {
         var username=this.username.getText();
         var password=this.password.getText();
         if(!username.isEmpty() && !password.isEmpty()) {
+
             connectionService.login(username,password);
-            //reinitialisation
             this.username.setText("");
             this.password.setText("");
         }

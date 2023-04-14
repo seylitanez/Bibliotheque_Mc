@@ -44,7 +44,7 @@ public class AuthentificationService {
                                PreparedStatement statement= null;
                                try {
                                    System.out.println("execution de la requete sql");
-                               statement = connection.prepareStatement(AJOUT_UTILISATEUR);
+                                   statement = connection.prepareStatement(AJOUT_UTILISATEUR);
                                statement.setString(1,nom);
                                statement.setString(2,prenom);
                                statement.setString(3,username);
