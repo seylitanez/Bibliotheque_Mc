@@ -17,10 +17,6 @@ public class DialogGenerator extends Stage {
             centerOnScreen();
             initStyle(StageStyle.TRANSPARENT);
             initModality(Modality.APPLICATION_MODAL);
-
-
-
-
         } catch (Exception e1) {}
     }
     public void build() {
