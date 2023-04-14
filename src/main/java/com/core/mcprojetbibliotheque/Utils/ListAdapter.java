@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 
 public class ListAdapter {
-    private Node[] scenes;
+    private Node scenes;
     private ArrayList<Abonne> abonnes;
     private VBox vBox;
     public ListAdapter(VBox vBox, ArrayList<Abonne> abonnes) {
@@ -18,14 +18,13 @@ public class ListAdapter {
         this.vBox = vBox;
     }
     public void build() {
-        scenes=new Node[abonnes.size()];
-        for (int i = 0; i < scenes.length; i++) {
+        for (Abonne abonne:abonnes) {
             try {
                 FXMLLoader loader=new FXMLLoader(HelloApplication.class.getResource("ListItem.fxml"));
-                scenes[i]=loader.load();
+                scenes=loader.load();
                 ItemControleur controller=loader.getController();
-                controller.setitem(abonnes.get(i));
-                vBox.getChildren().add(scenes[i]);
+                controller.setitem(abonne);
+                vBox.getChildren().add(scenes);
             } catch (Exception e) {
                 e.getStackTrace();
             }
