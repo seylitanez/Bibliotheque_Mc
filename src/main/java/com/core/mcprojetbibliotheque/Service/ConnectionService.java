@@ -14,14 +14,14 @@ public class ConnectionService {
     public ConnectionService() throws Exception{
         dbConnexion=new DbConnexion();
     }
-    public Abonne login(String username, String password) throws Exception{
+    public Abonne login(String username, String password) {
         try (var cnx =dbConnexion.getConnection()){
             PreparedStatement statement = cnx.prepareStatement(AJOUT_UTILISATEUR);
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setString(3,"photo/url/....");
             statement.execute();
-        }catch (Exception e){e.printStackTrace();}
+        }catch (Exception e){e.getMessage();}
         return new Abonne("","","","",new Date());
     }
 }

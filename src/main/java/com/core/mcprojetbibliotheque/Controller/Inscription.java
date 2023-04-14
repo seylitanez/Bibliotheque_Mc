@@ -49,6 +49,11 @@ public class Inscription implements Initializable {
     private File certificatFile;
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
+        categorie.getItems().add("Etudiant");
+        categorie.getItems().add("Etudiant externe");
+        categorie.getItems().add("Enseignant");
+        categorie.setValue("Etudiant");
+
         authentificationService=new AuthentificationService();
         effect=new WindowEffect(main);
     }
@@ -97,7 +102,7 @@ public class Inscription implements Initializable {
         certificatFile =dragEvent.getDragboard().getFiles().get(0);
         if (certificatFile.getPath().contains(".jpg") || certificatFile.getPath().contains(".png") || certificatFile.getPath().contains(".bmp")){
             System.out.println(certificatFile.getPath());
-        certificat.setImage(new Image(new FileInputStream(certificatFile)));
+            certificat.setImage(new Image(new FileInputStream(certificatFile)));
         }
     }
     public void onDragOver(DragEvent dragEvent) {

@@ -9,20 +9,20 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DbConnexion {
-    private String dirver,url,usr,pwd;
+    private String driver,url,usr,pwd;
 
     public DbConnexion() throws IOException {
         FileInputStream propFile=new FileInputStream("src/main/resources/application.properties");
         Properties properties=new Properties();
         properties.load(propFile);
-        this.dirver=properties.getProperty("DATABASE_DRIVER");
+        this.driver=properties.getProperty("DATABASE_DRIVER");
         this.url=properties.getProperty("DATABASE_URL");
         this.usr=properties.getProperty("USERNAME");
         this.pwd=properties.getProperty("PASSWORD");
     }
 
     public Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName(dirver);
+        Class.forName(driver);
         return DriverManager.getConnection(url,usr,pwd);
     }
 }
