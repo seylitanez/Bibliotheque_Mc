@@ -34,13 +34,19 @@ public class Login implements Initializable {
         }catch (Exception e){e.printStackTrace();}
     }
 
-    public void connect() throws Exception {
+    public void connect(ActionEvent e) throws Exception {
         var username=this.username.getText();
         var password=this.password.getText();
         if(!username.isEmpty() && !password.isEmpty()) {
             connectionService.login(username,password);
             this.username.setText("");
             this.password.setText("");
+            String role="gestionaire";
+            switch (role){
+                case "gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
+                case "Abonnes":effect.switchStage(e,"AbonneDashboard.fxml");break;
+                case "GAbonnes":effect.switchStage(e,"GestionnaireAbonnes.fxml");break;
+            }
         }
     }
     public void exit(ActionEvent e) {

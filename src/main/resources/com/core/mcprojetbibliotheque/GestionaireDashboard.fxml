@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1018.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.Gestionaire">
+<AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1018.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestionaireDashboard">
    <children>
       <AnchorPane layoutX="18.0" layoutY="16.0" prefHeight="604.0" prefWidth="969.0" styleClass="background">
          <children>
