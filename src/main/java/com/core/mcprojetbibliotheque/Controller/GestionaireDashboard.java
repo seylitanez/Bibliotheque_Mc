@@ -2,19 +2,16 @@ package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Model.Abonne;
 import com.core.mcprojetbibliotheque.Utils.ListAdapter;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.fxml.*;
+import javafx.scene.layout.*;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class GestionaireDashboard implements Initializable {
     private ListAdapter listAdapter;
     @FXML
-    private AnchorPane acnhorePane;
+    private AnchorPane anchorPane;
     @FXML
     private VBox listItem;
     @Override
@@ -24,7 +21,5 @@ public class GestionaireDashboard implements Initializable {
 //        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Login.fxml"));
 //            Scene scene = new Scene(fxmlLoader.load());
 //        acnhorePane.getChildren().set(0,scene.getRoot());
-
     }
-
 }
