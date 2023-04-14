@@ -1,15 +1,16 @@
 package com.core.mcprojetbibliotheque.Model;
 import java.util.Date;
 public class Abonne {
-    private String nom,prenom,password,categorie;
+    private String nom,prenom,email,password,categorie;
     private Date dateInscription;
     private int nombreLivresEmpruntes;
     private boolean penalite;
-    public Abonne(String nom, String prenom,String password, String categorie, Date dateInscription) {
+    public Abonne(String nom, String prenom,String email,String password, String categorie, Date dateInscription) {
         this.nom = nom;
         this.prenom = prenom;
         this.password=password;
         this.categorie = categorie;
+        this.email=email;
         this.dateInscription = dateInscription;
         this.nombreLivresEmpruntes = 0;
         this.penalite = false;
