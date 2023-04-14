@@ -77,6 +77,8 @@ public class GestionaireDashboard implements Initializable {
 
 
 
+        effect=new WindowEffect(acnhorePane);
+
         dernieresInscriptions.setItems(getAbonnes());
         dernieresInscriptions.getItems().stream().forEach(System.out::println);
 //        dernieresInscriptions.
