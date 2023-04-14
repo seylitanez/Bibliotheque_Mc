@@ -4,6 +4,7 @@ import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
@@ -13,7 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,11 +26,19 @@ public class Inscription implements Initializable {
     private WindowEffect effect;
     @FXML
     private AnchorPane main;
-
     @FXML
-    private
+    private ChoiceBox <String>  categorie;
+
+        private void init (){
+            categorie.getItems().add("Etudiant");
+            categorie.getItems().add("Etudiant externe");
+            categorie.getItems().add("Enseignant");
+            categorie.setValue("Etudiant");
+        }
+
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
+        init ();
         effect=new WindowEffect(main);
     }
     public void inscrire(ActionEvent actionEvent) {
