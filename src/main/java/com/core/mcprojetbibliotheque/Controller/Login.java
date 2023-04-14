@@ -18,12 +18,7 @@ public class Login implements Initializable {
     @FXML
     private AnchorPane main;
     @FXML
-    private Button inscription;
-    @FXML
     private TextField username,password;
-    @FXML
-    private ImageView image;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
