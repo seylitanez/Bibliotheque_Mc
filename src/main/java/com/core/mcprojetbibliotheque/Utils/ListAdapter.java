@@ -37,11 +37,9 @@ public class ListAdapter {
         clear();
         build();
     }
-
     public ArrayList<Abonne> getAbonnes() {
         return abonnes;
     }
-
     public void setAbonnes(ArrayList<Abonne> abonnes) {
         this.abonnes = abonnes;
         update();

@@ -40,12 +40,6 @@ public class WindowEffect {
         stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
         stage.setX(e.getScreenX()-x);
         stage.setY(e.getScreenY()-y);
-
-        System.out.println(e.getX());
-        System.out.println(e.getY());
-        System.out.println("la scene x:"+x);
-        System.out.println("la scene y:"+y);
-
     }
     public void pressed(MouseEvent e){
         x=e.getSceneX();
