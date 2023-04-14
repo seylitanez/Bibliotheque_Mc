@@ -57,6 +57,7 @@ public class Inscription implements Initializable {
         dialogGenerator=new DialogGenerator("popupInscription.fxml");
         dialogGenerator.build();
         popupInsController=dialogGenerator.getFxmll().getController();
+
     }
     public void exit(ActionEvent e) {
         effect.exit(e);
