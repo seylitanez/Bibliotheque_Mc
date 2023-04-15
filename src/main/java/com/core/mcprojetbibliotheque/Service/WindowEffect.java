@@ -3,19 +3,16 @@ package com.core.mcprojetbibliotheque.Service;
 import com.core.mcprojetbibliotheque.HelloApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
+import javafx.scene.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.stage.*;
 import animatefx.animation.*;
-
 public class WindowEffect {
     private Stage stage;
     private Parent scene;
     private AnchorPane main;
     private double x,y;
-
     public WindowEffect(AnchorPane main) {
         this.main = main;
     }

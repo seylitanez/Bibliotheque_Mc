@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
@@ -25,7 +24,6 @@ public class Login implements Initializable {
         try{connectionService=new ConnectionService();
         }catch (Exception e){e.printStackTrace();}
     }
-
     public void connect(ActionEvent e) throws Exception {
         var username=this.username.getText();
         var password=this.password.getText();

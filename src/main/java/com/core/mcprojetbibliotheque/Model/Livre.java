@@ -11,9 +11,6 @@ public class Livre {
     public String getPhoto() {
         return photo;
     }
-
-
-
 //    private List<String> references;
     public Livre(String titre, String auteur, int nbExemplaires, String codeRayon, String photo) {
         this.titre = titre;
@@ -49,14 +46,8 @@ public class Livre {
 //        this.references.remove(references);
 //        this.nbExemplaires--;
 //    }
-
-
-
     public boolean estDisponible() {
         return nbExemplaires>0;
     }
 
-
 }
-
-
