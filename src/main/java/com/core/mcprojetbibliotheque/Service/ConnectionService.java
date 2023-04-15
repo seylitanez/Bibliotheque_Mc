@@ -11,6 +11,7 @@ import net.dv8tion.jda.api.utils.FileUpload;
 
 import java.io.*;
 import java.sql.*;
+import java.util.Date;
 
 import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
 
@@ -45,21 +46,42 @@ public class ConnectionService {
                 certificat = resultSet.getString("certificat");
 
             }
-            if (categorie == "Etudiant"){
-                return new Etudiant();
-            } else if (categorie == "Etudiant externe") {
-                return new Etudiant( nom, prenom,username,password, email,categorie,certificat);
-            } else if (categorie == "Enseignant") {
-                return new Enseignant( nom, prenom,username,password, email,categorie,certificat);
-            }else if (categorie == "Bibliothecaire") {
-                return new Bibliothecaire( nom, prenom,username,password, email);
-            }else if (categorie == "Gestionnaire") {
-                return new Gestionnaire( nom, prenom,username,password, email,categorie);
-            }
+//            if (categorie == "Etudiant"){
+//                return new Etudiant();
+//            } else if (categorie == "Etudiant externe") {
+//                return new Etudiant( nom, prenom,username,password, email,categorie,certificat);
+//
+//                new Etudiant( nom,  prenom,  email,  password,  categorie,  new Date(System.currentTimeMillis()),  true,  certificat);
+//
+//            } else if (categorie == "Enseignant") {
+//                return new Enseignant( nom, prenom,username,password, email,categorie,certificat);
+//            }else if (categorie == "Bibliothecaire") {
+//                return new Bibliothecaire( nom, prenom,username,password, email);
+//            }else if (categorie == "Gestionnaire") {
+//                return new Gestionnaire( nom, prenom,username,password, email,categorie);
+//            }
+
+
+
+
+
+//            switch (categorie){
+//                case "Etudiant"->{
+//                    return new Etudiant(nom,prenom,email,password,categorie,certificat,new Date(System.currentTimeMillis()),3,false,true);
+//                }
+//                case "Etudiant externe"->{
+//                    return new Etudiant(nom,prenom,email,password,categorie,certificat,new Date(System.currentTimeMillis()),3,false,true);
+//                }
+//                case "Enseignant"->{
+//                    return new Enseignant(nom,prenom,email,password,categorie,certificat,new Date(System.currentTimeMillis()),3,false,true);
+//                }
+//
+//            }
 
         }catch (Exception e){
             e.getMessage();
         }
+        return null;
     }
     public void inscription(String nom, String prenom, String username, String email, String password, String categorie, File certificatFile, Button sInscrire) throws Exception {
         System.out.println("chargement...");

@@ -1,40 +1,59 @@
 package com.core.mcprojetbibliotheque.Model;
+import java.util.ArrayList;
 import java.util.Date;
-public class Abonne {
-    private String nom,prenom,email,password,categorie;
-    private Date dateInscription;
-    private int nombreLivresEmpruntes;
-    private boolean penalite;
-    public Abonne(String nom, String prenom,String email,String password, String categorie, Date dateInscription) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.password=password;
-        this.categorie = categorie;
-        this.email=email;
+public class Abonne extends Utilisateur{
+    private Date dateInscription,dateEmpunt;
+
+    private ArrayList<Livre> empreunts =new ArrayList<>();
+    private boolean penalite,compteValide;
+
+
+
+    public Date getDateEmpunt() {
+        return dateEmpunt;
+    }
+
+    public boolean isCompteValide() {
+        return compteValide;
+    }
+
+    public void setCompteValide(boolean compteValide) {
+        this.compteValide = compteValide;
+    }
+
+    public void setDateEmpunt(Date dateEmpunt) {
+        this.dateEmpunt = dateEmpunt;
+    }
+
+    public Abonne(String nom, String prenom, String username, String password, String email, String categorie, Date dateInscription, Date dateEmpunt, ArrayList<Livre> empreunts, boolean penalite, boolean compteValide) {
+        super(nom, prenom, username, password, email, categorie);
         this.dateInscription = dateInscription;
-        this.nombreLivresEmpruntes = 0;
-        this.penalite = false;
+        this.dateEmpunt = dateEmpunt;
+        this.empreunts = empreunts;
+        this.penalite = penalite;
+        this.compteValide = compteValide;
     }
-    public String getNom() {
-        return nom;
+
+    public ArrayList<Livre> getEmpreunts() {
+        return empreunts;
     }
-    public String getPrenom() {
-        return prenom;
+
+    public void setEmpreunts(ArrayList<Livre> empreunts) {
+        this.empreunts = empreunts;
     }
-    public String getCategorie() {
-        return categorie;
+
+    public void setDateInscription(Date dateInscription) {
+        this.dateInscription = dateInscription;
     }
+
+    public boolean isPenalite() {
+        return penalite;
+    }
+
+
+
     public Date getDateInscription() {
         return dateInscription;
-    }
-    public int getNombreLivresEmpruntes() {
-        return nombreLivresEmpruntes;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public void setNombreLivresEmpruntes(int nombreLivresEmpruntes) {
-        this.nombreLivresEmpruntes = nombreLivresEmpruntes;
     }
     public boolean hasPenalite() {
         return penalite;
@@ -43,8 +62,10 @@ public class Abonne {
         this.penalite = penalite;
     }
     public boolean peutEmprunter() {
-        return false;
+        return !penalite && isCompteValide();
     }
-    public void ajouterEmprunt(Emprunt emprunt) {
-    }
+    public void ajouterLivre(Livre livre) {
+            empreunts.add(livre);
+        }
+
 }

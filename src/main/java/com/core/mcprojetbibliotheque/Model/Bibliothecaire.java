@@ -38,7 +38,7 @@ public class Bibliothecaire {
             Emprunt emprunt = new Emprunt(livre, abonne, LocalDate.now());
             emprunts.add(emprunt);
             livre.emprunter();
-            abonne.ajouterEmprunt(emprunt);
+//            abonne.ajouterEmprunt(emprunt);
         } else {
             throw new Exception("Impossible d'effectuer l'emprunt");
         }
