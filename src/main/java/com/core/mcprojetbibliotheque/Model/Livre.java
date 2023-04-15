@@ -13,7 +13,6 @@ public class Livre {
     private String codeRayon;
     private String photo;
     private ArrayList<String> references;
-
     private boolean disponibilite;
 
 
@@ -38,22 +37,12 @@ public class Livre {
 
     public int suppNbExemplaires(){
         setNbExemplaires( getNbExemplaires() -1);
-        changeDisponibilite()
+        changeDisponibilite();
     }
     public int AjoutNbExemplaires(){
         setNbExemplaires( getNbExemplaires() +1);
-        changeDisponibilite()
+        changeDisponibilite();
     }
-
-
-
-
-
-
-
-
-
-
 
 
     public String getTitre() {
