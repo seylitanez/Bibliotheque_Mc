@@ -33,11 +33,10 @@ public class Inscription implements Initializable {
     private PopupInsControl popupInsController;
     @Override
     public void initialize(java.net.URL url, java.util.ResourceBundle resourceBundle) {
-        categorie.getItems().add("Etudiant");
-        categorie.getItems().add("Etudiant externe");
+        categorie.getItems().add("Enterne");
+        categorie.getItems().add("Externe");
         categorie.getItems().add("Enseignant");
-        categorie.getItems().add("Bibliothecaire");
-        categorie.getItems().add("Gestionnaire");
+
 
         try {
             connectionService =new ConnectionService();
