@@ -28,18 +28,19 @@ public class Livre {
 
 
     public void changeDisponibilite(){
-        if (getNbExemplaires()== 0){ setDisponibilite(false);
+        if (getNbExemplaires()== 0){
+            setDisponibilite(false);
         }
         else {
             setDisponibilite(true);
         }
     }
 
-    public int suppNbExemplaires(){
+    public void suppNbExemplaires(){
         setNbExemplaires( getNbExemplaires() -1);
         changeDisponibilite();
     }
-    public int AjoutNbExemplaires(){
+    public void AjoutNbExemplaires(){
         setNbExemplaires( getNbExemplaires() +1);
         changeDisponibilite();
     }
