@@ -65,7 +65,7 @@ public class Abonne extends Utilisateur{
         return !penalite && isCompteValide();
     }
     public void ajouterLivre(Livre livre) {
-            empreunts.add(livre);
-        }
+        if (empreunts.size()<3)empreunts.add(livre);
+    }
 
 }

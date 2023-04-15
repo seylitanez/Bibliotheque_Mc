@@ -4,10 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bibliothecaire {
+public class Bibliothecaire extends Utilisateur{
     List<Abonne> abonnes = new ArrayList<>();
     List<Livre> livres = new ArrayList<>();
     List<Emprunt> emprunts = new ArrayList<>();
+
+    public Bibliothecaire(String nom, String prenom, String username, String password, String email, String categorie) {
+        super(nom, prenom, username, password, email, categorie);
+    }
 
     public void ajouterAbonne(Abonne abonne) {
         abonnes.add(abonne);
@@ -29,7 +33,7 @@ public class Bibliothecaire {
         livres.remove(livre);
     }
 
-    public List<Livre> getLivres() {
+    public List<Livre> getAllLivres() {
         return livres;
     }
 

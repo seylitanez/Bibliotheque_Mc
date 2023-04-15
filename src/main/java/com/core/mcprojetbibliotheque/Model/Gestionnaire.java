@@ -1,15 +1,16 @@
 package com.core.mcprojetbibliotheque.Model;
 
-public class Gestionnaire {
+public class Gestionnaire extends Utilisateur{
 
     private String nom;
     private String prenom;
     private String email;
-    public Gestionnaire( String nom, String prenom, String email) {
 
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
+    public Gestionnaire(String nom, String prenom, String username, String password, String email, String categorie, String nom1, String prenom1, String email1) {
+        super(nom, prenom, username, password, email, categorie);
+        this.nom = nom1;
+        this.prenom = prenom1;
+        this.email = email1;
     }
 
     public String getNom() {
