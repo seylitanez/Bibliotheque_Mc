@@ -7,9 +7,9 @@ public class Bibliotheque {
 
       public static List<Abonne> abonnes = new ArrayList<>();
       public static List<Livre> livres = new ArrayList<>();
-    private Bibliotheque() {
+    Bibliotheque
 
-    }
+
     public void ajouterAbonne(Abonne abonne) {
         abonnes.add(abonne);
     }
@@ -34,6 +34,15 @@ public class Bibliotheque {
         if (livre.isDisponibilite() && abonne.peutEmprunter()) {
             abonne.ajouterLivre(livre);
             livre.suppNbExemplaires();
+        } else {
+            System.out.println("livre indisponible ou abonne ne peut plus empreinter");
+        }
+    }
+
+    public void restituerEmprunt(Livre livre, Abonne abonne) {
+        if ( abonne.) {
+            abonne.rendreLivre(livre);
+            livre.AjoutNbExemplaires();
         } else {
             System.out.println("livre indisponible ou abonne ne peut plus empreinter");
         }

@@ -66,6 +66,10 @@ public class Abonne extends Utilisateur{
     public void ajouterLivre(Livre livre) {
         if (empreunts.size()<3)empreunts.add(livre);
     }
+    public void rendreLivre(Livre livre) {
+        empreunts.remove(livre);
+    }
+
     public void sInscrire() throws Exception {
         ConnectionService connectionService=new ConnectionService();
         connectionService.inscription(this);

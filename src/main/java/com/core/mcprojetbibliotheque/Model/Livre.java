@@ -16,7 +16,7 @@ public class Livre {
     private boolean disponibilite;
 
 
-    public Livre(String titre, String auteur, int nbExemplaires, String codeRayon, String photo, ArrayList references) {
+    public Livre(String titre, String auteur, int nbExemplaires, String codeRayon, String photo, ArrayList<String> references) {
         this.titre = titre;
         this.auteur = auteur;
         this.nbExemplaires = nbExemplaires;
