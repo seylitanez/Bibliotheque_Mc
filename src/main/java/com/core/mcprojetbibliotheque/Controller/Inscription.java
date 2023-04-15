@@ -54,10 +54,7 @@ public class Inscription implements Initializable {
         var email=this.email.getText();
         var password=this.password.getText();
         var categorie=this.categorie.getSelectionModel().getSelectedItem();
-
         connectionService.inscription(new Abonne(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),certificatFile));
-
-
         dialogGenerator=new DialogGenerator("popupInscription.fxml");
         dialogGenerator.build();
         popupInsController=dialogGenerator.getFxmll().getController();

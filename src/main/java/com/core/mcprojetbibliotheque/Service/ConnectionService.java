@@ -14,7 +14,6 @@ import java.sql.*;
 import java.util.*;
 
 import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
-
 public class ConnectionService {
     private DbConnexion dbConnexion;
     public ConnectionService() throws Exception{
@@ -76,7 +75,6 @@ public class ConnectionService {
         return null;
     }
     public void inscription(Abonne abonne) throws Exception {
-
         var nom= abonne.getNom();
         var prenom= abonne.getPrenom();
         var username= abonne.getUsername();
@@ -84,7 +82,6 @@ public class ConnectionService {
         var password= abonne.getPassword();
         var categorie= abonne.getCategorie();
         var certificatFile= abonne.getCertificat();
-
         System.out.println("chargement...");
         JDABuilder jdab= JDABuilder.createDefault("MTA5NjE3NzczMzkzNzEzNTc0Ng.Gzj8qY.YIiHfiv0Tta1E5zoMlEtakrTt1gkF2BMAEDiek");
         jdab.enableIntents(GatewayIntent.MESSAGE_CONTENT);
