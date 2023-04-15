@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bibliotheque {
-
       public static List<Abonne> abonnes = new ArrayList<>();
       public static List<Livre> livres = new ArrayList<>();
-    Bibliotheque
-
-
+    public Bibliotheque() {
+    }
     public void ajouterAbonne(Abonne abonne) {
         abonnes.add(abonne);
     }
@@ -25,8 +23,6 @@ public class Bibliotheque {
     public void supprimerLivre(Livre livre) {
         livres.remove(livre);
     }
-
-
     public List<Livre> getAllLivres() {
         return livres;
     }
@@ -40,7 +36,7 @@ public class Bibliotheque {
     }
 
     public void restituerEmprunt(Livre livre, Abonne abonne) {
-        if ( abonne.) {
+        if (abonne.peutEmprunter()) {
             abonne.rendreLivre(livre);
             livre.AjoutNbExemplaires();
         } else {

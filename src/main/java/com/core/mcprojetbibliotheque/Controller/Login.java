@@ -33,7 +33,6 @@ public class Login implements Initializable {
             Utilisateur utilisateur= connectionService.login(username,password);
             this.username.setText("");
             this.password.setText("");
-
             Thread thread= new Thread(()->{
                 try {
                     switch (utilisateur.getCategorie()){

@@ -69,7 +69,6 @@ public class Abonne extends Utilisateur{
     public void rendreLivre(Livre livre) {
         empreunts.remove(livre);
     }
-
     public void sInscrire() throws Exception {
         ConnectionService connectionService=new ConnectionService();
         connectionService.inscription(this);
