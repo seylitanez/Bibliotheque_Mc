@@ -36,7 +36,9 @@ public class Inscription implements Initializable {
         categorie.getItems().add("Etudiant");
         categorie.getItems().add("Etudiant externe");
         categorie.getItems().add("Enseignant");
-        categorie.setValue("Etudiant");
+        categorie.getItems().add("Bibliothecaire");
+        categorie.getItems().add("Gestionnaire");
+
         try {
             connectionService =new ConnectionService();
         } catch (Exception e) {
