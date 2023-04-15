@@ -7,12 +7,12 @@ public class Livre {
     private String auteur;
     private int nbExemplaires;
     private String codeRayon;
-
+    private String photo;
     public String getPhoto() {
         return photo;
     }
 
-    private String photo;
+
 
 //    private List<String> references;
     public Livre(String titre, String auteur, int nbExemplaires, String codeRayon, String photo) {

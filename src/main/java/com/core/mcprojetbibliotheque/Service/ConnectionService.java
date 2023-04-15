@@ -1,6 +1,7 @@
 package com.core.mcprojetbibliotheque.Service;
 
 import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
+import com.core.mcprojetbibliotheque.Model.*;
 import javafx.scene.control.Button;
 import net.dv8tion.jda.api.*;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
@@ -18,21 +19,47 @@ public class ConnectionService {
     public ConnectionService() throws Exception{
         dbConnexion=new DbConnexion();
     }
-    public void login(String username, String password) {
-        try (var cnx =dbConnexion.getConnection()){
+    public Object login(String us, String pass) {
+        try (var cnx =dbConnexion.getConnection()) {
             PreparedStatement statement = cnx.prepareStatement(TROUVE_UTILISATEUR);
-            statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(1, us);
+            statement.setString(2, pass);
             // resultSet me renvoi le resultat de la requete select
             ResultSet resultSet = statement.executeQuery();
             System.out.println(resultSet);
+            var nom = "";
+            var prenom  = "";
+            var username = "";
+            var password = "";
+            var email = "";
+            var categorie = "";
+            var certificat = "";
+
             while (resultSet.next()) {
-                var  us = resultSet.getString("username");
-                var  pss = resultSet.getString("password");
-                System.out.println(us+' '+pss);
+                nom = resultSet.getString("nom");
+                prenom = resultSet.getString("prenom");
+                username = resultSet.getString("username");
+                password = resultSet.getString("password");
+                email = resultSet.getString("email");
+                categorie = resultSet.getString("categorie");
+                certificat = resultSet.getString("certificat");
+
             }
-            statement.execute();
-        }catch (Exception e){e.getMessage();}
+            if (categorie == "Etudiant"){
+                return new Etudiant();
+            } else if (categorie == "Etudiant externe") {
+                return new Etudiant();
+            } else if (categorie == "Enseignant") {
+                return new Enseignant();
+            }else if (categorie == "Bibliothecaire") {
+                return new Bibliothecaire();
+            }else if (categorie == "Gestionnaire") {
+                return new Gestionnaire( id, nom, prenom, email);
+            }
+
+        }catch (Exception e){
+            e.getMessage();
+        }
     }
     public void inscription(String nom, String prenom, String username, String email, String password, String categorie, File certificatFile, Button sInscrire) throws Exception {
         System.out.println("chargement...");

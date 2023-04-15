@@ -1,22 +1,17 @@
 package com.core.mcprojetbibliotheque.Model;
 
 public class Gestionnaire {
-    private int id;
+
     private String nom;
     private String prenom;
     private String email;
-    public Gestionnaire(int id, String nom, String prenom, String email) {
-        this.id = id;
+    public Gestionnaire( String nom, String prenom, String email) {
+
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
     }
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public String getNom() {
         return nom;
     }
