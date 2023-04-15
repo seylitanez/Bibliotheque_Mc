@@ -47,7 +47,9 @@ public class LivreItem implements Initializable{
         this.livre=livre;
         this.myListener=myListener;
         titre.setText(livre.getTitre());
+        new Thread(()->{
         photo.setImage(new Image(livre.getPhoto()));
+        }).start();
     }
     public void selectioner(ActionEvent actionEvent) throws IOException {
         myListener.OnClickList(livre);

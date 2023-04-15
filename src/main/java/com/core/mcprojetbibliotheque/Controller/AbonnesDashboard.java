@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -29,6 +30,10 @@ public class AbonnesDashboard implements Initializable {
     }
     @FXML
     private Label titre;
+
+    @FXML
+    private ImageView photo;
+
     private List<Livre> livres=new ArrayList();
     private MyListener listener;
     private WindowEffect effect;
@@ -37,7 +42,10 @@ public class AbonnesDashboard implements Initializable {
         effect=new WindowEffect(main);
         System.out.println();
         livres.add(new Livre("titre 1","auteur1",5,"4216","https://www.oumma-design.fr/wp-content/uploads/2015/12/LE_DEVOIR_modifi%C3%A9-1.jpg"));
-        livres.add(new Livre("titre 2","auteur2",4,"4216","https://www.oumma-design.fr/wp-content/uploads/2015/12/LE_DEVOIR_modifi%C3%A9-1.jpg"));
+        livres.add(new Livre("titre 2","auteur2",4,"4216","https://i.pinimg.com/originals/db/38/8d/db388d57cb3c1f9f4a8e3de7a7627510.jpg"));
+        livres.add(new Livre("titre 2","auteur2",4,"4216","https://www.babelio.com/users/blobid1608755607567.jpg"));
+        livres.add(new Livre("titre 2","auteur2",4,"4216","https://i1.wp.com/www.prom-auteur.com/wp-content/uploads/2018/01/couv-ebook-ok.jpg?w=1500"));
+        livres.add(new Livre("titre 2","auteur2",4,"4216","https://club-stephenking.fr/wp-content/uploads/2020/06/stephenking-marcheoucreve-lelivredepoche-couverture2020.jpg"));
 //        livres.add(new Livre("titre 3","auteur1",2,"4216","target/classes/com/core/mcprojetbibliotheque/images/inscription.png"));
 //        livres.add(new Livre("titre 4","auteur1",1,"4216","target/classes/com/core/mcprojetbibliotheque/images/plus.png"));
         listener=new MyListener() {
@@ -68,6 +76,13 @@ public class AbonnesDashboard implements Initializable {
     }
     private void selected(Livre livre){
         titre.setText(livre.getTitre());
+
+        //asynchrone pour recuperer la photo
+
+        new Thread(()->{
+        photo.setImage(new Image(livre.getPhoto()));
+        }).start();
+
     }
     public void exit(ActionEvent e) {
         effect.exit(e);

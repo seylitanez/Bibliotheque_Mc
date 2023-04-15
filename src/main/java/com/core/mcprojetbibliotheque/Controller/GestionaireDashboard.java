@@ -30,7 +30,7 @@ public class GestionaireDashboard implements Initializable {
 
 
     @FXML
-    private TableView dernieresInscriptions;
+    private TableView<Abonne> dernieresInscriptions;
 
     @FXML
     private TableView ins;
