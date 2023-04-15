@@ -1,5 +1,6 @@
 package com.core.mcprojetbibliotheque.Controller;
 
+import com.core.mcprojetbibliotheque.Model.Utilisateur;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import javafx.event.ActionEvent;
@@ -21,21 +22,24 @@ public class Login implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
-        try{connectionService=new ConnectionService();
-        }catch (Exception e){e.printStackTrace();}
     }
     public void connect(ActionEvent e) throws Exception {
+        connectionService=new ConnectionService();
         var username=this.username.getText();
         var password=this.password.getText();
         if(!username.isEmpty() && !password.isEmpty()) {
-            connectionService.login(username,password);
+            System.out.println(username);
+            System.out.println(password);
+            Utilisateur utilisateur= connectionService.login(username,password);
             this.username.setText("");
             this.password.setText("");
-            String role="gestionaire";
-            switch (role){
+            
+            switch (utilisateur.getCategorie()){
                 case "gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
-                case "Abonnes":effect.switchStage(e,"AbonneDashboard.fxml");break;
-                case "GAbonnes":effect.switchStage(e,"GestionnaireAbonnes.fxml");break;
+                case "Externe":effect.switchStage(e,"AbonneDashboard.fxml");break;
+                case "Interne ":effect.switchStage(e,"AbonneDashboard.fxml");break;
+                case "Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");break;
+                case "bibliothecaire":effect.switchStage(e,"GestionnaireAbonnes.fxml");break;
             }
         }
     }

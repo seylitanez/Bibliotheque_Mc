@@ -12,6 +12,7 @@ import net.dv8tion.jda.api.utils.FileUpload;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
 public class ConnectionService {
@@ -19,23 +20,27 @@ public class ConnectionService {
     public ConnectionService() throws Exception{
         dbConnexion=new DbConnexion();
     }
-    public Object login(String us, String pass) {
-        try (var cnx =dbConnexion.getConnection()) {
+    public Utilisateur login(String usr, String pwd) throws SQLException, ClassNotFoundException {
+            Utilisateur utilisateur=null;
+        var cnx =dbConnexion.getConnection();
+
+            System.out.println("***********************************");
             PreparedStatement statement = cnx.prepareStatement(TROUVE_UTILISATEUR);
-            statement.setString(1, us);
-            statement.setString(2, pass);
+            statement.setString(1, usr);
+            statement.setString(2, pwd);
             // resultSet me renvoi le resultat de la requete select
             ResultSet resultSet = statement.executeQuery();
             System.out.println(resultSet);
-            var nom = "";
-            var prenom  = "";
-            var username = "";
-            var password = "";
-            var email = "";
-            var categorie = "";
-            var certificat = "";
+            String nom = null;
+            String prenom = null;
+            String username = null;
+            String password = null;
+            String email = null;
+            String categorie = null;
+            String certificat = null;
             while (resultSet.next()) {
                 nom = resultSet.getString("nom");
+                System.out.println("--------------->"+nom);
                 prenom = resultSet.getString("prenom");
                 username = resultSet.getString("username");
                 password = resultSet.getString("password");
@@ -43,36 +48,33 @@ public class ConnectionService {
                 categorie = resultSet.getString("categorie");
                 certificat = resultSet.getString("certificat");
             }
-//            if (categorie == "Etudiant"){
-//                return new Etudiant();
-//            } else if (categorie == "Etudiant externe") {
-//                return new Etudiant( nom, prenom,username,password, email,categorie,certificat);
-//
-//                new Etudiant( nom,  prenom,  email,  password,  categorie,  new Date(System.currentTimeMillis()),  true,  certificat);
-//
-//            } else if (categorie == "Enseignant") {
-//                return new Enseignant( nom, prenom,username,password, email,categorie,certificat);
-//            }else if (categorie == "Bibliothecaire") {
-//                return new Bibliothecaire( nom, prenom,username,password, email);
-//            }else if (categorie == "Gestionnaire") {
-//                return new Gestionnaire( nom, prenom,username,password, email,categorie);
-//            }
-//            switch (categorie){
-//                case "Etudiant"->{
-//                    return new Etudiant(nom,prenom,email,password,categorie,certificat,new Date(System.currentTimeMillis()),3,false,true);
-//                }
-//                case "Etudiant externe"->{
-//                    return new Etudiant(nom,prenom,email,password,categorie,certificat,new Date(System.currentTimeMillis()),3,false,true);
-//                }
-//                case "Enseignant"->{
-//                    return new Enseignant(nom,prenom,email,password,categorie,certificat,new Date(System.currentTimeMillis()),3,false,true);
-//                }
-//
-//            }
-        }catch (Exception e){
-            e.getMessage();
-        }
-        return null;
+
+
+
+                File fileCertificat=new File(certificat);
+
+            switch (categorie){
+                case "Enseignant":
+                {
+                    return utilisateur=new Etudiant(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),fileCertificat);
+                }
+                case "Etudiant externe":
+                {
+                    return utilisateur=new Enseignant(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),fileCertificat);
+                }
+                case "gestionaire":
+                {
+                    return utilisateur=new Gestionnaire(nom,prenom,username,password,email,categorie);
+                }
+                case "bibliothecaire":
+                {
+                    return utilisateur=new Bibliothecaire(nom,prenom,username,password,email,categorie);
+                }
+
+
+            }
+
+        return utilisateur;
     }
     public void inscription(Abonne abonne) throws Exception {
         var nom= abonne.getNom();

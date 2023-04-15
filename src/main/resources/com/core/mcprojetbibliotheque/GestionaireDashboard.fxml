@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1018.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestionaireDashboard">
+<AnchorPane fx:id="main" prefHeight="1200.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestionaireDashboard">
    <children>
-      <AnchorPane layoutX="18.0" layoutY="16.0" prefHeight="604.0" prefWidth="969.0" styleClass="background">
+      <AnchorPane layoutX="145.0" layoutY="125.0" prefHeight="604.0" prefWidth="969.0" styleClass="background">
          <children>
             <AnchorPane onMouseDragged="#dragged" onMousePressed="#presse" prefHeight="36.0" prefWidth="970.0" />
             <Button layoutX="901.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="11.0" prefWidth="53.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="X" textFill="WHITE">
@@ -100,7 +100,7 @@
             <VBox fx:id="listItem" layoutX="707.0" layoutY="209.0" prefHeight="358.0" prefWidth="246.0" />
          </children>
       </AnchorPane>
-      <VBox prefHeight="639.0" prefWidth="237.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" styleClass="nav">
+      <VBox layoutX="127.0" layoutY="109.0" prefHeight="639.0" prefWidth="237.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" styleClass="nav">
          <children>
             <ImageView fitHeight="92.0" fitWidth="239.0" pickOnBounds="true" preserveRatio="true" />
             <HBox prefHeight="30.0" prefWidth="286.0" styleClass="nav__element">

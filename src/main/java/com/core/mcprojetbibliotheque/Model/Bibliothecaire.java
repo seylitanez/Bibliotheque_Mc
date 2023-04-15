@@ -12,6 +12,11 @@ public class Bibliothecaire extends Utilisateur{
         this.abonnes = abonnes;
         this.livres = livres;
     }
+    public Bibliothecaire(String nom, String prenom, String username, String password, String email, String categorie) {
+        super(nom, prenom, username, password, email, categorie);
+        this.abonnes = abonnes;
+        this.livres = livres;
+    }
     public void ajouterAbonne(Abonne abonne) {
         abonnes.add(abonne);
     }
