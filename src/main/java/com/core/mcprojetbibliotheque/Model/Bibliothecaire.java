@@ -36,7 +36,7 @@ public class Bibliothecaire extends Utilisateur{
         return livres;
     }
     public void effectuerEmprunt(Livre livre, Abonne abonne) throws Exception {
-        if (livre.estDisponible() && abonne.peutEmprunter()) {
+        if (livre.isDisponibilite() && abonne.peutEmprunter()) {
             abonne.ajouterLivre(livre);
         } else {
             throw new Exception("Impossible d'effectuer l'emprunt");

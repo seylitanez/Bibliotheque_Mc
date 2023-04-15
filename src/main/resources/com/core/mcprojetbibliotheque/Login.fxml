@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" prefHeight="1200.0" prefWidth="1200.0" style="-fx-background-color: transparent; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.Login">
+<AnchorPane fx:id="main" prefHeight="639" prefWidth="1200.0" style="-fx-background-color: transparent; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.Login">
    <children>
-      <AnchorPane layoutX="336.0" layoutY="261.0" prefHeight="358.0" prefWidth="586.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;">
+      <AnchorPane layoutX="306.0" layoutY="140.0" prefHeight="358.0" prefWidth="586.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;">
          <children>
             <TextField fx:id="username" layoutX="378.0" layoutY="152.0" promptText="ecrire ici" style="-fx-border-color: #d89b5a; -fx-background-color: white; -fx-border-radius: 4;" />
             <Button layoutX="350.0" layoutY="245.0" mnemonicParsing="false" onAction="#connect" style="-fx-background-color: #d89b5a;" text="Connect" textFill="WHITE">
