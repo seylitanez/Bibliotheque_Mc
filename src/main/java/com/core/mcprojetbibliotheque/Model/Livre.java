@@ -53,11 +53,10 @@ public class Livre {
 
 
     public boolean estDisponible() {
-        return false;
+        return nbExemplaires>0;
     }
 
-    public void emprunter() {
-    }
+
 }
 
 

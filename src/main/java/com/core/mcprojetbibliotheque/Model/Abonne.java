@@ -7,6 +7,15 @@ public class Abonne extends Utilisateur{
     private ArrayList<Livre> empreunts =new ArrayList<>();
     private boolean penalite,compteValide;
 
+    public Abonne(String nom, String prenom, String username, String password, String email, String categorie, Date dateInscription, Date dateEmpunt, ArrayList<Livre> empreunts, boolean penalite, boolean compteValide) {
+        super(nom, prenom, username, password, email, categorie);
+        this.dateInscription = dateInscription;
+        this.dateEmpunt = dateEmpunt;
+        this.empreunts = empreunts;
+        this.penalite = penalite;
+        this.compteValide = compteValide;
+    }
+
 
 
     public Date getDateEmpunt() {
@@ -25,14 +34,6 @@ public class Abonne extends Utilisateur{
         this.dateEmpunt = dateEmpunt;
     }
 
-    public Abonne(String nom, String prenom, String username, String password, String email, String categorie, Date dateInscription, Date dateEmpunt, ArrayList<Livre> empreunts, boolean penalite, boolean compteValide) {
-        super(nom, prenom, username, password, email, categorie);
-        this.dateInscription = dateInscription;
-        this.dateEmpunt = dateEmpunt;
-        this.empreunts = empreunts;
-        this.penalite = penalite;
-        this.compteValide = compteValide;
-    }
 
     public ArrayList<Livre> getEmpreunts() {
         return empreunts;
@@ -66,6 +67,12 @@ public class Abonne extends Utilisateur{
     }
     public void ajouterLivre(Livre livre) {
         if (empreunts.size()<3)empreunts.add(livre);
+    }
+
+    public void sInscrire(){
+
+
+
     }
 
 }

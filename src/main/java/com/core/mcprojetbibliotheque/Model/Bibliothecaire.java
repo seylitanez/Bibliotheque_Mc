@@ -7,10 +7,11 @@ import java.util.List;
 public class Bibliothecaire extends Utilisateur{
     List<Abonne> abonnes = new ArrayList<>();
     List<Livre> livres = new ArrayList<>();
-    List<Emprunt> emprunts = new ArrayList<>();
 
-    public Bibliothecaire(String nom, String prenom, String username, String password, String email, String categorie) {
+    public Bibliothecaire(String nom, String prenom, String username, String password, String email, String categorie, List<Abonne> abonnes, List<Livre> livres) {
         super(nom, prenom, username, password, email, categorie);
+        this.abonnes = abonnes;
+        this.livres = livres;
     }
 
     public void ajouterAbonne(Abonne abonne) {
@@ -39,10 +40,7 @@ public class Bibliothecaire extends Utilisateur{
 
     public void effectuerEmprunt(Livre livre, Abonne abonne) throws Exception {
         if (livre.estDisponible() && abonne.peutEmprunter()) {
-            Emprunt emprunt = new Emprunt(livre, abonne, LocalDate.now());
-            emprunts.add(emprunt);
-            livre.emprunter();
-//            abonne.ajouterEmprunt(emprunt);
+            abonne.ajouterLivre(livre);
         } else {
             throw new Exception("Impossible d'effectuer l'emprunt");
         }

@@ -84,6 +84,7 @@ public class ConnectionService {
         return null;
     }
     public void inscription(String nom, String prenom, String username, String email, String password, String categorie, File certificatFile, Button sInscrire) throws Exception {
+
         System.out.println("chargement...");
         JDABuilder jdab= JDABuilder.createDefault("MTA5NjE3NzczMzkzNzEzNTc0Ng.Gzj8qY.YIiHfiv0Tta1E5zoMlEtakrTt1gkF2BMAEDiek");
         jdab.enableIntents(GatewayIntent.MESSAGE_CONTENT);
