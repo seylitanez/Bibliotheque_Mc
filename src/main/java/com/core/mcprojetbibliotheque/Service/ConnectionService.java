@@ -48,13 +48,13 @@ public class ConnectionService {
             if (categorie == "Etudiant"){
                 return new Etudiant();
             } else if (categorie == "Etudiant externe") {
-                return new Etudiant();
+                return new Etudiant( nom, prenom,username,password, email,categorie,certificat);
             } else if (categorie == "Enseignant") {
-                return new Enseignant();
+                return new Enseignant( nom, prenom,username,password, email,categorie,certificat);
             }else if (categorie == "Bibliothecaire") {
-                return new Bibliothecaire();
+                return new Bibliothecaire( nom, prenom,username,password, email);
             }else if (categorie == "Gestionnaire") {
-                return new Gestionnaire( id, nom, prenom, email);
+                return new Gestionnaire( nom, prenom,username,password, email,categorie);
             }
 
         }catch (Exception e){
