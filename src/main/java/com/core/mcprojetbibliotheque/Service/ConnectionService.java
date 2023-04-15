@@ -11,7 +11,7 @@ import net.dv8tion.jda.api.utils.FileUpload;
 
 import java.io.*;
 import java.sql.*;
-import java.util.Date;
+import java.util.*;
 
 import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
 
@@ -35,7 +35,6 @@ public class ConnectionService {
             var email = "";
             var categorie = "";
             var certificat = "";
-
             while (resultSet.next()) {
                 nom = resultSet.getString("nom");
                 prenom = resultSet.getString("prenom");
@@ -44,7 +43,6 @@ public class ConnectionService {
                 email = resultSet.getString("email");
                 categorie = resultSet.getString("categorie");
                 certificat = resultSet.getString("certificat");
-
             }
 //            if (categorie == "Etudiant"){
 //                return new Etudiant();
@@ -60,11 +58,6 @@ public class ConnectionService {
 //            }else if (categorie == "Gestionnaire") {
 //                return new Gestionnaire( nom, prenom,username,password, email,categorie);
 //            }
-
-
-
-
-
 //            switch (categorie){
 //                case "Etudiant"->{
 //                    return new Etudiant(nom,prenom,email,password,categorie,certificat,new Date(System.currentTimeMillis()),3,false,true);
@@ -77,7 +70,6 @@ public class ConnectionService {
 //                }
 //
 //            }
-
         }catch (Exception e){
             e.getMessage();
         }
@@ -99,34 +91,34 @@ public class ConnectionService {
         jdab.addEventListeners(new ListenerAdapter() {
             @Override
             public void onReady(ReadyEvent event) {
-                try {
-                    System.out.println(certificatFile.getPath());
-                    File file = new File(certificatFile.getPath());
-                    event.getJDA().getTextChannelById("1096178322393804871").sendFiles(FileUpload.fromData(file)).queue(message -> {
-                        String pathOut=message.getAttachments().get(0).getUrl();
-                        PreparedStatement statement= null;
-                        try {
-                            System.out.println("execution de la requete sql");
-                            statement = dbConnexion.getConnection().prepareStatement(AJOUT_UTILISATEUR);
-                            statement.setString(1,nom);
-                            statement.setString(2,prenom);
-                            statement.setString(3,username);
-                            statement.setString(4,password);
-                            statement.setString(5,email);
-                            statement.setString(6,categorie);
-                            statement.setString(7, pathOut);
-                            statement.execute();
-                            System.out.println("inscription finit");
-                            System.out.println("apres btn");
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
+            try {
+                System.out.println(certificatFile.getPath());
+                File file = new File(certificatFile.getPath());
+                event.getJDA().getTextChannelById("1096178322393804871").sendFiles(FileUpload.fromData(file)).queue(message -> {
+                    String pathOut=message.getAttachments().get(0).getUrl();
+                    PreparedStatement statement= null;
+                    try {
+                        System.out.println("execution de la requete sql");
+                        statement = dbConnexion.getConnection().prepareStatement(AJOUT_UTILISATEUR);
+                        statement.setString(1,nom);
+                        statement.setString(2,prenom);
+                        statement.setString(3,username);
+                        statement.setString(4,password);
+                        statement.setString(5,email);
+                        statement.setString(6,categorie);
+                        statement.setString(7, pathOut);
+                        statement.execute();
+                        System.out.println("inscription finit");
+                        System.out.println("apres btn");
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
 //                    sInscrire.setText("s'inscrire");
-                    System.out.println("file sent");
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                System.out.println("file sent");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             }
         });
         jdab.setStatus(OnlineStatus.ONLINE);

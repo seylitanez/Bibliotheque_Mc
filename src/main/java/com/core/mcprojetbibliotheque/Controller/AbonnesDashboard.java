@@ -30,10 +30,8 @@ public class AbonnesDashboard implements Initializable {
     }
     @FXML
     private Label titre;
-
     @FXML
     private ImageView photo;
-
     private List<Livre> livres=new ArrayList();
     private MyListener listener;
     private WindowEffect effect;
@@ -76,13 +74,10 @@ public class AbonnesDashboard implements Initializable {
     }
     private void selected(Livre livre){
         titre.setText(livre.getTitre());
-
         //asynchrone pour recuperer la photo
-
         new Thread(()->{
         photo.setImage(new Image(livre.getPhoto()));
         }).start();
-
     }
     public void exit(ActionEvent e) {
         effect.exit(e);
