@@ -38,7 +38,7 @@ public class AbonnesDashboard implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
-        System.out.println();
+
 //        livres.add(new Livre("titre 1","auteur1",5,"4216","https://www.oumma-design.fr/wp-content/uploads/2015/12/LE_DEVOIR_modifi%C3%A9-1.jpg"));
 //        livres.add(new Livre("titre 2","auteur2",4,"4216","https://i.pinimg.com/originals/db/38/8d/db388d57cb3c1f9f4a8e3de7a7627510.jpg"));
 //        livres.add(new Livre("titre 2","auteur2",4,"4216","https://www.babelio.com/users/blobid1608755607567.jpg"));
