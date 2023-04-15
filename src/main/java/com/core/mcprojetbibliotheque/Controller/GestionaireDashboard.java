@@ -18,7 +18,7 @@ import java.util.*;
 public class GestionaireDashboard implements Initializable {
     private ListAdapter listAdapter;
     @FXML
-    private AnchorPane acnhorePane;
+    private AnchorPane main;
     private WindowEffect effect;
     @FXML
     private TableView<Abonne> dernieresInscriptions;
@@ -54,7 +54,7 @@ public class GestionaireDashboard implements Initializable {
         categorie.setCellValueFactory(new PropertyValueFactory<Abonne,String>("categorie"));
 //        status.setCellValueFactory(new PropertyValueFactory<Abonne,String>("status"));
 //        nom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("nom"));
-        effect=new WindowEffect(acnhorePane);
+        effect=new WindowEffect(main);
         dernieresInscriptions.setItems(getAbonnes());
         dernieresInscriptions.getItems().stream().forEach(System.out::println);
 //        dernieresInscriptions.

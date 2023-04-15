@@ -33,13 +33,9 @@ public class Login implements Initializable {
             Utilisateur utilisateur= connectionService.login(username,password);
             this.username.setText("");
             this.password.setText("");
-            
             switch (utilisateur.getCategorie()){
-                case "gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
-                case "Externe":effect.switchStage(e,"AbonneDashboard.fxml");break;
-                case "Interne ":effect.switchStage(e,"AbonneDashboard.fxml");break;
-                case "Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");break;
-                case "bibliothecaire":effect.switchStage(e,"GestionnaireAbonnes.fxml");break;
+                case "gestionaire","bibliothecaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
+                case "Externe","Interne","Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");break;
             }
         }
     }
