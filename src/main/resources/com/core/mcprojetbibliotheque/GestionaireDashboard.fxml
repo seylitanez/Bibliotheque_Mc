@@ -4,13 +4,13 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestionaireDashboard">
@@ -79,17 +79,8 @@
                   </ImageView>
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="265.0" layoutY="209.0" prefHeight="358.0" prefWidth="418.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0); -fx-background-color: white; -fx-background-radius: 5px;">
+            <AnchorPane layoutX="265.0" layoutY="209.0" prefHeight="358.0" prefWidth="632.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0); -fx-background-color: white; -fx-background-radius: 5px;">
                <children>
-                  <TableView fx:id="dernieresInscriptions" layoutX="22.0" layoutY="70.0" prefHeight="276.0" prefWidth="380.0" style="-fx-background-color: white; -fx-border-color: #d89b5a; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-radius: 5px;">
-                     <columns>
-                        <TableColumn fx:id="nom" prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="Nom" />
-                        <TableColumn fx:id="prenom" prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="prenom" />
-                        <TableColumn fx:id="categorie" prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="categorie" />
-                        <TableColumn fx:id="email" prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="email" />
-                        <TableColumn fx:id="status" prefWidth="75.0" style="-fx-background-color: white; -fx-border-width: 0 0 1 0; -fx-border-color: #d89b5a;" text="status" />
-                     </columns>
-                  </TableView>
                   <Label layoutX="46.0" layoutY="14.0" style="-fx-text-fill: #d89b5a;" text="Dernieres inscriptions">
                      <font>
                         <Font name="System Bold" size="24.0" />
@@ -97,7 +88,30 @@
                   </Label>
                </children>
             </AnchorPane>
-            <VBox fx:id="listItem" layoutX="707.0" layoutY="209.0" prefHeight="358.0" prefWidth="246.0" />
+            <ScrollPane layoutX="288.0" layoutY="278.0" prefHeight="276.0" prefWidth="586.0">
+               <content>
+                  <VBox fx:id="listItem" prefHeight="276.0" prefWidth="586.0">
+                     <children>
+                        <Line endX="485.69287109375" startX="-100.0" stroke="#d89b5a" />
+                        <HBox prefHeight="38.0" prefWidth="586.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="116.5" text="nom" textAlignment="CENTER" />
+                              <Line endX="-10.199996948242188" endY="33.999996185302734" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="116.5" text="prenom" textAlignment="CENTER" />
+                              <Line endX="-10.199996948242188" endY="33.999996185302734" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="116.5" text="categorie" textAlignment="CENTER" />
+                              <Line endX="-10.199996948242188" endY="33.999996185302734" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="116.5" text="email" textAlignment="CENTER" />
+                              <Line endX="-10.199996948242188" endY="33.999996185302734" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+                              <Label alignment="CENTER" prefHeight="50.0" prefWidth="116.5" text="valid" textAlignment="CENTER" />
+                           </children></HBox>
+                        <Line endX="485.69287109375" startX="-100.0" stroke="#d89b5a" />
+                     </children></VBox>
+               </content>
+            </ScrollPane>
+            <Line endX="485.69287109375" layoutX="388.0" layoutY="554.0" startX="-100.0" stroke="#d89b5a" />
+            <Line endX="-122.0" endY="541.0" layoutX="410.0" layoutY="12.0" startX="-122.0" startY="265.0" stroke="#d89b5a" />
+            <Line endX="-122.0" endY="541.0" layoutX="997.0" layoutY="13.0" startX="-122.0" startY="265.0" stroke="#d89b5a" />
          </children>
       </AnchorPane>
       <VBox layoutX="105.0" layoutY="1.0" prefHeight="639.0" prefWidth="237.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" styleClass="nav">

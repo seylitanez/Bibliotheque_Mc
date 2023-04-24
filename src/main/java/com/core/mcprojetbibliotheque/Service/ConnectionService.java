@@ -48,11 +48,7 @@ public class ConnectionService {
                 categorie = resultSet.getString("categorie");
                 certificat = resultSet.getString("certificat");
             }
-
-
-
-                File fileCertificat=new File(certificat);
-
+            File fileCertificat=new File(certificat);
             switch (categorie){
                 case "Enseignant":
                 {
@@ -62,11 +58,11 @@ public class ConnectionService {
                 {
                     return utilisateur=new Enseignant(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),fileCertificat);
                 }
-                case "gestionaire":
+                case "Gestionaire":
                 {
                     return utilisateur=new Gestionnaire(nom,prenom,username,password,email,categorie);
                 }
-                case "bibliothecaire":
+                case "Bibliothecaire":
                 {
                     return utilisateur=new Bibliothecaire(nom,prenom,username,password,email,categorie);
                 }

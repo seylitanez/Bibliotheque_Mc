@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.lastInscriptionitemC">
+   <children>
+      <Label fx:id="nom" alignment="CENTER" layoutY="-1.0" onMouseClicked="#clic" prefHeight="50.0" prefWidth="116.5" text="Label" textAlignment="CENTER" />
+      <Line endX="-10.199996948242188" endY="33.999996185302734" layoutX="128.0" layoutY="16.0" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+      <Label fx:id="prenom" alignment="CENTER" layoutX="117.0" layoutY="-2.0" onMouseClicked="#clic" prefHeight="50.0" prefWidth="116.5" text="Label" textAlignment="CENTER" />
+      <Line endX="-10.199996948242188" endY="33.999996185302734" layoutX="245.0" layoutY="15.0" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+      <Label fx:id="categorie" alignment="CENTER" layoutX="233.0" layoutY="-1.0" onMouseClicked="#clic" prefHeight="50.0" prefWidth="116.5" text="Label" textAlignment="CENTER" />
+      <Line endX="-10.199996948242188" endY="33.999996185302734" layoutX="361.0" layoutY="16.0" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+      <Label fx:id="email" alignment="CENTER" layoutX="351.0" layoutY="-1.0" onMouseClicked="#clic" prefHeight="50.0" prefWidth="116.5" text="Label" textAlignment="CENTER" />
+      <Line endX="-10.199996948242188" endY="33.999996185302734" layoutX="479.0" layoutY="16.0" startX="-10.199996948242188" startY="-16.0" stroke="#d89b5a" />
+      <Label fx:id="statue" alignment="CENTER" layoutX="468.0" layoutY="-1.0" onMouseClicked="#clic" prefHeight="50.0" prefWidth="116.5" text="Label" textAlignment="CENTER" />
+   </children>
+</AnchorPane>

@@ -1,5 +1,6 @@
 package com.core.mcprojetbibliotheque.Controller;
 
+import com.core.mcprojetbibliotheque.Configuration.PrepareStatementP;
 import com.core.mcprojetbibliotheque.Model.Abonne;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.ListAdapter;
@@ -14,26 +15,28 @@ import javafx.scene.layout.*;
 
 import java.net.URL;
 import java.util.*;
+import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
 
 public class GestionaireDashboard implements Initializable {
     private ListAdapter listAdapter;
     @FXML
     private AnchorPane main;
     private WindowEffect effect;
-    @FXML
-    private TableView<Abonne> dernieresInscriptions;
+    private PrepareStatementP statementP;
+//    @FXML
+//    private TableView<Abonne> dernieresInscriptions;
     @FXML
     private TableView ins;
     @FXML
     private VBox listItem;
-    @FXML
-    private TableColumn<Abonne,String> nom;
-    @FXML
-    private TableColumn<Abonne,String> prenom;
-    @FXML
-    private TableColumn<Abonne,String> email;
-    @FXML
-    private TableColumn<Abonne,String> categorie;
+//    @FXML
+//    private TableColumn<Abonne,String> nom;
+//    @FXML
+//    private TableColumn<Abonne,String> prenom;
+//    @FXML
+//    private TableColumn<Abonne,String> email;
+//    @FXML
+//    private TableColumn<Abonne,String> categorie;
     //    @FXML
 //    private TableColumn<Abonne,String> status;
     ArrayList<Abonne> abonnes =new ArrayList<>();
@@ -48,18 +51,24 @@ public class GestionaireDashboard implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        nom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("nom"));
-        prenom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("prenom"));
-        email.setCellValueFactory(new PropertyValueFactory<Abonne,String>("email"));
-        categorie.setCellValueFactory(new PropertyValueFactory<Abonne,String>("categorie"));
+//        nom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("nom"));
+//        prenom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("prenom"));
+//        email.setCellValueFactory(new PropertyValueFactory<Abonne,String>("email"));
+//        categorie.setCellValueFactory(new PropertyValueFactory<Abonne,String>("categorie"));
 //        status.setCellValueFactory(new PropertyValueFactory<Abonne,String>("status"));
 //        nom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("nom"));
         effect=new WindowEffect(main);
-        dernieresInscriptions.setItems(getAbonnes());
-        dernieresInscriptions.getItems().stream().forEach(System.out::println);
+//        dernieresInscriptions.setItems(getAbonnes());
+//        dernieresInscriptions.getItems().stream().forEach(System.out::println);
 //        dernieresInscriptions.
-        listAdapter=new ListAdapter(listItem,abonnes);
-        listAdapter.build();
+        try {
+            statementP =new PrepareStatementP(TROUVE_UTILISATEUR_NOAUTH);
+            listAdapter=new ListAdapter(listItem,statementP.data());
+            listAdapter.build();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
     public void exit(ActionEvent e) {
         effect.exit(e);

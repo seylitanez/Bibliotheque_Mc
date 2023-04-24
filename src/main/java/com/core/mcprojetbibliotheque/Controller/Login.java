@@ -33,16 +33,17 @@ public class Login implements Initializable {
             Utilisateur utilisateur= connectionService.login(username,password);
             this.username.setText("");
             this.password.setText("");
-            Thread thread= new Thread(()->{
+//            Thread thread= new Thread(()->{
                 try {
                     switch (utilisateur.getCategorie()){
-                        case "gestionaire","bibliothecaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
+                        case "Gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
                         case "Externe","Interne","Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");break;
+                        case "Bibliothecaire":effect.switchStage(e,"GestionaireAbonnes.fxml");break;
                     }
-                }catch (Exception exception){}
-            });
-            thread.join();
-            thread.start();
+                }catch (Exception exception){exception.printStackTrace();}
+//            });
+//            thread.join();
+//            thread.start();
         }
     }
     public void exit(ActionEvent e) {
