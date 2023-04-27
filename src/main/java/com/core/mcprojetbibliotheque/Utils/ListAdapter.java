@@ -14,14 +14,14 @@ import java.util.ArrayList;
 
 public class ListAdapter {
     private Node scenes;
-    private ArrayList<Utilisateur> abonnes;
+    private ArrayList<Abonne> abonnes;
     private VBox vBox;
-    public ListAdapter(VBox vBox, ArrayList<Utilisateur> abonnes) {
+    public ListAdapter(VBox vBox, ArrayList<Abonne> abonnes) {
         this.abonnes = abonnes;
         this.vBox = vBox;
     }
     public void build() {
-        for (Utilisateur abonne:abonnes) {
+        for (Abonne abonne:abonnes) {
             try {
                 FXMLLoader loader=new FXMLLoader(HelloApplication.class.getResource("lastInscriptionitem.fxml"));
                 scenes=loader.load();
@@ -40,10 +40,10 @@ public class ListAdapter {
         clear();
         build();
     }
-    public ArrayList<Utilisateur> getAbonnes() {
+    public ArrayList<Abonne> getAbonnes() {
         return abonnes;
     }
-    public void setAbonnes(ArrayList<Utilisateur> abonnes) {
+    public void setAbonnes(ArrayList<Abonne> abonnes) {
         this.abonnes = abonnes;
         update();
     }

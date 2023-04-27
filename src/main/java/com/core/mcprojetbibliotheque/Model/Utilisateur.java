@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class Utilisateur {
     private String nom,prenom,username,password,email,categorie;
+    private int id;
+
     public Utilisateur(String nom, String prenom, String username, String password, String email, String categorie) {
         this.nom = nom;
         this.prenom = prenom;
@@ -50,5 +52,13 @@ public class Utilisateur {
     }
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

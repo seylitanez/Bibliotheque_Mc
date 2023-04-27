@@ -1,7 +1,9 @@
 package com.core.mcprojetbibliotheque.Configuration;
 
+import com.core.mcprojetbibliotheque.Model.Abonne;
 import com.core.mcprojetbibliotheque.Model.Utilisateur;
 
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -16,17 +18,21 @@ public class PrepareStatementP {
         connexion=new DbConnexion();
         this.sql = sql;
     }
-    public ArrayList<Utilisateur> data() throws Exception {
+    public ArrayList<Abonne> data() throws Exception {
         preparedStatement=connexion.getConnection().prepareStatement(sql);
         resultSet=preparedStatement.executeQuery();
-        ArrayList<Utilisateur> list=new ArrayList<>();
+        ArrayList<Abonne> list=new ArrayList<>();
         while (resultSet.next()){
-            list.add(new Utilisateur(resultSet.getString("nom"),
+            Abonne utilisateur=new Abonne(resultSet.getString("nom"),
                     resultSet.getString("prenom"),
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("email"),
-                    resultSet.getString("categorie")));
+                    resultSet.getString("categorie"),null,
+                    new File(resultSet.getString("certificat")));
+
+            utilisateur.setId(resultSet.getInt("id"));
+            list.add(utilisateur);
         }
         return list;
     }
