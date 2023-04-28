@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="329.0" prefWidth="427.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.ChargementPopup">
+    <children>
+        <AnchorPane fx:id="popup" layoutX="40.0" layoutY="78.0" prefHeight="224.0" prefWidth="347.0" style="-fx-border-radius: 20px; -fx-border-color: #d89b5a; -fx-background-color: white; -fx-background-radius: 20px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);">
+            <children>
+                <Label alignment="CENTER" contentDisplay="CENTER" layoutX="48.0" layoutY="14.0" prefHeight="110.0" prefWidth="250.0" text="merci de patienter un instant" textAlignment="CENTER" wrapText="true">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+            <ProgressIndicator layoutX="147.0" layoutY="124.0" prefHeight="90.0" prefWidth="90.0" scaleX="1.5" scaleY="1.5" scaleZ="1.5" style="-fx-progress-color: #d89b5a;" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

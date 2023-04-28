@@ -7,11 +7,20 @@ public class Livre {
     private String titre;
     private String auteur;
     private int nbExemplaires;
-    private String codeRayon;
+    private int codeRayon;
     private String photo;
     private ArrayList<String> references;
     private boolean disponibilite;
-    public Livre(String titre, String auteur, int nbExemplaires, String codeRayon, String photo, ArrayList<String> references) {
+    public Livre(String titre, String auteur, int nbExemplaires, int codeRayon, String photo, ArrayList<String> references) {
+        this.titre = titre;
+        this.auteur = auteur;
+        this.nbExemplaires = nbExemplaires;
+        this.codeRayon = codeRayon;
+        this.references = references;
+        this.photo=photo;
+        this.disponibilite = true;
+    }
+    public Livre(String titre, String auteur, int nbExemplaires, int codeRayon, String photo) {
         this.titre = titre;
         this.auteur = auteur;
         this.nbExemplaires = nbExemplaires;
@@ -55,10 +64,10 @@ public class Livre {
     public void setNbExemplaires(int nbExemplaires) {
         if (nbExemplaires>0) this.nbExemplaires = nbExemplaires;
     }
-    public String getCodeRayon() {
+    public int getCodeRayon() {
         return codeRayon;
     }
-    public void setCodeRayon(String codeRayon) {
+    public void setCodeRayon(int codeRayon) {
         this.codeRayon = codeRayon;
     }
     public String getPhoto() {

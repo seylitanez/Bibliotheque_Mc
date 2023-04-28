@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1200.0" style="-fx-background-color: transparent; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.AbonnesDashboard">
+<AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1200.0" style="-fx-background-color: transparent; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.AbonnesDashboard">
     <children>
         <AnchorPane layoutX="44.0" layoutY="22.0" prefHeight="594.0" prefWidth="1112.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;" stylesheets="@inscription.css">
             <children>
@@ -47,8 +47,8 @@
             <Line endX="-34.79998779296875" endY="279.60003662109375" layoutX="328.0" layoutY="255.0" startX="-34.79998779296875" startY="-117.60000610351562" />
             <AnchorPane layoutX="19.0" layoutY="136.0" prefHeight="36.0" prefWidth="253.0" style="-fx-border-radius: 20px; -fx-border-color: #d89b5a; -fx-background-color: white;">
                <children>
-                  <TextField layoutX="11.0" layoutY="5.0" prefHeight="26.0" prefWidth="156.0" promptText="tapez un titre" style="-fx-background-color: none;" />
-                  <Button layoutX="187.0" layoutY="5.0" mnemonicParsing="false" style="-fx-background-color: #d89b5a; -fx-background-radius: 20px; -fx-text-fill: white;" text="chercher" />
+                  <TextField fx:id="rechercheLivre" layoutX="11.0" layoutY="5.0" prefHeight="26.0" prefWidth="156.0" promptText="tapez un titre" style="-fx-background-color: none;" />
+                  <Button fx:id="chercher" layoutX="187.0" layoutY="5.0" mnemonicParsing="false" onAction="#search" style="-fx-background-color: #d89b5a; -fx-background-radius: 20px; -fx-text-fill: white;" text="chercher" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="34.0" layoutY="207.0" prefHeight="314.0" prefWidth="222.0" style="-fx-background-color: #d89b5a; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);">
@@ -66,7 +66,7 @@
                   <Line endX="-27.599990844726562" endY="-3.0517578125E-5" layoutX="116.0" layoutY="242.0" startX="-100.0" stroke="WHITE" strokeLineCap="ROUND" strokeWidth="3.0" />
                   <AnchorPane layoutX="177.0" layoutY="12.0" prefHeight="26.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                      <children>
-                        <Label layoutX="10.0" layoutY="1.0" style="-fx-text-fill: #d89b5a;" text="5" textFill="WHITE">
+                        <Label fx:id="nbExemplaires" layoutX="10.0" layoutY="1.0" style="-fx-text-fill: #d89b5a;" text="5" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="18.0" />
                            </font>

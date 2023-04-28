@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+
 public class lastInscriptionitemC {
     private Abonne utilisateur;
     @FXML
@@ -20,7 +22,7 @@ public class lastInscriptionitemC {
         this.statue.setText("0");
         this.utilisateur=utilisateur;
     }
-    public void clic (MouseEvent event){
+    public void clic (MouseEvent event) throws IOException {
         DialogGenerator dialogGenerator=new DialogGenerator("PopupConfirmation.fxml");
         dialogGenerator.show();
         PopupConfirmation popupConfirmation=dialogGenerator.getFxmll().getController();

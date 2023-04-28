@@ -1,14 +1,18 @@
 package com.core.mcprojetbibliotheque.Controller;
 
+import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
 import com.core.mcprojetbibliotheque.HelloApplication;
 import com.core.mcprojetbibliotheque.Model.Livre;
+import com.core.mcprojetbibliotheque.Service.LivreService;
 import com.core.mcprojetbibliotheque.Service.MyListener;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,7 +21,7 @@ import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 public class AbonnesDashboard implements Initializable {
@@ -25,6 +29,14 @@ public class AbonnesDashboard implements Initializable {
     private AnchorPane main;
     @FXML
     private GridPane grid;
+
+    @FXML
+    private TextField rechercheLivre;
+    @FXML
+    private Button chercher;
+
+    @FXML
+    private Label nbExemplaires;
     public Label getTitre() {
         return titre;
     }
@@ -32,12 +44,28 @@ public class AbonnesDashboard implements Initializable {
     private Label titre;
     @FXML
     private ImageView photo;
-    private List<Livre> livres=new ArrayList();
+    private List<Livre> livres;
     private MyListener listener;
     private WindowEffect effect;
+
+    private DbConnexion dbConnexion;
+    private LivreService livreService;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
+
+
+
+        try {
+                livreService=new LivreService();
+                livres= livreService.getAllLivres();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
 //        livres.add(new Livre("titre 1","auteur1",5,"4216","https://www.oumma-design.fr/wp-content/uploads/2015/12/LE_DEVOIR_modifi%C3%A9-1.jpg"));
 //        livres.add(new Livre("titre 2","auteur2",4,"4216","https://i.pinimg.com/originals/db/38/8d/db388d57cb3c1f9f4a8e3de7a7627510.jpg"));
@@ -54,19 +82,24 @@ public class AbonnesDashboard implements Initializable {
                 selected(livre);
             }
         };
+
+        afficherLivres();
+    }
+    public void afficherLivres(){
         int ligne=0;
         for (int colonne = 0; colonne < livres.size(); colonne++) {
             try {
-            FXMLLoader fxmlLoader=new FXMLLoader(HelloApplication.class.getResource("LivreItem.fxml"));
-            AnchorPane anchorPane= fxmlLoader.load();
-            LivreItem livreItem=fxmlLoader.getController();
-            livreItem.setData(livres.get(colonne), listener);
+                FXMLLoader fxmlLoader=new FXMLLoader(HelloApplication.class.getResource("LivreItem.fxml"));
+                AnchorPane anchorPane= fxmlLoader.load();
+                LivreItem livreItem=fxmlLoader.getController();
+                livreItem.setData(livres.get(colonne), listener);
 //                livreItem.getPhoto().setImage(new Image(livres.get(colonne).getPhoto()));
 //            livreItem.selectioner(new ActionEvent());
-            if (colonne%3==0) {
-                ligne++;
-            }
-            grid.add(anchorPane,(colonne%3)+1,ligne);
+                if (colonne%3==0) {
+                    ligne++;
+                }
+                grid.add(anchorPane,(colonne%3)+1,ligne);
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -74,6 +107,8 @@ public class AbonnesDashboard implements Initializable {
     }
     private void selected(Livre livre){
         titre.setText(livre.getTitre());
+        nbExemplaires.setText(livre.getNbExemplaires()+"");
+
         //asynchrone pour recuperer la photo
         new Thread(()->{
         photo.setImage(new Image(livre.getPhoto()));
@@ -93,5 +128,17 @@ public class AbonnesDashboard implements Initializable {
     }
     public void back(ActionEvent e) throws Exception {
         effect.switchStage(e,"login.fxml");
+    }
+
+    public void search(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
+
+        var motCle=rechercheLivre.getText();
+        System.out.println(livreService.searchLivres(motCle).get(0).getTitre());
+        livres=livreService.searchLivres(motCle);
+        grid.getChildren().clear();
+        afficherLivres();
+
+    //        System.out.println(livres.get(1).getTitre());
+
     }
 }
