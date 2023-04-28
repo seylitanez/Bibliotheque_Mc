@@ -49,12 +49,13 @@ public class ConnectionService {
                 certificat = resultSet.getString("certificat");
             }
             File fileCertificat=new File(certificat);
+        System.out.println(categorie);
             switch (categorie){
                 case "Enseignant":
                 {
                     return utilisateur=new Etudiant(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),fileCertificat);
                 }
-                case "Etudiant externe":
+                case "Externe":
                 {
                     return utilisateur=new Enseignant(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),fileCertificat);
                 }
