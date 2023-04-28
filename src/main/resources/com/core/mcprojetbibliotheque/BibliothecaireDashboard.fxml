@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+
+<AnchorPane prefHeight="639.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.BibliothecaireDashboard">
+   <children>
+      <AnchorPane layoutX="61.0" layoutY="41.0" prefHeight="578.0" prefWidth="1103.0" style="-fx-border-color: black; -fx-border-radius: 15px;">
+         <children>
+            <AnchorPane layoutX="63.0" layoutY="8.0" prefHeight="282.0" prefWidth="596.0" style="-fx-border-color: black;">
+               <children>
+                  <ScrollPane layoutX="20.0" layoutY="51.0" prefHeight="197.0" prefWidth="556.0">
+                     <content>
+                        <HBox prefHeight="197.0" prefWidth="547.0" />
+                     </content>
+                  </ScrollPane>
+                  <Label layoutX="38.0" layoutY="14.0" text="nos livres" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="873.0" layoutY="96.0" prefHeight="148.0" prefWidth="152.0" style="-fx-border-color: black; -fx-background-radius: 15; -fx-background-color: white; -fx-border-radius: 15;">
+               <children>
+                  <Label layoutX="36.0" layoutY="89.0" text="50" />
+                  <Label layoutX="115.0" layoutY="30.0" text="livre" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="686.0" layoutY="96.0" prefHeight="148.0" prefWidth="152.0" style="-fx-border-color: black; -fx-background-radius: 15; -fx-background-color: white; -fx-border-radius: 15;">
+               <children>
+                  <Label layoutX="93.0" layoutY="23.0" text="abonnes" />
+                  <Label layoutX="32.0" layoutY="101.0" text="50" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="63.0" layoutY="303.0" prefHeight="262.0" prefWidth="596.0" style="-fx-border-color: black;">
+               <children>
+                  <ScrollPane layoutX="20.0" layoutY="51.0" prefHeight="197.0" prefWidth="556.0">
+                     <content>
+                        <ListView prefHeight="200.0" prefWidth="542.0" />
+                     </content>
+                  </ScrollPane>
+                  <Label layoutX="38.0" layoutY="14.0" text="demande de pret" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="750.0" layoutY="303.0" prefHeight="242.0" prefWidth="258.0" style="-fx-border-color: black;">
+               <children>
+                  <Label layoutX="106.0" layoutY="14.0" text="ajout livre" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

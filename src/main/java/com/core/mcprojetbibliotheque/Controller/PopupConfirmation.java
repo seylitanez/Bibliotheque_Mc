@@ -47,5 +47,7 @@ public class PopupConfirmation {
     public void setUtilisateur(Abonne utilisateur) {
         this.utilisateur = utilisateur;
         pdf.setImage(new Image(utilisateur.getCertificat().getPath().replace('\\','/').replaceFirst("/","//")));
+        //TODO:affichage du nom prenom etc...
+
     }
 }
