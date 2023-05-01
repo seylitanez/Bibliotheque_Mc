@@ -10,11 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
 
@@ -48,6 +44,5 @@ public class PopupConfirmation {
         this.utilisateur = utilisateur;
         pdf.setImage(new Image(utilisateur.getCertificat().getPath().replace('\\','/').replaceFirst("/","//")));
         //TODO:affichage du nom prenom etc...
-
     }
 }
