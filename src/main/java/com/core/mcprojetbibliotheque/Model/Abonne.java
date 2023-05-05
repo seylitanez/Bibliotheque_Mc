@@ -5,6 +5,8 @@ import java.util.*;
 public class Abonne extends Utilisateur{
     private Date dateInscription,dateEmpunt;
     private File certificat;
+    private int nbrReservation =0;
+    private int nbrEmprunt = 0;
     private ArrayList<Livre> empreunts =new ArrayList<>();
     private boolean penalite,compteValide;
     public Abonne(String nom, String prenom, String username, String password, String email, String categorie, Date dateInscription, Date dateEmpunt, File certificat, ArrayList<Livre> empreunts, boolean penalite, boolean compteValide) {
@@ -20,6 +22,15 @@ public class Abonne extends Utilisateur{
         super(nom, prenom, username, password, email, categorie);
         this.dateInscription = dateInscription;
         this.certificat = certificat;
+    }
+    public Abonne(String nom, String prenom, String username, String password, String email, String categorie,int nbrReservation,int nbrEmprunt ) {
+    	super(nom, prenom, username, password, email, categorie);
+    	this.nbrReservation=nbrReservation;
+    	this.nbrEmprunt=nbrEmprunt;
+    	
+    	
+    	
+    	
     }
     public File getCertificat() {
         return certificat;
@@ -73,4 +84,16 @@ public class Abonne extends Utilisateur{
         ConnectionService connectionService=new ConnectionService();
         connectionService.inscription(this);
     }
+	public int getNbrReservation() {
+		return nbrReservation;
+	}
+	public void setNbrReservation(int nbrReservation) {
+		this.nbrReservation = nbrReservation;
+	}
+	public int getNbrEmprunt() {
+		return nbrEmprunt;
+	}
+	public void setNbrEmprunt(int nbrEmprunt) {
+		this.nbrEmprunt = nbrEmprunt;
+	}
 }

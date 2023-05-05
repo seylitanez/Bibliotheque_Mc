@@ -1,8 +1,16 @@
 package com.core.mcprojetbibliotheque.Controller;
+import java.util.Calendar;
+
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
+
 import com.core.mcprojetbibliotheque.HelloApplication;
 import com.core.mcprojetbibliotheque.Model.Livre;
+import com.core.mcprojetbibliotheque.Model.UtilisateurConnecté;
+import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.LivreService;
 import com.core.mcprojetbibliotheque.Service.MyListener;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
@@ -11,6 +19,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -18,15 +30,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 public class AbonnesDashboard implements Initializable {
     @FXML
     private AnchorPane main;
+    
+   
+     
     @FXML
     private GridPane grid;
 
@@ -47,18 +64,26 @@ public class AbonnesDashboard implements Initializable {
     private List<Livre> livres;
     private MyListener listener;
     private WindowEffect effect;
-
+    private ConnectionService connectionService;
     private DbConnexion dbConnexion;
     private LivreService livreService;
+    
     @Override
+    
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        effect=new WindowEffect(main);
+    	effect=new WindowEffect(main);
+    	
+       
 
 
 
         try {
                 livreService=new LivreService();
                 livres= livreService.getAllLivres();
+               
+                
+               
+
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             } catch (ClassNotFoundException e) {
@@ -105,6 +130,11 @@ public class AbonnesDashboard implements Initializable {
             }
         }
     }
+    
+    
+    
+    
+    
     private void selected(Livre livre){
         titre.setText(livre.getTitre());
         nbExemplaires.setText(livre.getNbExemplaires()+"");
@@ -113,6 +143,7 @@ public class AbonnesDashboard implements Initializable {
         new Thread(()->{
         photo.setImage(new Image(livre.getPhoto()));
         }).start();
+        
     }
     public void exit(ActionEvent e) {
         effect.exit(e);
@@ -138,7 +169,75 @@ public class AbonnesDashboard implements Initializable {
         grid.getChildren().clear();
         afficherLivres();
 
-    //        System.out.println(livres.get(1).getTitre());
+    //        System.out.println(livres.get(1).getTitre());}
+}
 
+    public void reserver(ActionEvent e)throws Exception {
+    	connectionService=new ConnectionService();
+    	
+    	// parce que interdit de emprunté plus de trois ouvreage
+    	boolean possible = connectionService.checkPossiblity(UtilisateurConnecté.email);
+    	
+    	
+    	
+    	
+    	if(possible==true ) {
+    		
+    		 Dialog<ButtonType> dialog = new Dialog();
+    		dialog.setTitle("CONFIRMATION");
+    		dialog.setHeaderText("confirmer la reservation");
+    		dialog.initModality(Modality.APPLICATION_MODAL);
+    		Label label = new Label("voes etes sur vous voulez reservez le livre");
+    		dialog.getDialogPane().setContent(label);
+    		ButtonType okButton = new ButtonType("ok",ButtonBar.ButtonData.OK_DONE);
+    		ButtonType cancalButton = new ButtonType("cancal",ButtonBar.ButtonData.CANCEL_CLOSE);
+    		dialog.getDialogPane().getButtonTypes().addAll(okButton,cancalButton);
+    		Optional<ButtonType> result = dialog.showAndWait();
+    		if(result.isPresent()&& result.get()==okButton) {
+    			
+    		 
+    			// add to database 
+    			
+    			
+    			//1:on a titre de livre ;
+    			// :il faut recuperer id de livre 
+    			// mais il faut mettre  title unique 
+    			
+    			ConnectionService cs = new ConnectionService();
+    			int idLivre = cs.getIdLivre(titre.getText());
+    			int idUtilisateur=cs.getIdUtilisateur(UtilisateurConnecté.email);
+    			LocalDate date = LocalDate.now(); // ou LocalDate.of(2021, 3, 24) pour une date spécifique
+    			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    			String formattedDate = date.format(formatter);
+    			
+    			cs.addReservarion(idLivre,idUtilisateur,formattedDate);
+    			
+    			// update nembre of reservation
+    			cs.updateNbrReservation(idUtilisateur);
+    			
+    			
+    		}
+    		
+    		
+    		
+    	}else {
+    		
+    		Dialog<String> dialog = new Dialog<>();
+    		dialog.setTitle("Erreur");
+    		dialog.setHeaderText("Vous pouvez pas reservez maintent");
+    		dialog.setContentText("vous avez reservez ou empuntez plus de trois.");
+    		
+    		ButtonType okButton = new ButtonType("OK");
+    		dialog.getDialogPane().getButtonTypes().add(okButton);
+    		
+    		dialog.showAndWait();
+    		
+    		
+    	}
+   	
     }
+ 
+   
+    
+    
 }

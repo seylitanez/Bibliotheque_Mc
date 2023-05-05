@@ -5,6 +5,7 @@ module com.core.mcprojetbibliotheque {
     requires org.apache.commons.io;
     requires AnimateFX;
     requires net.dv8tion.jda;
+	requires okhttp3;
 
     opens com.core.mcprojetbibliotheque to javafx.fxml;
     exports com.core.mcprojetbibliotheque;

@@ -1,6 +1,7 @@
 package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Model.Utilisateur;
+import com.core.mcprojetbibliotheque.Model.UtilisateurConnecté;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import javafx.event.ActionEvent;
@@ -18,33 +19,43 @@ public class Login implements Initializable {
     @FXML
     private AnchorPane main;
     @FXML
-    private TextField username,password;
+    private TextField email,password;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         effect=new WindowEffect(main);
     }
     public void connect(ActionEvent e) throws Exception {
         connectionService=new ConnectionService();
-        var username=this.username.getText();
+        var email=this.email.getText();
         var password=this.password.getText();
-        if(!username.isEmpty() && !password.isEmpty()) {
-            System.out.println(username);
-            System.out.println(password);
-            Utilisateur utilisateur= connectionService.login(username,password);
-            this.username.setText("");
+        if(!email.isEmpty() && !password.isEmpty()) {
+           // System.out.println(email);
+           // System.out.println(password);
+            Utilisateur utilisateur= connectionService.login(email,password);
+            this.email.setText("");
             this.password.setText("");
+            UtilisateurConnecté.email=email;
+            
+            
 //            Thread thread= new Thread(()->{
                 try {
                     switch (utilisateur.getCategorie()){
                         case "Gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
-                        case "Externe","Interne","Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");break;
-                        case "Bibliothecaire":effect.switchStage(e,"GestionaireAbonnes.fxml");break;
+                        case "Externe","Interne","Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");
+                        break;
+                        case "Bibliothecaire":effect.switchStage(e,"GestionnaireAbonnes.fxml");break;
                     }
                 }catch (Exception exception){exception.printStackTrace();}
 //            });
 //            thread.join();
 //            thread.start();
+       
         }
+        
+       
+        
+        
+        
     }
     public void exit(ActionEvent e) {
         effect.exit(e);
