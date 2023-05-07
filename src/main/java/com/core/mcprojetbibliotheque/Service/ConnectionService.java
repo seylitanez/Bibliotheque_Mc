@@ -146,14 +146,16 @@ public class ConnectionService {
     }
     
     
-    public ObservableList<reservation> getReservationList() throws SQLException{
+    public ObservableList<reservation> getReservationList(String TypeReservation) throws SQLException{
     	 var cnx =dbConnexion.getConnection();
     	ObservableList<reservation> reservationList = FXCollections.observableArrayList();
     	 PreparedStatement statement = cnx.prepareStatement(TROUVE_ID_AND_DATE);
+    	 statement.setString(1,TypeReservation);
     	 ResultSet resultSet = statement.executeQuery();
     	 int idUtilisateur=0;
    	  	 int idLivre=0;
    	  	 Date dateReservation=null;
+   	  	 Date dateAcceptaionOuRefusé=null;
    	  	 int accepté=0;
    	  	 Boolean acceptéReservation =false;
    	  	 while (resultSet.next()) {
@@ -190,11 +192,12 @@ public class ConnectionService {
    		  
    	      dateReservation=resultSet.getDate("date");
    	      accepté=resultSet.getInt("accepté");
+   	      dateAcceptaionOuRefusé=resultSet.getDate("DateAcceptéOuRefusé");
    	      acceptéReservation=true?accepté==1:false;
    	      
    	      //System.out.println(email+" "+nom+" "+prenom+" "+username+" "+title+" "+nbrExmplaire+" "+dateReservation+" "+accepté+"\n");
    	      
-   	      reservation reservation = new reservation(email,nom,prenom,username,title,Integer.valueOf(nbrExmplaire),dateReservation,acceptéReservation);
+   	      reservation reservation = new reservation(email,nom,prenom,username,title,Integer.valueOf(nbrExmplaire),dateReservation,acceptéReservation,dateAcceptaionOuRefusé);
    	      reservationList.add(reservation);
 	   	   
    	      
@@ -207,7 +210,7 @@ public class ConnectionService {
     	
     	
     }
-    
+  
     public int getIdLivre(String titre)  throws SQLException{
 	   var cnx =dbConnexion.getConnection();
 	   PreparedStatement statement = cnx.prepareStatement(TROUVE_ID_LIVRE);
@@ -262,4 +265,35 @@ public class ConnectionService {
     	 statement.setInt(1,idUtilisateur); 
     	 statement.execute();
     }
-}
+	
+    
+    
+    public Boolean UpdateReservation(int idUtilisateur, int idLivre, Date dateReservation ,String accepté)throws SQLException, ParseException {
+    	
+    		var cnx =dbConnexion.getConnection();
+    		try {
+   	       PreparedStatement statement = cnx.prepareStatement(UPDATE_RESERVATION);
+   	       statement.setString(1,accepté);
+   	       statement.setInt(2,idUtilisateur);
+     	   statement.setInt(3,idLivre);
+     	   statement.setDate(4,(java.sql.Date) dateReservation);
+     	   
+   	       int rowsUpdated = statement.executeUpdate();
+     	   return true;
+		} catch (Exception e) {
+		   return false;
+		}
+    	   
+    	  
+		
+	}
+	public void supprimerReservation(int idUtilisateur, int idLivre, Date dateReservation) throws SQLException {
+		var cnx =dbConnexion.getConnection();
+		PreparedStatement statement = cnx.prepareStatement(DELETE_RESERVATION);
+		statement.setInt(1,idUtilisateur);
+  	   	statement.setInt(2,idLivre);
+  	   	statement.setDate(3,(java.sql.Date) dateReservation);
+		statement.executeUpdate();
+	}
+	
+	}

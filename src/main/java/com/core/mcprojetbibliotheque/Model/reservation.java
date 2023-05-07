@@ -7,8 +7,9 @@ public class reservation {
 	Integer nbrExemplaire;
 	Date dateReservation;
 	Boolean accepté;
+	Date dateAcceptaionOuRefusé;
 	public reservation(String email, String nom, String prenom, String userName, String title, Integer nbrExemplaire,
-			Date dateReservation,Boolean accepté) {
+			Date dateReservation,Boolean accepté,Date dateAcceptaionOuRefusé ) {
 		super();
 		this.email = email;
 		this.nom = nom;
@@ -18,7 +19,9 @@ public class reservation {
 		this.nbrExemplaire = nbrExemplaire;
 		this.dateReservation = dateReservation;
 		this.accepté=accepté;
+		this.dateAcceptaionOuRefusé =dateAcceptaionOuRefusé ;
 	}
+
 	public Boolean getAccepté() {
 		return accepté;
 	}
@@ -66,6 +69,14 @@ public class reservation {
 	}
 	public void setDateReservation(Date dateReservation) {
 		this.dateReservation = dateReservation;
+	}
+
+	public Date getDateAcceptaionOuRefusé() {
+		return dateAcceptaionOuRefusé;
+	}
+
+	public void setDateAcceptaionOuRefusé(Date dateAcceptaionOuRefusé) {
+		this.dateAcceptaionOuRefusé = dateAcceptaionOuRefusé;
 	}
 	
 	

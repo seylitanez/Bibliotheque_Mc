@@ -18,7 +18,7 @@ public class Constantes {
     
     public static String TROUVE_UTILISATEURWITHEMAIL="SELECT * FROM `utilisateur` WHERE `email`= ?;";
   
-    public static String TROUVE_ID_AND_DATE="SELECT * FROM `reservation`WHERE `accepté`=0;";
+    public static String TROUVE_ID_AND_DATE="SELECT * FROM `reservation`WHERE `accepté`=?;";
     public static String TROUVE_INFORMATION_UTILISATEUR="SELECT * FROM `utilisateur` WHERE `id`= ?;";
 
     public static String TROUVE_INFORMATION_LIVRE="SELECT * FROM `livre` WHERE `id`= ?;";
@@ -27,4 +27,7 @@ public class Constantes {
     public static String TROUVE_ID_UILISATEUR="SELECT * FROM `utilisateur` WHERE `email`= ?;";
     public static String ADD_RESERVATION="INSERT INTO `reservation` (id_utilisateur,id_livre,date) VALUES (?, ?, ?);";
     public static String UPDATE_NBR_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation + 1 WHERE id = ?;";
+    public static String UPDATE_RESERVATION="UPDATE reservation SET accepté = ?,DateAcceptéOuRefusé =  NOW() WHERE id_utilisateur = ? AND id_livre = ? AND date =?;";
+    public static String DELETE_RESERVATION="DELETE FROM reservation WHERE id_utilisateur = ? AND id_livre = ? AND date = ?;";
+
 }

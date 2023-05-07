@@ -15,11 +15,12 @@
           <TableColumn fx:id="email" prefWidth="97.0" text="Email" />
           <TableColumn fx:id="nom" prefWidth="68.0" text="Nom" />
             <TableColumn fx:id="prenom" prefWidth="72.0" text="Prenom" />
-            <TableColumn fx:id="username" prefWidth="83.0" text="Username" />
-            <TableColumn fx:id="title" prefWidth="88.0" text="Titlte" />
+            <TableColumn fx:id="username" prefWidth="76.0" text="Username" />
+            <TableColumn fx:id="title" prefWidth="95.0" text="Titlte" />
             <TableColumn fx:id="nbrExemplaire" prefWidth="42.0" text="nbrExemplaire" />
-            <TableColumn fx:id="date" prefWidth="68.0" text="Date" />
-            <TableColumn fx:id="accepté" prefWidth="82.0" text="Accepté" />
+            <TableColumn fx:id="dateReservation" prefWidth="88.0" text="DateReservation" />
+            <TableColumn fx:id="accepté" prefWidth="62.0" text="Accepté" />
+            <TableColumn fx:id="dateAcceptaion" prefWidth="75.0" text="DateAcceptation" />
         </columns>
       </TableView>
       <Button layoutX="598.0" layoutY="7.0" mnemonicParsing="false" onAction="#exit" prefHeight="11.0" prefWidth="53.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="X" textFill="WHITE">
@@ -38,12 +39,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="23.0" layoutY="47.0" text="Liste Des  Resrvation">
+      <Label fx:id="labelType" layoutX="23.0" layoutY="47.0" text="Liste Des  Resrvation">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="AccepterResvation" layoutX="105.0" layoutY="336.0" mnemonicParsing="false" text="Accepter" />
+      <Button fx:id="AccepterResvation" layoutX="105.0" layoutY="336.0" mnemonicParsing="false" onAction="#AccepterResvation" text="Accepter" />
       <Button fx:id="RefuserReservation" layoutX="539.0" layoutY="336.0" mnemonicParsing="false" text="Refuser" />
+      <Button fx:id="AjouterDansEmpurnt" layoutX="233.0" layoutY="336.0" mnemonicParsing="false" text="AjouterDansEmpurnt" />
+      <Button fx:id="Supprimer" layoutX="406.0" layoutY="336.0" mnemonicParsing="false" onAction="#Supprimer" text="Supprimer" />
    </children>
 </AnchorPane>

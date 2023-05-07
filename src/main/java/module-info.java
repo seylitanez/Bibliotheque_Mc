@@ -6,6 +6,7 @@ module com.core.mcprojetbibliotheque {
     requires AnimateFX;
     requires net.dv8tion.jda;
 	requires okhttp3;
+	requires javafx.graphics;
 
     opens com.core.mcprojetbibliotheque to javafx.fxml;
     exports com.core.mcprojetbibliotheque;
