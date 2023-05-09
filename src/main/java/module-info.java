@@ -7,6 +7,7 @@ module com.core.mcprojetbibliotheque {
     requires net.dv8tion.jda;
 	requires okhttp3;
 	requires javafx.graphics;
+	requires javafx.base;
 
     opens com.core.mcprojetbibliotheque to javafx.fxml;
     exports com.core.mcprojetbibliotheque;

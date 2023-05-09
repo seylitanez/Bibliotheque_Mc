@@ -29,5 +29,8 @@ public class Constantes {
     public static String UPDATE_NBR_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation + 1 WHERE id = ?;";
     public static String UPDATE_RESERVATION="UPDATE reservation SET accepté = ?,DateAcceptéOuRefusé =  NOW() WHERE id_utilisateur = ? AND id_livre = ? AND date =?;";
     public static String DELETE_RESERVATION="DELETE FROM reservation WHERE id_utilisateur = ? AND id_livre = ? AND date = ?;";
-
+    public static String CHERCHER_TITLE_LIVRE="SELECT COUNT(*) FROM `livre`where titre = ?;";
+    public static String ADD_LIVRE="INSERT INTO livre (titre, auteur, nbExemplaires, codeRayon, photo, filiere, dateAjout)VALUES (?, ?, ?, ?, null, ?,NOW());";
+    public static String UPDATE_LIVRE="UPDATE livre SET titre = ?, auteur = ?,nbExemplaires = ?,codeRayon = ?,photo= ?,filiere = ? WHERE id = ?";
+    public static String SUPPRIMER_LIVRE="DELETE FROM livre WHERE id = ?;";
 }

@@ -1,9 +1,11 @@
 package com.core.mcprojetbibliotheque.Model;
 
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 public class Livre {
+	private int idLivre;
     private String titre;
     private String auteur;
     private int nbExemplaires;
@@ -11,6 +13,8 @@ public class Livre {
     private String photo;
     private ArrayList<String> references;
     private boolean disponibilite;
+    private String filiere;
+    private Date dateAjouter;
     public Livre(String titre, String auteur, int nbExemplaires, int codeRayon, String photo, ArrayList<String> references) {
         this.titre = titre;
         this.auteur = auteur;
@@ -20,14 +24,16 @@ public class Livre {
         this.photo=photo;
         this.disponibilite = true;
     }
-    public Livre(String titre, String auteur, int nbExemplaires, int codeRayon, String photo) {
-        this.titre = titre;
+    public Livre(int idLivre,String titre, String auteur, int nbExemplaires, int codeRayon, String photo, String filiere,Date dateAjouter) {
+        this.idLivre=idLivre;
+    	this.titre = titre;
         this.auteur = auteur;
         this.nbExemplaires = nbExemplaires;
         this.codeRayon = codeRayon;
-        this.references = references;
         this.photo=photo;
         this.disponibilite = true;
+        this.setFiliere(filiere);
+        this.setDateAjouter(dateAjouter);
     }
     public void changeDisponibilite(){
         if (getNbExemplaires()== 0){
@@ -88,4 +94,22 @@ public class Livre {
     public void setDisponibilite(boolean disponibilite) {
         this.disponibilite = disponibilite;
     }
+	public int getIdLivre() {
+		return idLivre;
+	}
+	public void setIdLivre(int idLivre) {
+		this.idLivre = idLivre;
+	}
+	public String getFiliere() {
+		return filiere;
+	}
+	public void setFiliere(String filiere) {
+		this.filiere = filiere;
+	}
+	public Date getDateAjouter() {
+		return dateAjouter;
+	}
+	public void setDateAjouter(Date dateAjouter) {
+		this.dateAjouter = dateAjouter;
+	}
 }

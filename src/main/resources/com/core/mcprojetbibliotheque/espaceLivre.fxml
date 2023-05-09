@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.espaceLivre">
+   <children>
+      <TabPane prefHeight="414.0" prefWidth="715.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="livreTab" text="Livre">
+               <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="691.0">
+                     <children>
+                        <TableView fx:id="livreTabView" layoutX="220.0" layoutY="57.0" prefHeight="220.0" prefWidth="571.0">
+                          <columns>
+                            <TableColumn fx:id="titre" prefWidth="96.0" text="titre" />
+                            <TableColumn fx:id="auteur" prefWidth="109.0" text="auteur" />
+                              <TableColumn fx:id="nbrExemplaire" prefWidth="97.0" text="nbrExemplaire" />
+                              <TableColumn fx:id="codeRayon" prefWidth="89.0" text="codeRayon" />
+                              <TableColumn fx:id="idLivre" prefWidth="75.0" text="idLivre" />
+                              <TableColumn fx:id="filiere" prefWidth="76.0" text="Filiere" />
+                              <TableColumn fx:id="dateAjouter" prefWidth="75.0" text="DateAjouter" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="29.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouterLivre" prefHeight="23.0" prefWidth="76.0" text="Ajouter" />
+                        <Button layoutX="308.0" layoutY="317.0" mnemonicParsing="false" onAction="#modifierLivre" prefHeight="23.0" prefWidth="76.0" text="modifier" />
+                        <Button layoutX="585.0" layoutY="317.0" mnemonicParsing="false" onAction="#supprimerLivre" prefHeight="23.0" prefWidth="76.0" text="Supprimer" />
+                        <Label fx:id="label" layoutX="286.0" layoutY="321.0" />
+                        <GridPane layoutX="17.0" layoutY="62.0" prefHeight="109.0" prefWidth="81.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Titre" GridPane.halignment="RIGHT" />
+                              <Label text="Auteur" GridPane.rowIndex="1" />
+                              <Label text="nbrExempalire" GridPane.rowIndex="2" />
+                              <Label text="CodeRayon" GridPane.rowIndex="3" />
+                              <Label text="Filiere" GridPane.rowIndex="4" />
+                           </children>
+                        </GridPane>
+                        <GridPane layoutX="116.0" layoutY="62.0" prefHeight="114.0" prefWidth="100.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="titreTextField" />
+                              <TextField fx:id="auteurTextField" GridPane.rowIndex="1" />
+                              <TextField fx:id="nbrExemplaireTextField" GridPane.rowIndex="2" />
+                              <TextField fx:id="codeRayonTextField" GridPane.rowIndex="3" />
+                              <TextField fx:id="filiereTextField" GridPane.rowIndex="4" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+          <Tab text="Reservation" />
+            <Tab text="Emprunt" />
+        </tabs>
+      </TabPane>
+   </children>
+</StackPane>
