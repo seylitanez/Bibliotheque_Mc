@@ -2,11 +2,13 @@ package com.core.mcprojetbibliotheque.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
 import com.core.mcprojetbibliotheque.Model.Livre;
 import com.core.mcprojetbibliotheque.Model.reservation;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
@@ -30,6 +32,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class espaceLivre implements Initializable{
 	@FXML 
 	TableView livreTabView;
+	
 	@FXML
 	private Label label;
 	@FXML
@@ -56,6 +59,28 @@ public class espaceLivre implements Initializable{
 	public TextField codeRayonTextField;
 	@FXML
 	public TextField filiereTextField;
+	@FXML
+	public TextField ajouterExemplaireTextField;
+	
+	// for the table Emprunt 
+	@FXML 
+	TableView empruntTableView;
+	
+	@FXML
+	public TableColumn<EmpruntLivre, String>emailEmprunt;
+	@FXML
+	public TableColumn<EmpruntLivre, String>nomEmprunt;
+	@FXML
+	public TableColumn<EmpruntLivre, String>prenomEmprunt;
+	@FXML
+	public TableColumn<EmpruntLivre, String>titreEmprunt;
+	@FXML
+	public TableColumn<EmpruntLivre, String>auteurEmprunt;
+	@FXML
+	public TableColumn<EmpruntLivre, Integer>numeroEmp;
+	
+	
+	
 	
 	
 	
@@ -69,17 +94,15 @@ public class espaceLivre implements Initializable{
 		try {
 			showLivre();
 			livreTabView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-		        // Mettre à jour les TextField avec les informations du livre sélectionné
-		        updateSelectedBook();
-		    });
+			        // Mettre à jour les TextField avec les informations du livre sélectionné
+	       
+			updateSelectedBook();
+			});
+			ShowEmpruntList();
+		
+			} catch (Exception e) {
 			
-			
-			
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -96,7 +119,24 @@ public class espaceLivre implements Initializable{
 		livreTabView.setItems(list);
 	}
 	
-	
+	public void ShowEmpruntList() throws SQLException {
+		try {
+			LivreService ls = new LivreService();
+			ObservableList<EmpruntLivre> list =ls.getEmprunt();
+			emailEmprunt.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("email"));
+			nomEmprunt.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("nom"));
+			prenomEmprunt.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("prenom"));
+			titreEmprunt.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("titre"));
+			auteurEmprunt.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("auteur"));
+			numeroEmp.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Integer>("idEmprunt"));
+			
+			empruntTableView.setItems(list);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+	}
 	
 	public void ajouterLivre() throws Exception{
 			LivreService ls = new LivreService();
@@ -113,13 +153,6 @@ public class espaceLivre implements Initializable{
 					
 				}else {
 				}
-			
-			
-			
-			
-					
-		
-		
 		
 	}
 	
@@ -173,5 +206,45 @@ public class espaceLivre implements Initializable{
 	    }
 		return livreSelectionne;
 	}
+	
+	
+	public void ajouterExemplaire() throws Exception {
+		 TableViewSelectionModel<Livre> selectionModel = livreTabView.getSelectionModel();
+		  Livre livreSelectionne = selectionModel.getSelectedItem();
+		  LivreService ls = new LivreService();
+		  int id = livreSelectionne.getIdLivre();
+		  Boolean resultat = ls.ajouterExemplaire(id,ajouterExemplaireTextField.getText());
+		  showLivre();
+		  ajouterExemplaireTextField.setText("");
+			titreTextField.setText("");
+			auteurTextField.setText("");
+			nbrExemplaireTextField.setText("");
+			codeRayonTextField.setText("");
+			filiereTextField.setText("");
+		  if(resultat==true) {
+			//TODO:afficher un boite de Dialog  
+			  System.out.println(resultat);
+		  }else {
+			  
+		  }
+	}
+	
+	
+	
+	
+	   
+public void restituer() throws IOException, SQLException {
+	LivreService ls = new LivreService();
+	TableViewSelectionModel<EmpruntLivre> selectionModel = empruntTableView.getSelectionModel();
+    EmpruntLivre emprunt = selectionModel.getSelectedItem();
 
+    if (emprunt != null) {
+    	ls.updateRestitution(emprunt.getIdEmprunt());
+    	ShowEmpruntList();
+    	ls.updateExemplaireLivre(emprunt.getTitre(),emprunt.getAuteur());
+    	
+    }
+    }
 }
+    
+

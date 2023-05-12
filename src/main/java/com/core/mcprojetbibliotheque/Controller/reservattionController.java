@@ -2,6 +2,7 @@ package com.core.mcprojetbibliotheque.Controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -12,7 +13,9 @@ import com.core.mcprojetbibliotheque.Model.UtilisateurConnecté;
 
 import com.core.mcprojetbibliotheque.Model.reservation;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
+import com.core.mcprojetbibliotheque.Service.LivreService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
+import com.core.mcprojetbibliotheque.Utils.SendEmail;
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,32 +62,32 @@ public class reservattionController implements Initializable {
 	public TableColumn<reservation, String>nom;
 	@FXML
 	public TableColumn<reservation, String>prenom;
-	@FXML
-	public TableColumn<reservation, String>username;
+	
 	
 	@FXML
 	public TableColumn<reservation, String>title;
+	@FXML
+	public TableColumn<reservation, String>auteur;
 	@FXML
 	public TableColumn<reservation, Integer>nbrExemplaire;
 	@FXML
 	public TableColumn<reservation, Date>dateReservation;
 	@FXML
-	public TableColumn<reservation, Boolean>accepté;
-	@FXML
-	public TableColumn<reservation, Date>dateAcceptaion;
+	public TableColumn<reservation, Boolean>EnRetard;
 	@FXML
 	public Label labelType;
 
 	public void completéTableau() {
 		email.setCellValueFactory(new PropertyValueFactory<reservation,String>("email"));
 		nom.setCellValueFactory(new PropertyValueFactory<reservation,String>("nom"));
-		prenom.setCellValueFactory(new PropertyValueFactory<reservation,String>("prenom"));
-		username.setCellValueFactory(new PropertyValueFactory<reservation,String>("userName"));
+		prenom.setCellValueFactory(new PropertyValueFactory<reservation,String>("prenom"));	
 		title.setCellValueFactory(new PropertyValueFactory<reservation,String>("title"));
+		auteur.setCellValueFactory(new PropertyValueFactory<reservation,String>("auteur"));
 		nbrExemplaire.setCellValueFactory(new PropertyValueFactory<reservation,Integer>("nbrExemplaire"));
 		dateReservation.setCellValueFactory(new PropertyValueFactory<reservation,Date>("dateReservation"));
-		accepté.setCellValueFactory(new PropertyValueFactory<reservation,Boolean>("accepté"));
-		dateAcceptaion.setCellValueFactory(new PropertyValueFactory<reservation,Date>("dateAcceptaionOuRefusé"));
+		EnRetard.setCellValueFactory(new PropertyValueFactory<reservation,Boolean>("estEnRetard"));
+		
+		//dateAcceptaion.setCellValueFactory(new PropertyValueFactory<reservation,Date>("dateAcceptaionOuRefusé"));
 	}
 	
 	@FXML
@@ -104,6 +107,9 @@ public class reservattionController implements Initializable {
 	public void showListResvationAccepté() throws Exception {
 		ConnectionService cs = new ConnectionService();
 		ObservableList<reservation> list =cs.getReservationList("1");
+		for (reservation reservation : list) {
+			reservation.EstEnRetard();
+		}
 		completéTableau();
 		reservationTable.setItems(list);
 		labelType.setText("Liste Des  Resrvation Accepté");	
@@ -133,15 +139,25 @@ public class reservattionController implements Initializable {
 		reservation selectedReservation = selectionModel.getSelectedItem();
 		ConnectionService cs = new ConnectionService();
 		
+		
 		if (selectedReservation != null) {
 			
 		   String email=selectedReservation.getEmail();
 		   String titre =selectedReservation.getTitle();
-		   Date dateReservation=selectedReservation.getDateReservation();
-		   int idLivre = cs.getIdLivre(titre);
+		   String auteur=selectedReservation.getEmail();
+				
+		   LocalDate dateReservation=selectedReservation.getDateReservation();
+		   int idLivre = cs.getIdLivre(titre,auteur);// car deux livre ne peuvent pas avoir le meme titre at auteur
 		   int idUtilisateur=cs.getIdUtilisateur(email);
 		   
-		  Boolean bool =cs.UpdateReservation(idUtilisateur,idLivre,dateReservation,"1");
+		   Boolean bool =cs.UpdateReservation(idUtilisateur,idLivre,dateReservation,"1");
+		   cs.decrementerNombreExemplaire(idLivre);
+		   //Pour email
+		   SendEmail sendEmail = new SendEmail();
+		   LocalDate date = LocalDate.now().plusWeeks(1);
+		   String subject = "Reservation Accepté";
+		   String text ="la reservation de livre "+titre.toUpperCase()+"est accepté\n vous devez prendre votre livre avant"+date;
+		   sendEmail.sendEmailMethode(email,subject,text);
 		  
 		    
 		}
@@ -154,15 +170,17 @@ public class reservattionController implements Initializable {
 		ConnectionService cs = new ConnectionService();
 		
 		if (selectedReservation != null) {
-			
-		   String email=selectedReservation.getEmail();
-		   String titre =selectedReservation.getTitle();
-		   Date dateReservation=selectedReservation.getDateReservation();
-		   int idLivre = cs.getIdLivre(titre);
-		   int idUtilisateur=cs.getIdUtilisateur(email);
-		   
-		  Boolean bool =cs.UpdateReservation(idUtilisateur,idLivre,dateReservation,"2");
-		  
+		
+		   LocalDate dateReservation=selectedReservation.getDateReservation();
+		   int idLivre = cs.getIdLivre(selectedReservation.getTitle(),selectedReservation.getAuteur());
+		   int idUtilisateur=cs.getIdUtilisateur(selectedReservation.getEmail());
+ 
+		   Boolean bool =cs.UpdateReservation(idUtilisateur,idLivre,dateReservation,"2");
+		   SendEmail sendEmail = new SendEmail();
+		   LocalDate date = LocalDate.now().plusWeeks(1);
+		   String subject = "Reservation Refusé";
+		   String text ="la reservation de livre "+selectedReservation.getTitle().toUpperCase()+"est refusé";
+		   sendEmail.sendEmailMethode(selectedReservation.getEmail(),subject,text);
 		    
 		}
 		
@@ -172,7 +190,7 @@ public class reservattionController implements Initializable {
 	}
 	public void AjouterDansEmpurnt() throws Exception {
 		Supprimer();
-		//ajouté a emprunt
+		
 		
 	}
 	public void Supprimer() throws Exception {
@@ -182,11 +200,10 @@ public class reservattionController implements Initializable {
 		
 		if (selectedReservation != null) {
 			
-		   String email=selectedReservation.getEmail();
-		   String titre =selectedReservation.getTitle();
-		   Date dateReservation=selectedReservation.getDateReservation();
-		   int idLivre = cs.getIdLivre(titre);
-		   int idUtilisateur=cs.getIdUtilisateur(email);
+		   
+		   LocalDate dateReservation=selectedReservation.getDateReservation();
+		   int idLivre = cs.getIdLivre(selectedReservation.getTitle(),selectedReservation.getAuteur());
+		   int idUtilisateur=cs.getIdUtilisateur(selectedReservation.getEmail());
 		   
 		   cs.supprimerReservation(idUtilisateur,idLivre,dateReservation);
 		   

@@ -204,7 +204,8 @@ public class AbonnesDashboard implements Initializable {
     			// mais il faut mettre  title unique 
     			
     			ConnectionService cs = new ConnectionService();
-    			int idLivre = cs.getIdLivre(titre.getText());
+    			int idLivre = 5;
+    					//cs.getIdLivre(titre.getText());
     			int idUtilisateur=cs.getIdUtilisateur(UtilisateurConnecté.email);
     			LocalDate date = LocalDate.now(); // ou LocalDate.of(2021, 3, 24) pour une date spécifique
     			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");

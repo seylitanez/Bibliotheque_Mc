@@ -9,14 +9,18 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-    	
-    	FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("espaceLivre.fxml"));//abonnesReservatinList.fxml 
-    	//AbonnesReservationAcceptéList.fxml
-        Scene scene = new Scene(fxmlLoader.load());
-        scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.show();
+    	try {
+
+        	FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("abonnesReservatinList.fxml"));//abonnesReservatinList.fxml 
+        	
+            Scene scene = new Scene(fxmlLoader.load());
+            scene.setFill(Color.TRANSPARENT);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.show();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
     }
     public static void main(String[] args) {
         launch();

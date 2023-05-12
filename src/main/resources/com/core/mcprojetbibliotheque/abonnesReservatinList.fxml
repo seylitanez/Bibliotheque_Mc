@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.reservattionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.reservattionController">
    <children>
-      <TableView fx:id="reservationTable" layoutX="23.0" layoutY="85.0" prefHeight="213.0" prefWidth="628.0">
+      <TableView fx:id="reservationTable" layoutX="23.0" layoutY="74.0" prefHeight="224.0" prefWidth="699.0">
         <columns>
           <TableColumn fx:id="email" prefWidth="97.0" text="Email" />
           <TableColumn fx:id="nom" prefWidth="68.0" text="Nom" />
             <TableColumn fx:id="prenom" prefWidth="72.0" text="Prenom" />
-            <TableColumn fx:id="username" prefWidth="76.0" text="Username" />
-            <TableColumn fx:id="title" prefWidth="95.0" text="Titlte" />
-            <TableColumn fx:id="nbrExemplaire" prefWidth="42.0" text="nbrExemplaire" />
+            <TableColumn fx:id="title" prefWidth="62.0" text="Titlte" />
+             <TableColumn fx:id="auteur" prefWidth="68.0" text="auteur" />
+            <TableColumn fx:id="nbrExemplaire" prefWidth="82.0" text="nbrExemplaire" />
             <TableColumn fx:id="dateReservation" prefWidth="88.0" text="DateReservation" />
-            <TableColumn fx:id="accepté" prefWidth="62.0" text="Accepté" />
-            <TableColumn fx:id="dateAcceptaion" prefWidth="75.0" text="DateAcceptation" />
+            <TableColumn fx:id="EnRetard" prefWidth="75.0" text="EnRetard" />
+           
         </columns>
       </TableView>
       <Button layoutX="598.0" layoutY="7.0" mnemonicParsing="false" onAction="#exit" prefHeight="11.0" prefWidth="53.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="X" textFill="WHITE">

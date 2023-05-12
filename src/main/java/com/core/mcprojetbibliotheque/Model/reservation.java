@@ -1,25 +1,39 @@
 package com.core.mcprojetbibliotheque.Model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class reservation {
 	String email,nom,prenom,userName,title ;
 	Integer nbrExemplaire;
-	Date dateReservation;
+	LocalDate dateReservation;
 	Boolean accepté;
-	Date dateAcceptaionOuRefusé;
-	public reservation(String email, String nom, String prenom, String userName, String title, Integer nbrExemplaire,
-			Date dateReservation,Boolean accepté,Date dateAcceptaionOuRefusé ) {
+	LocalDate dateAcceptaion;
+	String auteur;
+	Boolean estEnRetard ;
+	
+
+	public Boolean getEstEnRetard() {
+		return estEnRetard;
+	}
+
+	public void setEstEnRetard(Boolean estEnRetard) {
+		this.estEnRetard = estEnRetard;
+	}
+
+	public reservation(String email, String nom, String prenom,  String title,String auteur, Integer nbrExemplaire,
+			LocalDate dateReservation,Boolean accepté,LocalDate dateAcceptaion ,Boolean estEnRetard ) {
 		super();
+		this.estEnRetard = estEnRetard;
 		this.email = email;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.userName = userName;
+		this.auteur=auteur;
 		this.title = title;
 		this.nbrExemplaire = nbrExemplaire;
 		this.dateReservation = dateReservation;
 		this.accepté=accepté;
-		this.dateAcceptaionOuRefusé =dateAcceptaionOuRefusé ;
+		this.dateAcceptaion =dateAcceptaion ;
 	}
 
 	public Boolean getAccepté() {
@@ -64,22 +78,33 @@ public class reservation {
 	public void setNbrExemplaire(Integer nbrExemplaire) {
 		this.nbrExemplaire = nbrExemplaire;
 	}
-	public Date getDateReservation() {
+	public LocalDate getDateReservation() {
 		return dateReservation;
 	}
-	public void setDateReservation(Date dateReservation) {
+	public void setDateReservation(LocalDate dateReservation) {
 		this.dateReservation = dateReservation;
 	}
 
-	public Date getDateAcceptaionOuRefusé() {
-		return dateAcceptaionOuRefusé;
+	public LocalDate getDateAcceptaionOuRefusé() {
+		return dateAcceptaion;
 	}
 
-	public void setDateAcceptaionOuRefusé(Date dateAcceptaionOuRefusé) {
-		this.dateAcceptaionOuRefusé = dateAcceptaionOuRefusé;
+	public void setDateAcceptaionOuRefusé(LocalDate dateAcceptaionOuRefusé) {
+		this.dateAcceptaion = dateAcceptaionOuRefusé;
+	}
+	public String getAuteur() {
+		return auteur;
+	}
+
+	public void setAuteur(String auteur) {
+		this.auteur = auteur;
 	}
 	
-	
+	public void EstEnRetard() {
+		if (dateAcceptaion != null && LocalDate.now().isAfter( (dateAcceptaion).plusWeeks(1)  )) {
+			this.setEstEnRetard(true);
+		}
+	}
 	
 	
 	

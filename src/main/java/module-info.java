@@ -8,6 +8,7 @@ module com.core.mcprojetbibliotheque {
 	requires okhttp3;
 	requires javafx.graphics;
 	requires javafx.base;
+	requires java.mail;
 
     opens com.core.mcprojetbibliotheque to javafx.fxml;
     exports com.core.mcprojetbibliotheque;

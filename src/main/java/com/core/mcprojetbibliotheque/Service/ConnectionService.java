@@ -147,15 +147,16 @@ public class ConnectionService {
     
     
     public ObservableList<reservation> getReservationList(String TypeReservation) throws SQLException{
-    	 var cnx =dbConnexion.getConnection();
+    	LocalDate dateCurrent = LocalDate.now();
+    	var cnx =dbConnexion.getConnection();
     	ObservableList<reservation> reservationList = FXCollections.observableArrayList();
     	 PreparedStatement statement = cnx.prepareStatement(TROUVE_ID_AND_DATE);
     	 statement.setString(1,TypeReservation);
     	 ResultSet resultSet = statement.executeQuery();
     	 int idUtilisateur=0;
    	  	 int idLivre=0;
-   	  	 Date dateReservation=null;
-   	  	 Date dateAcceptaionOuRefusé=null;
+   	  	 LocalDate dateReservation=null;
+   	  	 LocalDate dateAcceptaion=null;
    	  	 int accepté=0;
    	  	 Boolean acceptéReservation =false;
    	  	 while (resultSet.next()) {
@@ -167,12 +168,11 @@ public class ConnectionService {
 	   	     String email=null;
 		   	 String nom=null;
 		   	 String prenom=null;
-		   	 String username=null;
 		   	 while (resultSet2.next()) {
 		   		 email=resultSet2.getString("email");
 		   		 nom=resultSet2.getString("nom"); 
 		   		 prenom=resultSet2.getString("prenom");
-		   		 username=resultSet2.getString("username");
+		   		
 		   	 }
    		  //
    		  idLivre =resultSet.getInt("id_livre");
@@ -182,22 +182,30 @@ public class ConnectionService {
 	   	     ResultSet resultSet3 = statement3.executeQuery();
 	   	     String title = null;
 		   	 int nbrExmplaire =0;
-		   	 
+		   	 String auteur=null;
 		   	 while (resultSet3.next()) {
 		   		 title=resultSet3.getString("titre");
 		   		 nbrExmplaire=resultSet3.getInt("nbExemplaires"); 
-		   		
+		   		 auteur=resultSet3.getString("auteur");
+		   		 
 		   	 }
 		  //
    		  
-   	      dateReservation=resultSet.getDate("date");
+   	      dateReservation=resultSet.getDate("date").toLocalDate();
    	      accepté=resultSet.getInt("accepté");
-   	      dateAcceptaionOuRefusé=resultSet.getDate("DateAcceptéOuRefusé");
-   	      acceptéReservation=true?accepté==1:false;
+   	      dateAcceptaion=resultSet.getDate("dateAcceptation").toLocalDate();
+   	      Boolean estEnRetard=false;
+   	      if(accepté==0) {
+   	    	acceptéReservation=false;
+   	    	
+   	      }else {
+   	    	acceptéReservation=true;
+   	    	
+   	      }
    	      
-   	      //System.out.println(email+" "+nom+" "+prenom+" "+username+" "+title+" "+nbrExmplaire+" "+dateReservation+" "+accepté+"\n");
    	      
-   	      reservation reservation = new reservation(email,nom,prenom,username,title,Integer.valueOf(nbrExmplaire),dateReservation,acceptéReservation,dateAcceptaionOuRefusé);
+   	      reservation reservation = new reservation(email,nom,prenom,title,auteur,Integer.valueOf(nbrExmplaire),dateReservation,acceptéReservation,dateAcceptaion,false);
+   	      
    	      reservationList.add(reservation);
 	   	   
    	      
@@ -211,10 +219,11 @@ public class ConnectionService {
     	
     }
   
-    public int getIdLivre(String titre)  throws SQLException{
+    public int getIdLivre(String titre ,String auteur )  throws SQLException{
 	   var cnx =dbConnexion.getConnection();
 	   PreparedStatement statement = cnx.prepareStatement(TROUVE_ID_LIVRE);
   	   statement.setString(1,titre);
+  	   statement.setString(2, auteur);
   	   ResultSet resultSet = statement.executeQuery();
   	   int idLivre = 0;
   	   while (resultSet.next()) {
@@ -268,7 +277,7 @@ public class ConnectionService {
 	
     
     
-    public Boolean UpdateReservation(int idUtilisateur, int idLivre, Date dateReservation ,String accepté)throws SQLException, ParseException {
+    public Boolean UpdateReservation(int idUtilisateur, int idLivre, LocalDate dateReservation ,String accepté)throws SQLException, ParseException {
     	
     		var cnx =dbConnexion.getConnection();
     		try {
@@ -276,7 +285,7 @@ public class ConnectionService {
    	       statement.setString(1,accepté);
    	       statement.setInt(2,idUtilisateur);
      	   statement.setInt(3,idLivre);
-     	   statement.setDate(4,(java.sql.Date) dateReservation);
+     	   statement.setDate(4,java.sql.Date.valueOf(dateReservation));
      	   
    	       int rowsUpdated = statement.executeUpdate();
      	   return true;
@@ -287,12 +296,18 @@ public class ConnectionService {
     	  
 		
 	}
-	public void supprimerReservation(int idUtilisateur, int idLivre, Date dateReservation) throws SQLException {
+	public void supprimerReservation(int idUtilisateur, int idLivre, LocalDate dateReservation) throws SQLException {
 		var cnx =dbConnexion.getConnection();
 		PreparedStatement statement = cnx.prepareStatement(DELETE_RESERVATION);
 		statement.setInt(1,idUtilisateur);
   	   	statement.setInt(2,idLivre);
-  	   	statement.setDate(3,(java.sql.Date) dateReservation);
+  	   	statement.setDate(3, java.sql.Date.valueOf(dateReservation));
+		statement.executeUpdate();
+	}
+	public void decrementerNombreExemplaire(int idLivre) throws SQLException {
+		var cnx =dbConnexion.getConnection();
+		PreparedStatement statement = cnx.prepareStatement(DECREMENTER_NOMBRE_EXEMPLAIRE);
+		statement.setInt(1,idLivre);
 		statement.executeUpdate();
 	}
 	

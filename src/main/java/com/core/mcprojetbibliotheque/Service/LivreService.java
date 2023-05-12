@@ -1,7 +1,7 @@
 package com.core.mcprojetbibliotheque.Service;
 
 import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
-
+import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
 import com.core.mcprojetbibliotheque.Model.Livre;
 import com.core.mcprojetbibliotheque.Model.reservation;
 import com.core.mcprojetbibliotheque.Utils.Constantes;
@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -22,13 +24,15 @@ import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
 
 public class LivreService {
 
-    private DbConnexion dbConnexion;
+    private static final Date NULL = null;
+	private DbConnexion dbConnexion;
 
     public LivreService() throws IOException {
         dbConnexion=new DbConnexion();
 
     }
 
+    
     public ObservableList<Livre> getAllLivres() throws SQLException, ClassNotFoundException, IOException {
         var connection= dbConnexion.getConnection();
 
@@ -134,5 +138,82 @@ public class LivreService {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	
+
+	public Boolean ajouterExemplaire(int idLivre, String nbrExemplaire) {
+		try {
+			var connection= dbConnexion.getConnection();
+	        var preparedStatement=connection.prepareStatement(AJOUTEREXEMPLAIRE);
+	        preparedStatement.setInt(1,Integer.parseInt(nbrExemplaire));
+	        preparedStatement.setInt(2,idLivre);
+	        preparedStatement.executeUpdate();
+	        return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	
+
+
+	public ObservableList<EmpruntLivre> getEmprunt() throws SQLException {
+		
+			 var connection= dbConnexion.getConnection();
+		        var preparedStatement=connection.prepareStatement(LISTER_EMPRUNT);
+		        ObservableList<EmpruntLivre> list = FXCollections.observableArrayList();
+		        ResultSet resultSet = preparedStatement.executeQuery();
+				   
+		        while (resultSet.next()){
+		        	 //pour trouver les information d utilisateur aprtir de id;
+			   		 PreparedStatement statement2 = connection.prepareStatement(TROUVE_INFORMATION_UTILISATEUR);
+			   		 statement2.setString(1,String.valueOf(resultSet.getInt("idUtilisateur")));
+			   	     ResultSet resultSet2 = statement2.executeQuery();
+			   	     String email=null;
+			   	     String nom = null;
+			   	     String prenom=null;
+			   	     	while (resultSet2.next()) {
+					   		  email=resultSet2.getString("email");
+					   		  nom=resultSet2.getString("nom"); 
+					   		  prenom=resultSet2.getString("prenom");
+					   		
+			   	     	}	
+					  //pour trouver les information d livre aprtir de id;
+			 		 PreparedStatement statement3 = connection.prepareStatement(TROUVE_INFORMATION_LIVRE);
+			   		 statement3.setString(1,String.valueOf(resultSet.getInt("idLivre")));
+			   		 ResultSet resultSet3 = statement3.executeQuery();
+			   		 	  String auteur=null;
+			   		 	  String title = null;
+					   	 while (resultSet3.next()) {
+					   		 title=resultSet3.getString("titre");
+					   		 auteur=resultSet3.getString("auteur");   	 
+				   	 }
+		          EmpruntLivre emprunt = new EmpruntLivre(resultSet.getInt("idEmprunt"),email,nom,prenom,title,auteur);
+		          list.add(emprunt);
+		         
+		          
+		        }
+		
+		return list;
+	}
+
+
+	public void updateRestitution(int idEmprunt) throws SQLException {
+		var cnx= dbConnexion.getConnection();
+		PreparedStatement statement = cnx.prepareStatement(UPDATE_EMPRUNT_RESTITUTION);
+		statement.setInt(1, idEmprunt);
+		int rowsUpdated = statement.executeUpdate();
+		
+	}
+
+
+	public void updateExemplaireLivre(String titre,String auteur) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(UPDATE_EXEMPLAIRE_NEMBER);
+        preparedStatement.setString(1,titre);
+        preparedStatement.setString(2,auteur);
+        preparedStatement.executeUpdate();
+		
 	}
 }
