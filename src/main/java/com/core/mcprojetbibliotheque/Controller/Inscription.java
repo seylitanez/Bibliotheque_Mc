@@ -4,9 +4,12 @@ import com.core.mcprojetbibliotheque.Model.Abonne;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.DialogGenerator;
+import com.core.mcprojetbibliotheque.Utils.SendEmail;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -14,6 +17,8 @@ import javafx.stage.*;
 
 import java.io.*;
 import java.util.Date;
+import java.util.Optional;
+import java.util.Random;
 
 public class Inscription implements Initializable {
     @FXML
@@ -46,25 +51,84 @@ public class Inscription implements Initializable {
         effect=new WindowEffect(main);
     }
     public void inscrire(ActionEvent actionEvent) throws Exception {
-        sInscrire.setText("chargement");
-        sInscrire.setDisable(true);
-        var nom=this.nom.getText();
-        var prenom=this.prenom.getText();
-        var username=this.username.getText();
-        var email=this.email.getText();
-        var password=this.password.getText();
-        var categorie=this.categorie.getSelectionModel().getSelectedItem();
-        connectionService.inscription(new Abonne(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),certificatFile));
-        dialogGenerator=new DialogGenerator("popupInscription.fxml");
-        dialogGenerator.build();
-        popupInsController=dialogGenerator.getFxmll().getController();
-        dialogGenerator.setOnHidden(windowEvent -> {
-            try {
-                effect.switchStage(actionEvent,"login.fxml");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+    	//confirmation d email 
+    	
+    	
+    	 Random rand = new Random();
+         int randomNum = rand.nextInt(900000) + 100000;
+    	
+         
+         try {
+        	 SendEmail sendEmail = new SendEmail();
+         	sendEmail.sendEmailMethode(email.getText(),"Confirmation de votre email", "le code de confirmation est "+randomNum);
+         	
+ 		} catch (Exception e2) {
+ 			System.out.println(e2.getMessage());
+ 		}
+         
+         
+         
+    	
+    	TextInputDialog dialog = new TextInputDialog();
+    	dialog.setTitle("Confirmation email");
+    	dialog.setHeaderText("Entrez le code de verification qui a été envoyé a votre email:");
+    	dialog.setContentText("code:");
+    	Optional<String> result = dialog.showAndWait();
+    	
+    	if (result.isPresent()) {
+    	    try {
+    	        int code = Integer.parseInt(result.get());
+    	        if(code == randomNum) {
+    	        	
+    	        	
+    	        	
+    	            sInscrire.setText("chargement");
+    	            sInscrire.setDisable(true);
+    	            var nom=this.nom.getText();
+    	            var prenom=this.prenom.getText();
+    	            var username=this.username.getText();
+    	            var email=this.email.getText();
+    	            var password=this.password.getText();
+    	            var categorie=this.categorie.getSelectionModel().getSelectedItem();
+    	            connectionService.inscription(new Abonne(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),certificatFile));
+    	            dialogGenerator=new DialogGenerator("popupInscription.fxml");
+    	            dialogGenerator.build();
+    	            popupInsController=dialogGenerator.getFxmll().getController();
+    	            dialogGenerator.setOnHidden(windowEvent -> {
+    	                try {
+    	                    effect.switchStage(actionEvent,"login.fxml");
+    	                } catch (Exception e) {
+    	                    throw new RuntimeException(e);
+    	                }
+    	            });
+    	        	
+    	        	
+    	        	
+    	        	
+    	        	
+    	        	
+    	        	
+    	        }else {
+    	        	Alert alert = new Alert(AlertType.ERROR);
+        	        alert.setTitle("Erreur");
+        	        alert.setHeaderText("code invalide");
+        	        alert.setContentText("La code saisie n'est pas un valide.\nveillez ressayer l'insecription");
+        	        alert.showAndWait();
+    	        }
+    	        
+    	    } catch (NumberFormatException e) {
+    	       
+    	        Alert alert = new Alert(AlertType.ERROR);
+    	        alert.setTitle("Erreur");
+    	        alert.setHeaderText("Valeur invalide");
+    	        alert.setContentText("La valeur saisie n'est pas un entier.");
+    	        alert.showAndWait();
+    	    }
+    	}
+    	
+    	
+    	
+  
     }
     public void exit(ActionEvent e) {
         effect.exit(e);

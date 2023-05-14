@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.DemandeProlongé">
+   <children>
+      <TableView fx:id="demandeProlongerTableView" layoutX="46.0" layoutY="14.0" prefHeight="224.0" prefWidth="540.0">
+        <columns>
+          <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
+          <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="prenom" prefWidth="75.0" text="Prenom" />
+            <TableColumn fx:id="titre" prefWidth="75.0" text="Titre" />
+            <TableColumn fx:id="nbrExemplaire" prefWidth="75.0" text="NbrExemplaire" />
+            <TableColumn fx:id="Delais" prefWidth="164.0" text="DernierDelais" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

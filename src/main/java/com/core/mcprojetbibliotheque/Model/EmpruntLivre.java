@@ -11,19 +11,36 @@ public class EmpruntLivre {
 	    private int idLivre;
 	    private String titre;
 	    private String auteur;
+	    private int nbrExemplaire;
 	    private LocalDate dateEmprunt;
 		private LocalDate dateRestitution; 
 	    private boolean demandeProlonger;
-	    private boolean prolonge;
+	    private boolean prolonge;//
+	    //private boolean prolongéRufusé;
+	    private boolean EnRetard;
+	    private LocalDate Delais;
 	    
 
-	    public EmpruntLivre(int idEmprunt,String email,String nom,String prenom,String titre,String auteur) {
+	    
+
+		
+
+
+		public EmpruntLivre(int idEmprunt,String email,String nom,String prenom,String titre,String auteur,int nbrExemplaire,LocalDate dateEmprunt,LocalDate dateRestitution,Boolean demandeProlonger , Boolean prolonger, Boolean enRetard ,LocalDate Delais) {
 	    	this.idEmprunt=idEmprunt;
 	        this.email = email;
 	        this.nom=nom;
 	        this.prenom=prenom;
 	        this.titre=titre;
 	        this.auteur=auteur;
+	        this.nbrExemplaire=nbrExemplaire;
+	        this.dateEmprunt=dateEmprunt;
+	        this.dateRestitution=dateRestitution;
+	        this.demandeProlonger =demandeProlonger;
+	        this.prolonge = prolonger;
+	        //this.prolongéAnnule=prolongéAnnule;
+	        this.EnRetard = enRetard;
+	        this.Delais=Delais;
 	    
 	    }
 
@@ -135,6 +152,61 @@ public class EmpruntLivre {
 			}
 
 
+
+
+			public boolean isEnRetard() {
+				return EnRetard;
+			}
+
+
+
+
+			public void setEnRetard(boolean enRetard) {
+				EnRetard = enRetard;
+			}
+
+			
+			
+			
+			public void EstEnRetard() {
+				if ( LocalDate.now().isAfter( (this.dateEmprunt).plusMonths(1)  )) {
+					this.setEnRetard(true);
+				}
+				}
+			
+			public void dernierDelais() {
+				this.setDelais(this.dateEmprunt.plusMonths(1));
+				
+			}
+			
+			public LocalDate getDelais() {
+				return Delais;
+			}
+
+
+
+
+			public void setDelais(LocalDate delais) {
+				Delais = delais;
+			}
+
+
+
+
+			public int getNbrExemplaire() {
+				return nbrExemplaire;
+			}
+
+
+
+
+			public void setNbrExemplaire(int nbrExemplaire) {
+				this.nbrExemplaire = nbrExemplaire;
+			}
+			
+			
+			
+			
 	}
 
 

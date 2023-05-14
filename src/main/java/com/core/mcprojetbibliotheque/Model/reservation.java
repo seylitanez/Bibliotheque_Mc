@@ -101,7 +101,7 @@ public class reservation {
 	}
 	
 	public void EstEnRetard() {
-		if (dateAcceptaion != null && LocalDate.now().isAfter( (dateAcceptaion).plusWeeks(1)  )) {
+		if (this.dateAcceptaion != null && LocalDate.now().isAfter( (this.dateAcceptaion).plusWeeks(1)  )) {
 			this.setEstEnRetard(true);
 		}
 	}

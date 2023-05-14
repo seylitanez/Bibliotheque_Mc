@@ -8,12 +8,17 @@ import java.time.format.DateTimeFormatter;
 import com.core.mcprojetbibliotheque.Configuration.DbConnexion;
 
 import com.core.mcprojetbibliotheque.HelloApplication;
+import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
 import com.core.mcprojetbibliotheque.Model.Livre;
 import com.core.mcprojetbibliotheque.Model.UtilisateurConnecté;
+import com.core.mcprojetbibliotheque.Model.reservation;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.LivreService;
 import com.core.mcprojetbibliotheque.Service.MyListener;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +29,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -38,6 +46,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 public class AbonnesDashboard implements Initializable {
     @FXML
     private AnchorPane main;
@@ -67,6 +76,21 @@ public class AbonnesDashboard implements Initializable {
     private ConnectionService connectionService;
     private DbConnexion dbConnexion;
     private LivreService livreService;
+    @FXML
+    private TableView<EmpruntLivre>abonneEmpruntTableView;
+    @FXML
+	public TableColumn<EmpruntLivre, String>title;
+	@FXML
+	public TableColumn<EmpruntLivre, String>auteur;
+	@FXML
+	public TableColumn<EmpruntLivre, LocalDate>dateRestitution;
+	@FXML  
+	public TableColumn<EmpruntLivre, Boolean>demandeProlongé;
+	@FXML  
+	public TableColumn<EmpruntLivre, Boolean>prolongé;
+	@FXML
+	public TableColumn<EmpruntLivre, Boolean>enRetard;
+    
     
     @Override
     
@@ -214,7 +238,7 @@ public class AbonnesDashboard implements Initializable {
     			cs.addReservarion(idLivre,idUtilisateur,formattedDate);
     			
     			// update nembre of reservation
-    			cs.updateNbrReservation(idUtilisateur);
+    			cs.incrementerNbrReservationUtilisateur(idUtilisateur);
     			
     			
     		}
@@ -238,7 +262,27 @@ public class AbonnesDashboard implements Initializable {
    	
     }
  
-   
+   public void showAbooneEmprunt() throws IOException, SQLException {
+	   LivreService ls = new LivreService();
+		ObservableList<EmpruntLivre> list =ls.getEmprunt();
+		for (EmpruntLivre emprunt : list) {
+			emprunt.EstEnRetard();
+		}
+		ObservableList<EmpruntLivre> empruntFiltered = FXCollections.observableArrayList();
+		for (EmpruntLivre emprunt : list) {
+			if(emprunt.getEmail().equals("lyes")) {
+				empruntFiltered.add(emprunt);	
+			}
+		}
+	   title.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("title"));
+	   auteur.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("auteur"));
+	   dateRestitution.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,LocalDate>("dateRestitution"));
+	   demandeProlongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("demandeProlonger"));
+	   prolongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("prolonge"));
+	   enRetard.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("enRetard"));
+	   abonneEmpruntTableView.setItems(empruntFiltered);
+
+   }
     
     
 }

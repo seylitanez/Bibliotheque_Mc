@@ -26,19 +26,26 @@ public class Constantes {
     public static String TROUVE_ID_LIVRE="SELECT * FROM `livre` WHERE `titre`= ? AND `auteur` = ?;";
     public static String TROUVE_ID_UILISATEUR="SELECT * FROM `utilisateur` WHERE `email`= ?;";
     public static String ADD_RESERVATION="INSERT INTO `reservation` (id_utilisateur,id_livre,date) VALUES (?, ?, ?);";
-    public static String UPDATE_NBR_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation + 1 WHERE id = ?;";
+    //public static String UPDATE_NBR_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation + 1 WHERE id = ?;";
     public static String UPDATE_RESERVATION="UPDATE reservation SET accepté = ?,DateAcceptation =  NOW() WHERE id_utilisateur = ? AND id_livre = ? AND date =?;";
     public static String DELETE_RESERVATION="DELETE FROM reservation WHERE id_utilisateur = ? AND id_livre = ? AND date = ?;";
-    public static String CHERCHER_TITLE_LIVRE="SELECT COUNT(*) FROM `livre`where titre = ?;";
+    public static String CHERCHER_TITLE_LIVRE="SELECT COUNT(*) FROM `livre`where titre = ? AND auteur = ? ;";
     public static String ADD_LIVRE="INSERT INTO livre (titre, auteur, nbExemplaires, codeRayon, photo, filiere, dateAjout)VALUES (?, ?, ?, ?, null, ?,NOW());";
     public static String UPDATE_LIVRE="UPDATE livre SET titre = ?, auteur = ?,nbExemplaires = ?,codeRayon = ?,photo= ?,filiere = ? WHERE id = ?";
     public static String SUPPRIMER_LIVRE="DELETE FROM livre WHERE id = ?;";
     public static String AJOUTEREXEMPLAIRE = "UPDATE livre SET nbExemplaires = nbExemplaires + ? WHERE id = ?";
     
-    public static String LISTER_EMPRUNT ="SELECT * FROM emprunt WHERE dateRestitution IS NULL;";
+    public static String LISTER_EMPRUNT ="SELECT * FROM emprunt ;";
     public static String UPDATE_EMPRUNT_RESTITUTION="UPDATE emprunt set dateRestitution = Now() where idEmprunt = ?;";
     public static String UPDATE_EXEMPLAIRE_NEMBER="UPDATE livre SET nbExemplaires = nbExemplaires + 1 where titre = ? and auteur = ?;";
     public static String DECREMENTER_NOMBRE_EXEMPLAIRE = "UPDATE livre SET nbExemplaires = nbExemplaires - 1 WHERE id_livre = ?";
-     
+    public static String INCREMENTER_NOMBRE_EXEMPLAIRE = "UPDATE livre SET nbExemplaires = nbExemplaires - +1 WHERE id_livre = ?";
+    public static String AJOUTER_EMPRUNT = "INSERT INTO emprunt (idUtilisateur, idLivre, dateEmprunt) VALUES (?, ?, ?);";
+   
+    public static String DECREMENTER_NOMBRE_EMPRUNT ="UPDATE utilisateur SET nbrEmprunt = nbrEmprunt - 1 WHERE email = ?;";
+    public static String INCREMENTER_NOMBRE_EMPRUNT = "UPDATE utilisateur SET nbrEmprunt = nbrEmprunt + 1 WHERE id = ?;";
+    public static String INCREMENTER_NOMBRE_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation + 1 WHERE id = ?;";
+    public static String DECREMENTER_NOMBRE_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation - 1 WHERE id = ?;";
+    public static String ADD_DEMANDE ="UPDATE emprunt set demandeProlonger = 1 WHERE idEmprunt = ?";
 
 }

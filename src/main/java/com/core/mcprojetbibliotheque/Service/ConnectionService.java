@@ -268,12 +268,8 @@ public class ConnectionService {
     	
     }
     	
-    public void updateNbrReservation(int idUtilisateur)throws SQLException {
-    	var cnx =dbConnexion.getConnection();
-    	 PreparedStatement statement = cnx.prepareStatement(UPDATE_NBR_RESERVATION);
-    	 statement.setInt(1,idUtilisateur); 
-    	 statement.execute();
-    }
+   
+    
 	
     
     
@@ -309,6 +305,41 @@ public class ConnectionService {
 		PreparedStatement statement = cnx.prepareStatement(DECREMENTER_NOMBRE_EXEMPLAIRE);
 		statement.setInt(1,idLivre);
 		statement.executeUpdate();
+	}
+	public void incrementerNombreExemplaire(int idLivre) throws SQLException {
+		var cnx =dbConnexion.getConnection();
+		PreparedStatement statement = cnx.prepareStatement(INCREMENTER_NOMBRE_EXEMPLAIRE);
+		statement.setInt(1,idLivre);
+		statement.executeUpdate();
+		
+	}
+	public void AjouterEmprunt(int idUtilisateur, int idLivre, LocalDate date) throws SQLException {
+		var cnx =dbConnexion.getConnection();
+		PreparedStatement statement = cnx.prepareStatement(AJOUTER_EMPRUNT);	
+		statement.setInt(1,idUtilisateur);
+		statement.setInt(2, idLivre);
+		statement.setDate(3,java.sql.Date.valueOf(date));
+		statement.executeUpdate();
+	}
+	public void incrementerNbrReservationUtilisateur(int idUtilisateur) throws SQLException {
+		var cnx =dbConnexion.getConnection();
+		PreparedStatement statement = cnx.prepareStatement(INCREMENTER_NOMBRE_RESERVATION);
+		statement.setInt(1, idUtilisateur);
+		statement.executeUpdate();
+	}
+	public void decrementerNbrReservationUtilisateur(int idUtilisateur) throws SQLException {
+		var cnx =dbConnexion.getConnection();
+		PreparedStatement statement = cnx.prepareStatement(DECREMENTER_NOMBRE_RESERVATION);
+		statement.setInt(1, idUtilisateur);
+		statement.executeUpdate();
+	}
+	public void icrementerNombreEmprunt(int idUtilisateur)throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(INCREMENTER_NOMBRE_EMPRUNT);
+        preparedStatement.setInt(1,idUtilisateur);
+        preparedStatement.executeUpdate();
+		
+		
 	}
 	
 	}

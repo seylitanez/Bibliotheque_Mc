@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
@@ -115,7 +114,6 @@
                   <Font name="JetBrains Mono Bold" size="48.0" />
                </font>
             </Label>
-            <ChoiceBox id="filiereChoiseBox" layoutX="26.0" layoutY="187.0" prefWidth="150.0" />
             <Label id="email" fx:id="abonnesDasboardEmail" layoutX="308.0" layoutY="81.0" prefHeight="20.0" prefWidth="181.0" text="email" />
             </children></AnchorPane>
     </children>

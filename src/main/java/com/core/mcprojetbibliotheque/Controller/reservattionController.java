@@ -17,11 +17,13 @@ import com.core.mcprojetbibliotheque.Service.LivreService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.SendEmail;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
@@ -30,18 +32,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class reservattionController implements Initializable {
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			//showListResvation();
-			showListResvationAccepté();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
 	
+	
+	
+	@FXML
+	public ChoiceBox<String> reservationChoiceBox;
+	ObservableList<String> options = FXCollections.observableArrayList(
+		    "listeReservation", "listeReservationAccepté");
 	
 	
 	@FXML
@@ -76,6 +73,43 @@ public class reservattionController implements Initializable {
 	public TableColumn<reservation, Boolean>EnRetard;
 	@FXML
 	public Label labelType;
+	
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		try {
+		
+			reservationChoiceBox.setItems(options);
+			reservationChoiceBox.setValue("listeReservation");
+			reservationChoiceBox.setOnAction(e -> {
+			    String selectedOption = reservationChoiceBox.getValue();
+			    if (selectedOption.equals("listeReservation")) {
+			    	try {
+						showListResvation();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    } else if (selectedOption.equals("listeReservationAccepté")) {
+			    	try {
+						showListResvationAccepté();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			    }
+			});
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 
 	public void completéTableau() {
 		email.setCellValueFactory(new PropertyValueFactory<reservation,String>("email"));
@@ -152,6 +186,7 @@ public class reservattionController implements Initializable {
 		   
 		   Boolean bool =cs.UpdateReservation(idUtilisateur,idLivre,dateReservation,"1");
 		   cs.decrementerNombreExemplaire(idLivre);
+		   cs.incrementerNbrReservationUtilisateur(idUtilisateur);
 		   //Pour email
 		   SendEmail sendEmail = new SendEmail();
 		   LocalDate date = LocalDate.now().plusWeeks(1);
@@ -179,7 +214,7 @@ public class reservattionController implements Initializable {
 		   SendEmail sendEmail = new SendEmail();
 		   LocalDate date = LocalDate.now().plusWeeks(1);
 		   String subject = "Reservation Refusé";
-		   String text ="la reservation de livre "+selectedReservation.getTitle().toUpperCase()+"est refusé";
+		   String text ="la reservation de livre "+selectedReservation.getTitle().toUpperCase()+" est refusé";
 		   sendEmail.sendEmailMethode(selectedReservation.getEmail(),subject,text);
 		    
 		}
@@ -190,6 +225,20 @@ public class reservattionController implements Initializable {
 	}
 	public void AjouterDansEmpurnt() throws Exception {
 		Supprimer();
+		SelectionModel<reservation> selectionModel = reservationTable.getSelectionModel();
+		reservation selectedReservation = selectionModel.getSelectedItem();
+		ConnectionService cs = new ConnectionService();
+		if (selectedReservation != null) {
+			int idLivre = cs.getIdLivre(selectedReservation.getTitle(),selectedReservation.getAuteur());
+			int idUtilisateur=cs.getIdUtilisateur(selectedReservation.getEmail());
+			SendEmail sendEmail = new SendEmail();
+			LocalDate date = LocalDate.now();   
+			String subject = "Confirmation d'Emprunt";
+			String text ="vous avez empruntez "+selectedReservation.getTitle().toUpperCase()+"/vous devez le restituez avant "+date.plusMonths(1);
+			sendEmail.sendEmailMethode(selectedReservation.getEmail(),subject,text);
+			cs.AjouterEmprunt(idUtilisateur,idLivre,date);
+			cs.icrementerNombreEmprunt(idUtilisateur);
+		}
 		
 		
 	}
@@ -205,7 +254,15 @@ public class reservattionController implements Initializable {
 		   int idLivre = cs.getIdLivre(selectedReservation.getTitle(),selectedReservation.getAuteur());
 		   int idUtilisateur=cs.getIdUtilisateur(selectedReservation.getEmail());
 		   
+		   SendEmail sendEmail = new SendEmail();
+		   
+		   String subject = "Reservation Supprimer";
+		   String text ="la reservation de livre "+selectedReservation.getTitle().toUpperCase()+" est Supprimer ";
+		   sendEmail.sendEmailMethode(selectedReservation.getEmail(),subject,text);
+		    
 		   cs.supprimerReservation(idUtilisateur,idLivre,dateReservation);
+		   cs.incrementerNombreExemplaire(idLivre);
+		   cs.decrementerNbrReservationUtilisateur(idUtilisateur);
 		   
 	}
 		showListResvationAccepté();

@@ -65,11 +65,12 @@ public class LivreService {
     
     
     
-    public Boolean checkIfTitleExist(String titre) throws SQLException {
+    public Boolean checkIfTitleAndAuteurExist(String titre,String auteur) throws SQLException {
     	
     	var connection= dbConnexion.getConnection();
         var preparedStatement=connection.prepareStatement(CHERCHER_TITLE_LIVRE);
         preparedStatement.setString(1,titre);
+        preparedStatement.setString(2,auteur);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
             int nombreLivres = resultSet.getInt(1);
@@ -160,42 +161,57 @@ public class LivreService {
 
 	public ObservableList<EmpruntLivre> getEmprunt() throws SQLException {
 		
-			 var connection= dbConnexion.getConnection();
-		        var preparedStatement=connection.prepareStatement(LISTER_EMPRUNT);
-		        ObservableList<EmpruntLivre> list = FXCollections.observableArrayList();
-		        ResultSet resultSet = preparedStatement.executeQuery();
-				   
-		        while (resultSet.next()){
-		        	 //pour trouver les information d utilisateur aprtir de id;
-			   		 PreparedStatement statement2 = connection.prepareStatement(TROUVE_INFORMATION_UTILISATEUR);
-			   		 statement2.setString(1,String.valueOf(resultSet.getInt("idUtilisateur")));
-			   	     ResultSet resultSet2 = statement2.executeQuery();
-			   	     String email=null;
-			   	     String nom = null;
-			   	     String prenom=null;
-			   	     	while (resultSet2.next()) {
-					   		  email=resultSet2.getString("email");
-					   		  nom=resultSet2.getString("nom"); 
-					   		  prenom=resultSet2.getString("prenom");
-					   		
-			   	     	}	
-					  //pour trouver les information d livre aprtir de id;
-			 		 PreparedStatement statement3 = connection.prepareStatement(TROUVE_INFORMATION_LIVRE);
-			   		 statement3.setString(1,String.valueOf(resultSet.getInt("idLivre")));
-			   		 ResultSet resultSet3 = statement3.executeQuery();
-			   		 	  String auteur=null;
-			   		 	  String title = null;
-					   	 while (resultSet3.next()) {
-					   		 title=resultSet3.getString("titre");
-					   		 auteur=resultSet3.getString("auteur");   	 
-				   	 }
-		          EmpruntLivre emprunt = new EmpruntLivre(resultSet.getInt("idEmprunt"),email,nom,prenom,title,auteur);
-		          list.add(emprunt);
-		         
-		          
-		        }
+			
+				 var connection= dbConnexion.getConnection();
+			        var preparedStatement=connection.prepareStatement(LISTER_EMPRUNT);
+			        ObservableList<EmpruntLivre> list = FXCollections.observableArrayList();
+			        ResultSet resultSet = preparedStatement.executeQuery();
+					   
+			        while (resultSet.next()){
+			        	 //pour trouver les information d utilisateur aprtir de id;
+				   		 PreparedStatement statement2 = connection.prepareStatement(TROUVE_INFORMATION_UTILISATEUR);
+				   		 statement2.setString(1,String.valueOf(resultSet.getInt("idUtilisateur")));
+				   	     ResultSet resultSet2 = statement2.executeQuery();
+				   	     String email=null;
+				   	     String nom = null;
+				   	     String prenom=null;
+				   	     	while (resultSet2.next()) {
+						   		  email=resultSet2.getString("email");
+						   		  nom=resultSet2.getString("nom"); 
+						   		  prenom=resultSet2.getString("prenom");
+						   		
+				   	     	}	
+						  //pour trouver les information d livre aprtir de id;
+				 		 PreparedStatement statement3 = connection.prepareStatement(TROUVE_INFORMATION_LIVRE);
+				   		 statement3.setString(1,String.valueOf(resultSet.getInt("idLivre")));
+				   		 ResultSet resultSet3 = statement3.executeQuery();
+				   		 	  String auteur=null;
+				   		 	  String title = null;
+				   		 	  int nbrExemplaire=0;
+						   	 while (resultSet3.next()) {
+						   		 title=resultSet3.getString("titre");
+						   		 auteur=resultSet3.getString("auteur");  
+						   		 nbrExemplaire =resultSet3.getInt("nbExemplaires");
+					   	 }
+						   	
+						   	Boolean demandeProlongé= false;
+						   	Boolean prolongé =false;
+						   	if(resultSet.getInt("demandeProlonger")==1) {
+						   		demandeProlongé = true;
+						   	}	
+						   	if(resultSet.getInt("prolonge")==1) {
+						   		prolongé=true;
+						   	}
+			          EmpruntLivre emprunt = new EmpruntLivre(resultSet.getInt("idEmprunt"),email,nom,prenom,title,auteur,nbrExemplaire,resultSet.getDate("dateEmprunt").toLocalDate(),resultSet.getDate("dateRestitution").toLocalDate(),demandeProlongé,prolongé,false,null);
+			          
+			          list.add(emprunt);
+			         
+			         
+			        }
+			
+			        return list;
+			
 		
-		return list;
 	}
 
 
@@ -216,4 +232,27 @@ public class LivreService {
         preparedStatement.executeUpdate();
 		
 	}
+
+
+	public void decrementerNombreEmprintPourUtilisateur(String email) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(DECREMENTER_NOMBRE_EMPRUNT);
+        preparedStatement.setString(1,email);
+        preparedStatement.executeUpdate();
+	}
+	
+	
+	
+	public void addDemande( int idEmprunt) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(ADD_DEMANDE);
+        preparedStatement.setInt(1,idEmprunt);
+        preparedStatement.executeUpdate();
+		
+		
+	}
+	
+	
+	
+	
 }
