@@ -338,13 +338,18 @@ public class ConnectionService {
 		
 		
 	}
-	public void penaliserUtilisateur(String email) throws SQLException {
-		var connection= dbConnexion.getConnection();
-        var preparedStatement=connection.prepareStatement(PENALISER_UTILISATEUR);
-        LocalDate date = LocalDate.now().plusMonths(1);
-        preparedStatement.setDate(1, java.sql.Date.valueOf(date));
-        preparedStatement.setString(2,email);
-        preparedStatement.executeUpdate();
+	public boolean penaliserUtilisateur(String email) throws SQLException {
+		try {
+			var connection= dbConnexion.getConnection();
+	        var preparedStatement=connection.prepareStatement(PENALISER_UTILISATEUR);
+	        LocalDate date = LocalDate.now().plusMonths(1);
+	        preparedStatement.setDate(1, java.sql.Date.valueOf(date));
+	        preparedStatement.setString(2,email);
+	        preparedStatement.executeUpdate();
+	        return true;
+		} catch (Exception e) {
+			return false;
+		}
 		
 	}
 	public boolean checkPenalisation(String email) throws SQLException {
@@ -422,5 +427,57 @@ public class ConnectionService {
 	        }
 		return list;
 	}
+	public Boolean deleteUtilisateur(String email) throws SQLException {
+		
+		try {
+			var connection= dbConnexion.getConnection();
+
+		     var preparedStatement=connection.prepareStatement(DELETE_UTILISATEUR);
+		     preparedStatement.setString(1, email);
+		     preparedStatement.executeUpdate();
+		     return true;
+		} catch (Exception e) {
+			return false;
+		}
+	     
+	}
+	public boolean Payement(String email, LocalDate date)throws Exception {
+		try {
+			var connection= dbConnexion.getConnection();
+
+		     var preparedStatement=connection.prepareStatement(UPDATE_PAYEMENT);
+		     preparedStatement.setString(2, email);
+		     preparedStatement.setDate(1,java.sql.Date.valueOf(date) );
+		     preparedStatement.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+			return false;
+			
+		}
+		
+	}
+	
+	
+	public boolean AnnulerpenalisationUtilisateur(String email) throws SQLException {
+		try {
+			var connection= dbConnexion.getConnection();
+	        var preparedStatement=connection.prepareStatement(ANNULRE_PENALISER_UTILISATEUR);
+	       
+	        preparedStatement.setString(1,email);
+	        preparedStatement.executeUpdate();
+	        return true;
+		} catch (Exception e) {
+			return false;
+		}
+	
+	
+	}
+	
+	
+	
+	
+	
 	
 	}

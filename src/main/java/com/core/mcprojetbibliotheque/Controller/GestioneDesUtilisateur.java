@@ -1,6 +1,8 @@
 package com.core.mcprojetbibliotheque.Controller;
 
 import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
@@ -10,6 +12,8 @@ import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -72,25 +76,115 @@ public class GestioneDesUtilisateur implements Initializable {
 		
 		
 	}
-	public void supprimer() {
+	public void supprimer() throws Exception {
+		ConnectionService cs = new ConnectionService();
+		SelectionModel<Utilisateur> selectionModel = listUtilisateurTableView.getSelectionModel();
+		Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
+		if(selectedUtililisateur != null) {
+			boolean resultat = cs.deleteUtilisateur(selectedUtililisateur.getEmail());
+			if(resultat == true ) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Utilisateur supprimé");
+				alert.setHeaderText(null);
+				alert.setContentText("L'utilisateur "+selectedUtililisateur.getNom()+" "+selectedUtililisateur.getPrenom()+" été supprimé avec succès.");
+
+				alert.showAndWait();
+			}
+			showUtilisateur();
+			
+		}
+		
+		
+	}
+	public void payement() throws Exception {
+		ConnectionService cs = new ConnectionService();
+		SelectionModel<Utilisateur> selectionModel = listUtilisateurTableView.getSelectionModel();
+		Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
+		if(selectedUtililisateur != null) {
+			
+			boolean resultat = cs.Payement(selectedUtililisateur.getEmail(),LocalDate.now().plusYears(1));
+			if(resultat == true ) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Payement ");
+				alert.setHeaderText(null);
+				alert.setContentText("Le Payement est ajouté avec succès pour utilisateur "+selectedUtililisateur.getNom()+" "+selectedUtililisateur.getPrenom());
+
+				alert.showAndWait();
+		}
+			showUtilisateur();
+		
+		}
+		
+	}
+	public void annulerPayement() throws Exception {
+		try {
+			ConnectionService cs = new ConnectionService();
+			SelectionModel<Utilisateur> selectionModel = listUtilisateurTableView.getSelectionModel();
+			Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
+			if(selectedUtililisateur != null) {
+				LocalDate date = LocalDate.of(2000, 1, 1);
+
+				boolean resultat = cs.Payement(selectedUtililisateur.getEmail(),date);
 				
-		
-		
-		
-	}
-	public void payement() {
-		
-	}
-	public void annulerPayement() {
-	
+				if(resultat == true ) {
+					
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("Payement ");
+					alert.setHeaderText(null);
+					alert.setContentText("Le Payement est anuule avec succès pour utilisateur "+selectedUtililisateur.getNom()+" "+selectedUtililisateur.getPrenom());
+
+					alert.showAndWait();
+					}
+				showUtilisateur();
+				}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 }
-	public void penaliser() {
+	public void penaliser() throws Exception {
+		ConnectionService cs = new ConnectionService();
+		SelectionModel<Utilisateur> selectionModel = listUtilisateurTableView.getSelectionModel();
+		Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
+		if(selectedUtililisateur != null) {
+			boolean resultat = cs.penaliserUtilisateur(selectedUtililisateur.getEmail());
+			if(resultat == true ) {
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Penalisation ");
+				alert.setHeaderText(null);
+				alert.setContentText("Utilistaeur " + selectedUtililisateur.getNom()+" "+selectedUtililisateur.getPrenom()+" est penalisé.");
+
+				alert.showAndWait();
+				}
+			showUtilisateur();
+			}
+			
+			
+		}
+
+	public void annulerPenalisation() throws Exception {
+		ConnectionService cs = new ConnectionService();
+		SelectionModel<Utilisateur> selectionModel = listUtilisateurTableView.getSelectionModel();
+		Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
+		if(selectedUtililisateur != null) {
+			boolean resultat = cs.AnnulerpenalisationUtilisateur(selectedUtililisateur.getEmail());
+			if(resultat == true ) {
+				
+				
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Penalisation ");
+				alert.setHeaderText(null);
+				alert.setContentText("penalisation est anuule avec succès pour utilisateur "+selectedUtililisateur.getNom()+" "+selectedUtililisateur.getPrenom());
+
+				alert.showAndWait();
+				}
+			showUtilisateur();
+				
+				
+				}
+			}
+
 	
-}
-	public void annulerPenalisation() {
 	
-}
-	
-	
-	
+
 }

@@ -81,7 +81,7 @@ public class empruntEnRetard implements Initializable {
 			if(selectedEmprunt != null) {
 				
 				ConnectionService cs = new ConnectionService();
-				cs.penaliserUtilisateur(selectedEmprunt.getEmail());
+				boolean resultat =cs.penaliserUtilisateur(selectedEmprunt.getEmail());
 				LivreService ls = new LivreService();
 				ls.addPenalisation(selectedEmprunt.getIdEmprunt());
 				ShowEmpruntEnRetard();

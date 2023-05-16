@@ -53,4 +53,7 @@ public class Constantes {
     public static String ADD_PENALISATION = "UPDATE emprunt set penalisé = 1 WHERE idEmprunt = ?;";
     public static String TROUVE_RESERVATION ="SELECT * FROM reservation WHERE id_utilisateur = ? AND id_livre = ? AND date = ?";
     public static String ALL_UTILISATEUR = "SELECT * FROM utilisateur WHERE categorie NOT IN ('Gestionaire', 'Bibliothecaire')";
+    public static String DELETE_UTILISATEUR ="DELETE FROM utilisateur WHERE email = ? ;";
+    public static String UPDATE_PAYEMENT = "UPDATE utilisateur set dateFinPyement = ? WHERE email = ?;";		
+    public static String ANNULRE_PENALISER_UTILISATEUR ="UPDATE utilisateur SET DateFinPenalisation = '2000-01-01' WHERE email = ?;";
 }
