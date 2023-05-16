@@ -147,9 +147,9 @@ public class espaceLivre implements Initializable{
 			livreTabView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			        // Mettre à jour les TextField avec les informations du livre sélectionné
 	       
-			updateSelectedBook();
+			//updateSelectedBook();
 			});
-			ShowEmpruntList();
+			//ShowEmpruntList();
 			
 			
 			
@@ -162,7 +162,7 @@ public class espaceLivre implements Initializable{
 			
 			
 			
-				
+			
 			searchTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
 				try {
 					search();
@@ -296,7 +296,11 @@ public class espaceLivre implements Initializable{
 			filiereTextField.setText("");
 			showLivre();
 				if (bool) {	
-					//
+					 Alert alert = new Alert(AlertType.INFORMATION);
+				        alert.setTitle("Livre ajouté");
+				        alert.setHeaderText(null);
+				        alert.setContentText("Le livre a été ajouté avec succès!");
+				        alert.showAndWait();
 					
 				}else {
 				}
@@ -376,8 +380,9 @@ public class espaceLivre implements Initializable{
 			codeRayonTextField.setText("");
 			filiereTextField.setText("");
 		  if(resultat==true) {
-			//TODO:afficher un boite de Dialog  
-			  System.out.println(resultat);
+			  
+			  
+			 
 		  }else {
 			  
 		  }

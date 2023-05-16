@@ -15,15 +15,15 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.espaceLivre">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.espaceLivre">
    <children>
-      <TabPane prefHeight="488.0" prefWidth="799.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="495.0" prefWidth="830.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="livreTab" text="Livre">
                <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="691.0">
                      <children>
-                        <TableView fx:id="livreTabView" layoutX="225.0" layoutY="57.0" prefHeight="381.0" prefWidth="566.0">
+                        <TableView fx:id="livreTabView" layoutX="224.0" layoutY="62.0" prefHeight="379.0" prefWidth="615.0">
                           <columns>
                             <TableColumn fx:id="titre" prefWidth="96.0" text="titre" />
                             <TableColumn fx:id="auteurLivre" prefWidth="109.0" text="auteur" />
@@ -31,7 +31,7 @@
                               <TableColumn fx:id="codeRayon" prefWidth="89.0" text="codeRayon" />
                               <TableColumn fx:id="idLivre" prefWidth="75.0" text="idLivre" />
                               <TableColumn fx:id="filiere" prefWidth="76.0" text="Filiere" />
-                              <TableColumn fx:id="dateAjouter" prefWidth="75.0" text="DateAjouter" />
+                              <TableColumn fx:id="dateAjouter" prefWidth="72.0" text="DateAjouter" />
                           </columns>
                         </TableView>
                         <Button layoutX="79.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouterLivre" prefHeight="23.0" prefWidth="76.0" text="Ajouter" />
@@ -120,7 +120,7 @@
                </content></Tab>
             <Tab fx:id="empruntTab" text="Emprunt">
                <content>
-                  <AnchorPane fx:id="searchEmpruntTextField" prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="empruntAnchor" prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <TableView fx:id="empruntTableView" layoutX="9.0" layoutY="71.0" prefHeight="368.0" prefWidth="774.0">
                           <columns>
@@ -129,11 +129,11 @@
                               <TableColumn fx:id="prenomEmprunt" prefWidth="84.0" text="Prenom" />
                               <TableColumn fx:id="titreEmprunt" prefWidth="154.0" text="Titre" />
                               <TableColumn fx:id="auteurEmprunt" prefWidth="104.0" text="Auteur" />
-                              <TableColumn fx:id="numeroEmp" prefWidth="77.0" text="numeroEmp" />
+                              <TableColumn fx:id="numeroEmp" prefWidth="209.0" text="numeroEmp" />
                           </columns>
                         </TableView>
                         <Button layoutX="707.0" layoutY="37.0" mnemonicParsing="false" onAction="#restituer" text="Restituer" />
-                        <TextField layoutX="243.0" layoutY="36.0" prefHeight="27.0" prefWidth="425.0" />
+                        <TextField fx:id="searchEmpruntTextField" layoutX="243.0" layoutY="36.0" prefHeight="27.0" prefWidth="425.0" />
                         <Label layoutX="14.0" layoutY="32.0" prefHeight="33.0" prefWidth="211.0" text="Liste Des Emprunts">
                            <font>
                               <Font size="24.0" />

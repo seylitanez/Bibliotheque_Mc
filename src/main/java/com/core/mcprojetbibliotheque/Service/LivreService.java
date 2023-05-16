@@ -66,17 +66,29 @@ public class LivreService {
     
     
     public Boolean checkIfTitleAndAuteurExist(String titre,String auteur) throws SQLException {
-    	
-    	var connection= dbConnexion.getConnection();
-        var preparedStatement=connection.prepareStatement(CHERCHER_TITLE_LIVRE);
-        preparedStatement.setString(1,titre);
-        preparedStatement.setString(2,auteur);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            int nombreLivres = resultSet.getInt(1);
-            return nombreLivres > 0;
-        }
-        return false;
+    	try {
+			
+
+        	var connection= dbConnexion.getConnection();
+            var preparedStatement=connection.prepareStatement(CHERCHER_TITLE_LIVRE);
+            preparedStatement.setString(1,titre);
+            preparedStatement.setString(2,auteur);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                
+                return true;
+                
+            }
+            return false;
+    		
+    		
+    		
+    		
+		} catch (Exception e) {
+			
+			System.out.println(e.getMessage());
+			return false;
+		}
         
         
     }
