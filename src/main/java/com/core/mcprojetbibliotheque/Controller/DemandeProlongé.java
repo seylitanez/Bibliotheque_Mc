@@ -2,15 +2,21 @@ package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
 import com.core.mcprojetbibliotheque.Service.LivreService;
+import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.SendEmail;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,6 +30,14 @@ import org.apache.commons.io.IOExceptionList;
 
 
 public class DemandeProlongé implements Initializable{
+	 @FXML
+	 private AnchorPane main;
+	 
+	 private WindowEffect effect;
+	 
+	 @FXML
+	 TextField searchDemandeTextField;
+	
 	@FXML
     private TableView<EmpruntLivre>demandeProlongerTableView;
     @FXML
@@ -42,7 +56,32 @@ public class DemandeProlongé implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			effect=new WindowEffect(main);
 			showDemande();
+			
+			
+			searchDemandeTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
+				
+				
+				try {
+					searchDemande();
+				} catch (IOException | SQLException e) {
+					
+				System.out.print(e.getMessage());
+				}
+				
+				
+				
+				
+			});
+			
+			
+			
+			
+			
+			
+			
+			
 		} catch (SQLException | IOException e) {
 			System.out.println(e.getMessage());
 		}
@@ -108,5 +147,59 @@ public class DemandeProlongé implements Initializable{
 			showDemande();
 		}
 	}
+	
+	
+	
+	
+	public void searchDemande() throws IOException, SQLException {
+		
+		
+		
+		LivreService ls = new LivreService();
+		ObservableList<EmpruntLivre> list =ls.getEmprunt();
+		ObservableList<EmpruntLivre> serachDemande =FXCollections.observableArrayList();
+		for (EmpruntLivre emprunt : list) {
+			if( 	emprunt.getTitre().toLowerCase().contains(searchDemandeTextField.getText().toLowerCase()) ||
+					emprunt.getNom().toLowerCase().contains(searchDemandeTextField.getText().toLowerCase())|| 
+					emprunt.getPrenom().toLowerCase().contains(searchDemandeTextField.getText().toLowerCase())|| 
+					emprunt.getEmail().toLowerCase().contains(searchDemandeTextField.getText().toLowerCase()) 
+	) {
+				 emprunt.dernierDelais();
+				serachDemande.add(emprunt);
+				
+				
+				
+			}
+		}
+		demandeProlongerTableView.setItems(serachDemande);
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+
+	 public void exit(ActionEvent e) {
+	        effect.exit(e);
+	    }
+	    public void dragged(MouseEvent e) {
+	        effect.dragged(e);
+	    }
+	    public void presse(MouseEvent e) {
+	        effect.pressed(e);
+	    }
+	    public void cache(ActionEvent e) {
+	        effect.cache(e);
+	    }
+	    public void back(ActionEvent e) throws Exception {
+	        effect.switchStage(e,"login.fxml");
+	    }
+	
+	
 	
 }

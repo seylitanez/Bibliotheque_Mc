@@ -15,15 +15,15 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="405.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.espaceLivre">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="488.0" prefWidth="790.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.espaceLivre">
    <children>
-      <TabPane prefHeight="414.0" prefWidth="715.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="488.0" prefWidth="799.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="livreTab" text="Livre">
                <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="691.0">
                      <children>
-                        <TableView fx:id="livreTabView" layoutX="220.0" layoutY="57.0" prefHeight="220.0" prefWidth="571.0">
+                        <TableView fx:id="livreTabView" layoutX="225.0" layoutY="57.0" prefHeight="381.0" prefWidth="566.0">
                           <columns>
                             <TableColumn fx:id="titre" prefWidth="96.0" text="titre" />
                             <TableColumn fx:id="auteurLivre" prefWidth="109.0" text="auteur" />
@@ -34,9 +34,9 @@
                               <TableColumn fx:id="dateAjouter" prefWidth="75.0" text="DateAjouter" />
                           </columns>
                         </TableView>
-                        <Button layoutX="29.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouterLivre" prefHeight="23.0" prefWidth="76.0" text="Ajouter" />
-                        <Button layoutX="308.0" layoutY="317.0" mnemonicParsing="false" onAction="#modifierLivre" prefHeight="23.0" prefWidth="76.0" text="modifier" />
-                        <Button layoutX="585.0" layoutY="317.0" mnemonicParsing="false" onAction="#supprimerLivre" prefHeight="23.0" prefWidth="76.0" text="Supprimer" />
+                        <Button layoutX="79.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouterLivre" prefHeight="23.0" prefWidth="76.0" text="Ajouter" />
+                        <Button layoutX="79.0" layoutY="364.0" mnemonicParsing="false" onAction="#modifierLivre" prefHeight="23.0" prefWidth="76.0" text="modifier" />
+                        <Button layoutX="79.0" layoutY="409.0" mnemonicParsing="false" onAction="#supprimerLivre" prefHeight="23.0" prefWidth="76.0" text="Supprimer" />
                         <Label fx:id="label" layoutX="286.0" layoutY="321.0" />
                         <GridPane layoutX="17.0" layoutY="62.0" prefHeight="109.0" prefWidth="81.0">
                           <columnConstraints>
@@ -78,8 +78,12 @@
                         </GridPane>
                         <TextField fx:id="ajouterExemplaireTextField" layoutX="81.0" layoutY="203.0" prefHeight="22.0" prefWidth="70.0" />
                         <Button layoutX="59.0" layoutY="244.0" mnemonicParsing="false" onAction="#ajouterExemplaire" text="Ajouter Exemplaire" />
-                        <Label layoutX="220.0" layoutY="22.0" text="Search" />
-                        <TextField fx:id="searchTextField" layoutX="264.0" layoutY="17.0" prefHeight="27.0" prefWidth="333.0" />
+                        <TextField fx:id="searchTextField" layoutX="229.0" layoutY="17.0" prefHeight="27.0" prefWidth="333.0" />
+                        <Label layoutX="18.0" layoutY="13.0" text="Gestione Des Livre">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content>
@@ -89,7 +93,7 @@
                <content>
                   <AnchorPane fx:id="reservationAnchor" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="reservationTable" layoutX="61.0" layoutY="93.0" prefHeight="224.0" prefWidth="699.0">
+                        <TableView fx:id="reservationTable" layoutX="216.0" layoutY="59.0" prefHeight="378.0" prefWidth="562.0">
                            <columns>
                               <TableColumn fx:id="email" prefWidth="97.0" text="Email" />
                               <TableColumn fx:id="nom" prefWidth="68.0" text="Nom" />
@@ -101,37 +105,40 @@
                               <TableColumn fx:id="EnRetard" prefWidth="75.0" text="EnRetard" />
                            </columns>
                         </TableView>
-                        <Label fx:id="labelType" layoutX="61.0" layoutY="54.0" text="Liste Des  Resrvation">
+                        <Label fx:id="labelType" layoutX="62.0" layoutY="28.0" text="Liste Des  Resrvation">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="reservationChoiceBox" layoutX="61.0" layoutY="29.0" prefWidth="150.0" />
-                        <Button fx:id="AccepterResvation" layoutX="112.0" layoutY="329.0" mnemonicParsing="false" onAction="#AccepterResvation" text="Accepter" />
-                        <Button fx:id="AjouterDansEmpurnt" layoutX="257.0" layoutY="329.0" mnemonicParsing="false" onAction="#AjouterDansEmpurnt" text="AjouterDansEmpurnt" />
-                        <Button fx:id="Supprimer" layoutX="478.0" layoutY="329.0" mnemonicParsing="false" onAction="#Supprimer" text="Supprimer" />
-                        <Button fx:id="RefuserReservation" layoutX="644.0" layoutY="329.0" mnemonicParsing="false" onAction="#RefuserReservation" text="Refuser" />
-                        <Label layoutX="243.0" layoutY="33.0" text="search" />
-                        <TextField fx:id="searchReservationTextField" layoutX="283.0" layoutY="29.0" prefHeight="24.0" prefWidth="361.0" />
+                        <ChoiceBox fx:id="reservationChoiceBox" layoutX="48.0" layoutY="55.0" prefWidth="150.0" />
+                        <Button fx:id="AccepterResvation" layoutX="81.0" layoutY="92.0" mnemonicParsing="false" onAction="#AccepterResvation" prefHeight="27.0" prefWidth="69.0" text="Accepter" />
+                        <Button fx:id="AjouterDansEmpurnt" layoutX="50.0" layoutY="188.0" mnemonicParsing="false" onAction="#AjouterDansEmpurnt" text="AjouterDansEmpurnt" />
+                        <Button fx:id="Supprimer" layoutX="48.0" layoutY="238.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="29.0" prefWidth="129.0" text="Supprimer" />
+                        <Button fx:id="RefuserReservation" layoutX="81.0" layoutY="133.0" mnemonicParsing="false" onAction="#RefuserReservation" prefHeight="27.0" prefWidth="69.0" text="Refuser" />
+                        <TextField fx:id="searchReservationTextField" layoutX="241.0" layoutY="29.0" prefHeight="24.0" prefWidth="361.0" />
                      </children></AnchorPane>
                </content></Tab>
             <Tab fx:id="empruntTab" text="Emprunt">
                <content>
                   <AnchorPane fx:id="searchEmpruntTextField" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="empruntTableView" layoutX="140.0" layoutY="74.0" prefHeight="288.0" prefWidth="582.0">
+                        <TableView fx:id="empruntTableView" layoutX="9.0" layoutY="71.0" prefHeight="368.0" prefWidth="774.0">
                           <columns>
                             <TableColumn fx:id="emailEmprunt" prefWidth="99.0" text="Email" />
                             <TableColumn fx:id="nomEmprunt" prefWidth="123.0" text="Nom" />
                               <TableColumn fx:id="prenomEmprunt" prefWidth="84.0" text="Prenom" />
                               <TableColumn fx:id="titreEmprunt" prefWidth="154.0" text="Titre" />
                               <TableColumn fx:id="auteurEmprunt" prefWidth="104.0" text="Auteur" />
-                              <TableColumn fx:id="numeroEmp" prefWidth="75.0" text="numeroEmp" />
+                              <TableColumn fx:id="numeroEmp" prefWidth="77.0" text="numeroEmp" />
                           </columns>
                         </TableView>
-                        <Button layoutX="41.0" layoutY="163.0" mnemonicParsing="false" onAction="#restituer" text="Restituer" />
-                        <Label layoutX="140.0" layoutY="39.0" text="Search" />
-                        <TextField layoutX="187.0" layoutY="34.0" prefHeight="27.0" prefWidth="425.0" />
+                        <Button layoutX="707.0" layoutY="37.0" mnemonicParsing="false" onAction="#restituer" text="Restituer" />
+                        <TextField layoutX="243.0" layoutY="36.0" prefHeight="27.0" prefWidth="425.0" />
+                        <Label layoutX="14.0" layoutY="32.0" prefHeight="33.0" prefWidth="211.0" text="Liste Des Emprunts">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
                </content></Tab>

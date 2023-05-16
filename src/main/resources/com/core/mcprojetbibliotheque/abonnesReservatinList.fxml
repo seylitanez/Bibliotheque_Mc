@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.gluonhq.charm.glisten.control.TextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -8,30 +9,31 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="395.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.reservattionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.reservattionController">
    <children>
-      <TableView fx:id="reservationTable" layoutX="23.0" layoutY="74.0" prefHeight="224.0" prefWidth="699.0">
+      <TableView fx:id="reservationTable" layoutX="187.0" layoutY="56.0" prefHeight="423.0" prefWidth="592.0">
         <columns>
           <TableColumn fx:id="email" prefWidth="97.0" text="Email" />
           <TableColumn fx:id="nom" prefWidth="68.0" text="Nom" />
             <TableColumn fx:id="prenom" prefWidth="72.0" text="Prenom" />
             <TableColumn fx:id="title" prefWidth="62.0" text="Titlte" />
              <TableColumn fx:id="auteur" prefWidth="68.0" text="auteur" />
-            <TableColumn fx:id="nbrExemplaire" prefWidth="82.0" text="nbrExemplaire" />
-            <TableColumn fx:id="dateReservation" prefWidth="88.0" text="DateReservation" />
-            <TableColumn fx:id="EnRetard" prefWidth="75.0" text="EnRetard" />
+            <TableColumn fx:id="nbrExemplaire" prefWidth="67.0" text="nbrExemplaire" />
+            <TableColumn fx:id="dateReservation" text="DateReservation" />
+            <TableColumn fx:id="EnRetard" prefWidth="98.0" text="EnRetard" />
            
         </columns>
       </TableView>
-      <Label fx:id="labelType" layoutX="23.0" layoutY="47.0" text="Liste Des  Resrvation">
+      <Label fx:id="labelType" layoutX="23.0" layoutY="21.0" text="Liste Des  Resrvation">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="AccepterResvation" layoutX="105.0" layoutY="336.0" mnemonicParsing="false" onAction="#AccepterResvation" text="Accepter" />
-      <Button fx:id="RefuserReservation" layoutX="539.0" layoutY="336.0" mnemonicParsing="false" onAction="#RefuserReservation" text="Refuser" />
-      <Button fx:id="AjouterDansEmpurnt" layoutX="233.0" layoutY="336.0" mnemonicParsing="false" onAction="#AjouterDansEmpurnt" text="AjouterDansEmpurnt" />
-      <Button fx:id="Supprimer" layoutX="406.0" layoutY="336.0" mnemonicParsing="false" onAction="#Supprimer" text="Supprimer" />
-      <ChoiceBox fx:id="reservationChoiceBox" layoutX="23.0" layoutY="18.0" prefWidth="150.0" />
+      <Button fx:id="AccepterResvation" layoutX="56.0" layoutY="128.0" mnemonicParsing="false" onAction="#AccepterResvation" text="Accepter" />
+      <Button fx:id="RefuserReservation" layoutX="60.0" layoutY="182.0" mnemonicParsing="false" onAction="#RefuserReservation" prefHeight="27.0" prefWidth="63.0" text="Refuser" />
+      <Button fx:id="AjouterDansEmpurnt" layoutX="35.0" layoutY="255.0" mnemonicParsing="false" onAction="#AjouterDansEmpurnt" text="AjouterDansEmpurnt" />
+      <Button fx:id="Supprimer" layoutX="33.0" layoutY="300.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="33.0" prefWidth="127.0" text="Supprimer" />
+      <ChoiceBox fx:id="reservationChoiceBox" layoutX="23.0" layoutY="58.0" prefWidth="150.0" />
+      <TextField layoutX="199.0" layoutY="22.0" prefHeight="25.0" prefWidth="302.0" />
    </children>
 </AnchorPane>

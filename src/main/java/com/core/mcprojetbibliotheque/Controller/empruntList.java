@@ -13,9 +13,11 @@ import com.core.mcprojetbibliotheque.Model.UtilisateurConnecté;
 import com.core.mcprojetbibliotheque.Model.reservation;
 import com.core.mcprojetbibliotheque.Service.EmpruntService;
 import com.core.mcprojetbibliotheque.Service.LivreService;
+import com.core.mcprojetbibliotheque.Service.WindowEffect;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -25,8 +27,16 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class empruntList implements Initializable{
+	
+	
+		private WindowEffect effect;
+		@FXML
+	    private AnchorPane main;
+	
 		@FXML
 	    private TableView<EmpruntLivre>abonneEmpruntTableView;
 	    @FXML
@@ -95,6 +105,7 @@ public class empruntList implements Initializable{
 		public void initialize(URL location, ResourceBundle resources) {
 			try {
 				showAbooneEmprunt();
+				effect=new WindowEffect(main);
 			} catch (IOException | SQLException e) {
 				
 				e.printStackTrace();
@@ -134,5 +145,29 @@ public class empruntList implements Initializable{
 			
 			
 		}
+		
+		
+		
+		 public void exit(ActionEvent e) {
+		        effect.exit(e);
+		    }
+		    public void dragged(MouseEvent e) {
+		        effect.dragged(e);
+		    }
+		    public void presse(MouseEvent e) {
+		        effect.pressed(e);
+		    }
+		    public void cache(ActionEvent e) {
+		        effect.cache(e);
+		    }
+		    public void back(ActionEvent e) throws Exception {
+		        effect.switchStage(e,"login.fxml");
+		    }
+		
+		
+		
+		
+		
+		
 
 }

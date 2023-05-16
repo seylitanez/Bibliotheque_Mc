@@ -300,6 +300,18 @@ public class AbonnesDashboard implements Initializable {
     	}
     }
  
+    
+    
+    public void VoirListEmprunt(ActionEvent a) throws Exception {
+    	
+    	try {
+    		effect.switchStage(a,"AbonneListEmprunt.fxml");
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+    	
+    	
+    }
    
 public void showAbooneEmprunt() throws IOException, SQLException {
 	   LivreService ls = new LivreService();

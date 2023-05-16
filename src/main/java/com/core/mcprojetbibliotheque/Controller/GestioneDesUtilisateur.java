@@ -1,5 +1,6 @@
 package com.core.mcprojetbibliotheque.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -8,8 +9,12 @@ import java.util.ResourceBundle;
 import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
 import com.core.mcprojetbibliotheque.Model.Utilisateur;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
+import com.core.mcprojetbibliotheque.Service.LivreService;
+import com.core.mcprojetbibliotheque.Service.WindowEffect;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -17,9 +22,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 public class GestioneDesUtilisateur implements Initializable {
+	@FXML
+	TextField seachUtilisateur;
+	
 	@FXML
     private TableView<Utilisateur>listUtilisateurTableView;
     @FXML
@@ -34,12 +45,36 @@ public class GestioneDesUtilisateur implements Initializable {
 	public TableColumn<Utilisateur, Boolean>payement;
 	@FXML
 	public TableColumn<Utilisateur, Boolean>penalisé;
+	
+	private WindowEffect effect;
+ 	@FXML
+    private AnchorPane main;
+	
+	
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			effect=new WindowEffect(main);
 			showUtilisateur();
+			
+			
+			seachUtilisateur.textProperty().addListener((ObservableList,oldValue,newValue)->{
+				
+					try {
+						searchUtilisateur();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+			
+			});
+			
+			
+			
+			
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -184,6 +219,53 @@ public class GestioneDesUtilisateur implements Initializable {
 				}
 			}
 
+	
+	
+	public void searchUtilisateur() throws Exception {
+		
+		ConnectionService cs = new ConnectionService();
+		ObservableList<Utilisateur> list =cs.getAllUtilisateur();
+		ObservableList<Utilisateur> serachList =FXCollections.observableArrayList();
+		for (Utilisateur utilisateur : list) {
+			if(utilisateur.getEmail().toLowerCase().contains(seachUtilisateur.getText().toLowerCase()) ||
+					utilisateur.getNom().toLowerCase().contains(seachUtilisateur.getText().toLowerCase()) ||
+					utilisateur.getPrenom().toLowerCase().contains(seachUtilisateur.getText().toLowerCase())|| 
+					utilisateur.getCategorie().toLowerCase().contains(seachUtilisateur.getText().toLowerCase()) 
+					) 
+	 {
+				
+				serachList.add(utilisateur);
+				
+				
+				
+			}
+		}
+		listUtilisateurTableView.setItems(serachList);
+		
+		
+		
+	}
+	
+	 public void exit(ActionEvent e) {
+	        effect.exit(e);
+	    }
+	    public void dragged(MouseEvent e) {
+	        effect.dragged(e);
+	    }
+	    public void presse(MouseEvent e) {
+	        effect.pressed(e);
+	    }
+	    public void cache(ActionEvent e) {
+	        effect.cache(e);
+	    }
+	    public void back(ActionEvent e) throws Exception {
+	        effect.switchStage(e,"login.fxml");
+	    }
+	
+	
+	
+	
+	
 	
 	
 

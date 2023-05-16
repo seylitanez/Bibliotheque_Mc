@@ -70,6 +70,10 @@ public class GestionaireDashboard implements Initializable {
         }
 
     }
+   
+    
+    
+    
     public void exit(ActionEvent e) {
         effect.exit(e);
     }

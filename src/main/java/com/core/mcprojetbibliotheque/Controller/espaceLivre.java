@@ -150,6 +150,18 @@ public class espaceLivre implements Initializable{
 			updateSelectedBook();
 			});
 			ShowEmpruntList();
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 				
 			searchTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
 				try {

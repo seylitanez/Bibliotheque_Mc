@@ -44,7 +44,7 @@ public class Login implements Initializable {
                         case "Gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
                         case "Externe","Interne","Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");
                         break;
-                        case "Bibliothecaire":effect.switchStage(e,"GestionnaireAbonnes.fxml");break;
+                        case "Bibliothecaire":effect.switchStage(e,"espaceLivre.fxml");break;
                     }
                 }catch (Exception exception){exception.printStackTrace();}
 //            });
