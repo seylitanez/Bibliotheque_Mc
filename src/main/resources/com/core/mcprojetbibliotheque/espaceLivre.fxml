@@ -78,6 +78,8 @@
                         </GridPane>
                         <TextField fx:id="ajouterExemplaireTextField" layoutX="81.0" layoutY="203.0" prefHeight="22.0" prefWidth="70.0" />
                         <Button layoutX="59.0" layoutY="244.0" mnemonicParsing="false" onAction="#ajouterExemplaire" text="Ajouter Exemplaire" />
+                        <Label layoutX="220.0" layoutY="22.0" text="Search" />
+                        <TextField fx:id="searchTextField" layoutX="264.0" layoutY="17.0" prefHeight="27.0" prefWidth="333.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -109,13 +111,15 @@
                         <Button fx:id="AjouterDansEmpurnt" layoutX="257.0" layoutY="329.0" mnemonicParsing="false" onAction="#AjouterDansEmpurnt" text="AjouterDansEmpurnt" />
                         <Button fx:id="Supprimer" layoutX="478.0" layoutY="329.0" mnemonicParsing="false" onAction="#Supprimer" text="Supprimer" />
                         <Button fx:id="RefuserReservation" layoutX="644.0" layoutY="329.0" mnemonicParsing="false" onAction="#RefuserReservation" text="Refuser" />
+                        <Label layoutX="243.0" layoutY="33.0" text="search" />
+                        <TextField fx:id="searchReservationTextField" layoutX="283.0" layoutY="29.0" prefHeight="24.0" prefWidth="361.0" />
                      </children></AnchorPane>
                </content></Tab>
             <Tab fx:id="empruntTab" text="Emprunt">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                  <AnchorPane fx:id="searchEmpruntTextField" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="empruntTableView" layoutX="160.0" layoutY="9.0" prefHeight="349.0" prefWidth="611.0">
+                        <TableView fx:id="empruntTableView" layoutX="140.0" layoutY="74.0" prefHeight="288.0" prefWidth="582.0">
                           <columns>
                             <TableColumn fx:id="emailEmprunt" prefWidth="99.0" text="Email" />
                             <TableColumn fx:id="nomEmprunt" prefWidth="123.0" text="Nom" />
@@ -125,7 +129,9 @@
                               <TableColumn fx:id="numeroEmp" prefWidth="75.0" text="numeroEmp" />
                           </columns>
                         </TableView>
-                        <Button layoutX="62.0" layoutY="106.0" mnemonicParsing="false" onAction="#restituer" text="Restituer" />
+                        <Button layoutX="41.0" layoutY="163.0" mnemonicParsing="false" onAction="#restituer" text="Restituer" />
+                        <Label layoutX="140.0" layoutY="39.0" text="Search" />
+                        <TextField layoutX="187.0" layoutY="34.0" prefHeight="27.0" prefWidth="425.0" />
                      </children>
                   </AnchorPane>
                </content></Tab>

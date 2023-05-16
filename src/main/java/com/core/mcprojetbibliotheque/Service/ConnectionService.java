@@ -55,7 +55,7 @@ public class ConnectionService {
                 certificat = resultSet.getString("certificat");
             }
             File fileCertificat=new File(certificat);
-        System.out.println(categorie);
+            System.out.println(categorie);
             switch (categorie){
                 case "Enseignant":
                 {
@@ -249,21 +249,18 @@ public class ConnectionService {
      	return idutilisateur;
  		
      }
-    public void addReservarion(int idLivre,int idUtilisateur,String dateStr)throws SQLException, ParseException{
+    public void addReservarion(int idLivre,int idUtilisateur)throws SQLException, ParseException{
     	var cnx =dbConnexion.getConnection();
     	
 
-    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-    	java.util.Date utilDate = dateFormat.parse(dateStr);
-    	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
     	
 
 
     	PreparedStatement statement = cnx.prepareStatement(ADD_RESERVATION);
     	statement.setInt(1, idUtilisateur);
     	statement.setInt(2, idLivre);
-    	statement.setDate(3,sqlDate);
-    	System.out.println("seccuss");
+    	statement.setDate(3,java.sql.Date.valueOf(LocalDate.now()));
+    	//System.out.println("seccuss");
     	statement.execute();
     	
     }
@@ -340,6 +337,90 @@ public class ConnectionService {
         preparedStatement.executeUpdate();
 		
 		
+	}
+	public void penaliserUtilisateur(String email) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(PENALISER_UTILISATEUR);
+        LocalDate date = LocalDate.now().plusMonths(1);
+        preparedStatement.setDate(1, java.sql.Date.valueOf(date));
+        preparedStatement.setString(2,email);
+        preparedStatement.executeUpdate();
+		
+	}
+	public boolean checkPenalisation(String email) throws SQLException {
+		
+			var connection= dbConnexion.getConnection();
+	        var preparedStatement=connection.prepareStatement(TROUVE_UTILISATEURWITHEMAIL);
+	        preparedStatement.setString(1,email);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        if(resultSet.next()) {
+	        LocalDate date =resultSet.getDate("DateFinPenalisation").toLocalDate();
+	        
+	       
+	        if(date == null || date.isBefore(LocalDate.now())) {
+	        	return false;
+	        }else {
+	        	return true;
+	        }
+		
+	        }
+        
+		return false;
+	}
+	public boolean checkPayement(String email) throws SQLException {
+		
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(TROUVE_UTILISATEURWITHEMAIL);
+        preparedStatement.setString(1,email);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if(resultSet.next()) {
+        LocalDate date =resultSet.getDate("dateFinPyement").toLocalDate();
+        
+        String 	categorie = resultSet.getString("categorie");
+        if(categorie == "Enseignant") {
+        	return true;
+        }else {
+        	if(date == null || LocalDate.now().isAfter(date) ) {
+        		return false;
+        	}else {
+        		return true;
+        	}
+       	
+        }
+        }
+		return false;
+        
+		
+		
+		
+		
+		
+	}
+	public boolean checkIfReservationExiste(int idUtilisateur, int idLivre) throws SQLException {
+		var connection= dbConnexion.getConnection();
+		 var preparedStatement=connection.prepareStatement(TROUVE_RESERVATION);
+	        preparedStatement.setInt(1, idUtilisateur);
+	        preparedStatement.setInt(2, idLivre);
+	        preparedStatement.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        if (resultSet.next()) {
+	            return true;
+	        }
+	        return false;
+		
+	}
+	public ObservableList<Utilisateur> getAllUtilisateur() throws SQLException {
+		 var connection= dbConnexion.getConnection();
+
+	     var preparedStatement=connection.prepareStatement(ALL_UTILISATEUR);
+	     ResultSet resultSet = preparedStatement.executeQuery();
+	     ObservableList<Utilisateur> list = FXCollections.observableArrayList();
+	     	
+	        while (resultSet.next()){
+	    
+	        	 list.add(new Utilisateur(resultSet.getString("email"),resultSet.getString("nom"),resultSet.getString("prenom"),resultSet.getString("categorie"),false,false));
+	        }
+		return list;
 	}
 	
 	}

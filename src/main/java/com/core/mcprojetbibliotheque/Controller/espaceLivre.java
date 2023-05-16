@@ -1,6 +1,7 @@
 package com.core.mcprojetbibliotheque.Controller;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -67,6 +68,12 @@ public class espaceLivre implements Initializable{
 	public TextField filiereTextField;
 	@FXML
 	public TextField ajouterExemplaireTextField;
+	@FXML
+	public TextField searchTextField;
+	@FXML
+	public TextField searchEmpruntTextField;
+	@FXML
+	public TextField searchReservationTextField;
 	
 	// for the table Emprunt 
 	@FXML 
@@ -143,6 +150,59 @@ public class espaceLivre implements Initializable{
 			updateSelectedBook();
 			});
 			ShowEmpruntList();
+				
+			searchTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
+				try {
+					search();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block 
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
+			
+			searchEmpruntTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
+				try {
+					searchEmprunt();
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block 
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			});
+			
+			
+			searchReservationTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
+				
+					try {
+						searchReservation();
+					} catch (Exception e1) {
+						  e1.printStackTrace();
+					}
+				
+			});
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			//pour TabPane: 
 			reservationChoiceBox.setItems(options);
@@ -494,8 +554,89 @@ public void Supprimer() throws Exception {
 }
 
 
+public void search() throws IOException, ClassNotFoundException, SQLException {
+	
+	LivreService ls = new LivreService();
+	ObservableList<Livre> list =ls.getAllLivres();
+	ObservableList<Livre> serachList =FXCollections.observableArrayList();
+	for (Livre livre : list) {
+		if(livre.getAuteur().toLowerCase().contains(searchTextField.getText().toLowerCase()) ||
+				livre.getTitre().toLowerCase().contains(searchTextField.getText().toLowerCase()) ||
+				livre.getFiliere().toLowerCase().contains(searchTextField.getText().toLowerCase())) {
+			
+			serachList.add(livre);
+			
+			
+			
+		}
+	}
+	livreTabView.setItems(serachList);
+	
+	
+	
+}
 
 
+public void searchEmprunt() throws IOException, ClassNotFoundException, SQLException {
+	
+	LivreService ls = new LivreService();
+	ObservableList<EmpruntLivre> list =ls.getEmprunt();
+	ObservableList<EmpruntLivre> serachList =FXCollections.observableArrayList();
+	for (EmpruntLivre emprunt : list) {
+		if(emprunt.getAuteur().toLowerCase().contains(searchEmpruntTextField.getText().toLowerCase()) ||
+				emprunt.getTitre().toLowerCase().contains(searchEmpruntTextField.getText().toLowerCase()) ||
+				emprunt.getNom().toLowerCase().contains(searchEmpruntTextField.getText().toLowerCase())|| 
+				emprunt.getPrenom().toLowerCase().contains(searchEmpruntTextField.getText().toLowerCase())|| 
+				emprunt.getEmail().toLowerCase().contains(searchEmpruntTextField.getText().toLowerCase()) 
+) {
+			
+			serachList.add(emprunt);
+			
+			
+			
+		}
+	}
+	empruntTableView.setItems(serachList);
+	
+	
+	
+}
+
+public void searchReservation() throws Exception {
+	ObservableList<reservation> list =FXCollections.observableArrayList();
+	ConnectionService cs = new ConnectionService();
+	String selectedOption = reservationChoiceBox.getValue();
+    if (selectedOption.equals("listeReservation")) {
+    	list = cs.getReservationList("0");
+    }else {
+    	 list = cs.getReservationList("1");
+    	
+    	
+    	
+    }
+    
+    
+	ObservableList<reservation> serachList =FXCollections.observableArrayList();
+	
+	for (reservation reservation : list) {
+		if(reservation.getAuteur().toLowerCase().contains(searchReservationTextField.getText().toLowerCase()) ||
+				reservation.getTitle().toLowerCase().contains(searchReservationTextField.getText().toLowerCase()) ||
+				reservation.getNom().toLowerCase().contains(searchReservationTextField.getText().toLowerCase())|| 
+				reservation.getPrenom().toLowerCase().contains(searchReservationTextField.getText().toLowerCase())|| 
+				reservation.getEmail().toLowerCase().contains(searchReservationTextField.getText().toLowerCase()) 
+) {
+			
+			serachList.add(reservation);
+			
+			
+			
+		}
+	}
+	reservationTable.setItems(serachList);
+	
+	
+	
+}
 
 
 

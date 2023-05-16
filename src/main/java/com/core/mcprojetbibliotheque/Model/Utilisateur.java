@@ -5,6 +5,9 @@ import java.util.Date;
 public class Utilisateur {
     private String nom,prenom,username,password,email,categorie;
     private int id;
+    private Boolean penalisé;
+    private Boolean payement;
+    
 
     public Utilisateur(String nom, String prenom, String username, String password, String email, String categorie) {
         this.nom = nom;
@@ -13,7 +16,21 @@ public class Utilisateur {
         this.password = password;
         this.email = email;
         this.categorie = categorie;
+        
     }
+    public Utilisateur(String email, String nom ,String prenom, String categorie,boolean penalisé,boolean payement ) {
+    	this.email=email;
+    	this.nom=nom;
+    	this.prenom=prenom;
+    	this.categorie=categorie;
+    	this.penalisé=penalisé;
+        this.payement=payement;
+    	
+    }
+     
+    
+    
+    
     public void login(String username, String password){
 
     }
@@ -61,4 +78,16 @@ public class Utilisateur {
     public void setId(int id) {
         this.id = id;
     }
+	public Boolean getPenalisé() {
+		return penalisé;
+	}
+	public void setPenalisé(Boolean penalisé) {
+		this.penalisé = penalisé;
+	}
+	public Boolean getPayement() {
+		return payement;
+	}
+	public void setPayement(Boolean payement) {
+		this.payement = payement;
+	}
 }

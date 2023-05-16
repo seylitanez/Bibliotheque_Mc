@@ -196,15 +196,34 @@ public class LivreService {
 						   	
 						   	Boolean demandeProlongé= false;
 						   	Boolean prolongé =false;
+						   	Boolean prolongéRufusé = false;
+						   	Boolean penalisé = false;
 						   	if(resultSet.getInt("demandeProlonger")==1) {
 						   		demandeProlongé = true;
 						   	}	
 						   	if(resultSet.getInt("prolonge")==1) {
 						   		prolongé=true;
 						   	}
-			          EmpruntLivre emprunt = new EmpruntLivre(resultSet.getInt("idEmprunt"),email,nom,prenom,title,auteur,nbrExemplaire,resultSet.getDate("dateEmprunt").toLocalDate(),resultSet.getDate("dateRestitution").toLocalDate(),demandeProlongé,prolongé,false,null);
+						   	if(resultSet.getInt("prolongéRufusé")==1) {
+						   		prolongéRufusé = true;
+						   	}if(resultSet.getInt("penalisé")==1) {
+						   		penalisé = true;
+						   	}
+						   	
+						   	
+						   	if(resultSet.getDate("dateRestitution") != null) {
+						          EmpruntLivre emprunt = new EmpruntLivre(resultSet.getInt("idEmprunt"),email,nom,prenom,title,auteur,nbrExemplaire,resultSet.getDate("dateEmprunt").toLocalDate(),resultSet.getDate("dateRestitution").toLocalDate(),demandeProlongé,prolongé,prolongéRufusé,false,null,penalisé);
+						          list.add(emprunt);
+						   	}else {
+						          EmpruntLivre emprunt = new EmpruntLivre(resultSet.getInt("idEmprunt"),email,nom,prenom,title,auteur,nbrExemplaire,resultSet.getDate("dateEmprunt").toLocalDate(),null,demandeProlongé,prolongé,prolongéRufusé,false,null,penalisé);
+						          list.add(emprunt);
+						   	}
+						   	
+						   	
+						   	
+						   	
 			          
-			          list.add(emprunt);
+			         
 			         
 			         
 			        }
@@ -249,6 +268,33 @@ public class LivreService {
         preparedStatement.setInt(1,idEmprunt);
         preparedStatement.executeUpdate();
 		
+		
+	}
+
+
+	public void accepterDemande(int idEmprunt) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(ACCEPTER_DEMANDE);
+        preparedStatement.setInt(1,idEmprunt);
+        preparedStatement.executeUpdate();
+		
+	}
+
+
+	public void ReffuserDemande(int idEmprunt) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(REFFUSER_DEMANDE);
+        preparedStatement.setInt(1,idEmprunt);
+        preparedStatement.executeUpdate();
+		
+	}
+
+
+	public void addPenalisation(int idEmprunt) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(ADD_PENALISATION);
+        preparedStatement.setInt(1,idEmprunt);
+        preparedStatement.executeUpdate();
 		
 	}
 	

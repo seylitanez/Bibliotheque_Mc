@@ -47,5 +47,10 @@ public class Constantes {
     public static String INCREMENTER_NOMBRE_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation + 1 WHERE id = ?;";
     public static String DECREMENTER_NOMBRE_RESERVATION = "UPDATE utilisateur SET nbrReservation = nbrReservation - 1 WHERE id = ?;";
     public static String ADD_DEMANDE ="UPDATE emprunt set demandeProlonger = 1 WHERE idEmprunt = ?";
-
+    public static String ACCEPTER_DEMANDE="UPDATE emprunt set prolonge = 1 WHERE idEmprunt = ?;";
+    public static String REFFUSER_DEMANDE = "UPDATE emprunt set prolongéRufusé = 1 WHERE idEmprunt = ?;";
+    public static String PENALISER_UTILISATEUR = "UPDATE utilisateur SET DateFinPenalisation = ? WHERE email = ?;";
+    public static String ADD_PENALISATION = "UPDATE emprunt set penalisé = 1 WHERE idEmprunt = ?;";
+    public static String TROUVE_RESERVATION ="SELECT * FROM reservation WHERE id_utilisateur = ? AND id_livre = ? AND date = ?";
+    public static String ALL_UTILISATEUR = "SELECT * FROM utilisateur WHERE categorie NOT IN ('Gestionaire', 'Bibliothecaire')";
 }

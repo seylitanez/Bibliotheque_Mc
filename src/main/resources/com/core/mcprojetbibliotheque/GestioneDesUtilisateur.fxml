@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestioneDesUtilisateur">
+   <children>
+      <TableView fx:id="listUtilisateurTableView" layoutX="110.0" layoutY="47.0" prefHeight="330.0" prefWidth="463.0">
+        <columns>
+          <TableColumn fx:id="email" prefWidth="75.0" text="Email" />
+          <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
+            <TableColumn fx:id="prenom" prefWidth="75.0" text="Prenom" />
+            <TableColumn fx:id="categorie" prefWidth="75.0" text="Categorie" />
+            <TableColumn fx:id="payement" prefWidth="76.0" text="Payement" />
+            <TableColumn fx:id="penalisé" prefWidth="81.0" text="Penalisé" />
+        </columns>
+      </TableView>
+      <Button fx:id="supprimer" layoutX="21.0" layoutY="61.0" mnemonicParsing="false" onAction="#supprimer" text="Supprimer" />
+      <Button layoutX="23.0" layoutY="119.0" mnemonicParsing="false" onAction="#payement" text="Payement" />
+      <Button layoutX="23.0" layoutY="220.0" mnemonicParsing="false" onAction="#penaliser" text="Penaliser" />
+      <Button layoutX="14.0" layoutY="175.0" mnemonicParsing="false" onAction="#annulerPayement" prefHeight="25.0" prefWidth="82.0" text="AnnulerPayement" />
+      <Button layoutX="21.0" layoutY="274.0" mnemonicParsing="false" onAction="#annulerPenalisation" prefHeight="25.0" prefWidth="72.0" text="AnuulerPenalisation" />
+      <Label layoutX="116.0" layoutY="14.0" text="Search" />
+      <TextField layoutX="169.0" layoutY="10.0" prefHeight="25.0" prefWidth="374.0" />
+   </children>
+</AnchorPane>

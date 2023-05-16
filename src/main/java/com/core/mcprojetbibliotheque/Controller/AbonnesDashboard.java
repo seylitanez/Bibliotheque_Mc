@@ -23,6 +23,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -32,6 +33,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -198,71 +200,108 @@ public class AbonnesDashboard implements Initializable {
 
     public void reserver(ActionEvent e)throws Exception {
     	connectionService=new ConnectionService();
-    	
-    	// parce que interdit de emprunté plus de trois ouvreage
-    	boolean possible = connectionService.checkPossiblity(UtilisateurConnecté.email);
-    	
-    	
-    	
-    	
-    	if(possible==true ) {
+    	boolean payement = connectionService.checkPayement(UtilisateurConnecté.email);
+    	if(payement == true) {
     		
-    		 Dialog<ButtonType> dialog = new Dialog();
-    		dialog.setTitle("CONFIRMATION");
-    		dialog.setHeaderText("confirmer la reservation");
-    		dialog.initModality(Modality.APPLICATION_MODAL);
-    		Label label = new Label("voes etes sur vous voulez reservez le livre");
-    		dialog.getDialogPane().setContent(label);
-    		ButtonType okButton = new ButtonType("ok",ButtonBar.ButtonData.OK_DONE);
-    		ButtonType cancalButton = new ButtonType("cancal",ButtonBar.ButtonData.CANCEL_CLOSE);
-    		dialog.getDialogPane().getButtonTypes().addAll(okButton,cancalButton);
-    		Optional<ButtonType> result = dialog.showAndWait();
-    		if(result.isPresent()&& result.get()==okButton) {
-    			
-    		 
-    			// add to database 
-    			
-    			
-    			//1:on a titre de livre ;
-    			// :il faut recuperer id de livre 
-    			// mais il faut mettre  title unique 
-    			
-    			ConnectionService cs = new ConnectionService();
+    		boolean penalise = connectionService.checkPenalisation(UtilisateurConnecté.email);
+        	if(penalise == false) {
+        	
+        	boolean possible = connectionService.checkPossiblity(UtilisateurConnecté.email);
+        	
+        	
+        	
+        	
+        	if(possible==true ) {
+        		ConnectionService cs = new ConnectionService();
+
     			int idLivre = 5;
     					//cs.getIdLivre(titre.getText());
     			int idUtilisateur=cs.getIdUtilisateur(UtilisateurConnecté.email);
-    			LocalDate date = LocalDate.now(); // ou LocalDate.of(2021, 3, 24) pour une date spécifique
-    			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    			String formattedDate = date.format(formatter);
-    			
-    			cs.addReservarion(idLivre,idUtilisateur,formattedDate);
-    			
-    			// update nembre of reservation
-    			cs.incrementerNbrReservationUtilisateur(idUtilisateur);
-    			
-    			
-    		}
+    			// vous pouvez faire la meme reservation pour meme livre dana la meme journé;
+        		boolean reservationExiste= cs.checkIfReservationExiste(idUtilisateur,idLivre);
+        		if(reservationExiste == false) {
+        		
+
+            		
+           		 Dialog<ButtonType> dialog = new Dialog();
+           		dialog.setTitle("CONFIRMATION");
+           		dialog.setHeaderText("confirmer la reservation");
+           		dialog.initModality(Modality.APPLICATION_MODAL);
+           		Label label = new Label("voes etes sur vous voulez reservez le livre");
+           		dialog.getDialogPane().setContent(label);
+           		ButtonType okButton = new ButtonType("ok",ButtonBar.ButtonData.OK_DONE);
+           		ButtonType cancalButton = new ButtonType("cancal",ButtonBar.ButtonData.CANCEL_CLOSE);
+           		dialog.getDialogPane().getButtonTypes().addAll(okButton,cancalButton);
+           		Optional<ButtonType> result = dialog.showAndWait();
+           		if(result.isPresent()&& result.get()==okButton) {
+           			
+           		 
+           			// add to database 
+           		
+           			cs.addReservarion(idLivre,idUtilisateur);
+           			
+           			// update nembre of reservation
+           			cs.incrementerNbrReservationUtilisateur(idUtilisateur);
+           			
+           			
+           		}	
+        			
+        			
+        		}else {
+        			Alert alert = new Alert(AlertType.ERROR);
+        	        alert.setTitle("Erreur");
+        	        alert.setHeaderText("Reservation impossible");
+        	        alert.setContentText("vous pouvez pas reserver le meme livre dans le meme jour");
+        	        alert.showAndWait();
+        			
+        			
+        			
+        		}
+        		
+        		
+        		
+        		
+        		
+        		
+        		  
+        		
+        	}else {
+        		
+        		Alert alert = new Alert(AlertType.ERROR);
+    	        alert.setTitle("Erreur");
+    	        alert.setHeaderText("code invalide");
+    	        alert.setContentText("vous avez reserver ou emprunter plus de trois");
+    	        alert.showAndWait();
+        		
+        		
+        	}
+       	
+        	}else {
+        		
+        		Alert alert = new Alert(AlertType.ERROR);
+    	        alert.setTitle("Erreur");
+    	        alert.setHeaderText("vous etes penalisé");
+    	        alert.setContentText("vous pouvez pas reserver car vous etes penalisé");
+    	        alert.showAndWait();
+        		
+        		
+        	}	
     		
-    		  
-    		
+    	
+    	
     	}else {
-    		
-    		Dialog<String> dialog = new Dialog<>();
-    		dialog.setTitle("Erreur");
-    		dialog.setHeaderText("Vous pouvez pas reservez maintent");
-    		dialog.setContentText("vous avez reservez ou empuntez plus de trois.");
-    		
-    		ButtonType okButton = new ButtonType("OK");
-    		dialog.getDialogPane().getButtonTypes().add(okButton);
-    		
-    		dialog.showAndWait();
+    		Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Erreur");
+	        alert.setHeaderText("payement");
+	        alert.setContentText("il faut payer pour reserver et emprunter !");
+	        alert.showAndWait();
     		
     		
     	}
-   	
     }
  
-   public void showAbooneEmprunt() throws IOException, SQLException {
+   
+public void showAbooneEmprunt() throws IOException, SQLException {
 	   LivreService ls = new LivreService();
 		ObservableList<EmpruntLivre> list =ls.getEmprunt();
 		for (EmpruntLivre emprunt : list) {

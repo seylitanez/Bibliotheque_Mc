@@ -16,9 +16,10 @@ public class EmpruntLivre {
 		private LocalDate dateRestitution; 
 	    private boolean demandeProlonger;
 	    private boolean prolonge;//
-	    //private boolean prolongéRufusé;
+	    private boolean prolongéRufusé;
 	    private boolean EnRetard;
 	    private LocalDate Delais;
+	    private boolean penalisé;
 	    
 
 	    
@@ -26,7 +27,21 @@ public class EmpruntLivre {
 		
 
 
-		public EmpruntLivre(int idEmprunt,String email,String nom,String prenom,String titre,String auteur,int nbrExemplaire,LocalDate dateEmprunt,LocalDate dateRestitution,Boolean demandeProlonger , Boolean prolonger, Boolean enRetard ,LocalDate Delais) {
+		public boolean isPenalisé() {
+			return penalisé;
+		}
+
+
+
+
+		public void setPenalisé(boolean penalisé) {
+			this.penalisé = penalisé;
+		}
+
+
+
+
+		public EmpruntLivre(int idEmprunt,String email,String nom,String prenom,String titre,String auteur,int nbrExemplaire,LocalDate dateEmprunt,LocalDate dateRestitution,Boolean demandeProlonger , Boolean prolonger,Boolean prolongéRufusé, Boolean enRetard ,LocalDate Delais,Boolean penalisé) {
 	    	this.idEmprunt=idEmprunt;
 	        this.email = email;
 	        this.nom=nom;
@@ -38,9 +53,10 @@ public class EmpruntLivre {
 	        this.dateRestitution=dateRestitution;
 	        this.demandeProlonger =demandeProlonger;
 	        this.prolonge = prolonger;
-	        //this.prolongéAnnule=prolongéAnnule;
+	        this.prolongéRufusé=prolongéRufusé;
 	        this.EnRetard = enRetard;
 	        this.Delais=Delais;
+	        this.penalisé=penalisé;
 	    
 	    }
 
@@ -169,13 +185,26 @@ public class EmpruntLivre {
 			
 			
 			public void EstEnRetard() {
-				if ( LocalDate.now().isAfter( (this.dateEmprunt).plusMonths(1)  )) {
+				if(LocalDate.now().isAfter(this.Delais)) {
 					this.setEnRetard(true);
+					
+				}else {
+					this.setEnRetard(false);
 				}
+				
+				
+				
+				
 				}
 			
 			public void dernierDelais() {
-				this.setDelais(this.dateEmprunt.plusMonths(1));
+				if(this.isProlonge()==false) {
+					this.setDelais(this.dateEmprunt.plusWeeks(3));
+				}else
+				{
+					this.setDelais(this.dateEmprunt.plusWeeks(5));
+					
+				}
 				
 			}
 			
@@ -202,6 +231,20 @@ public class EmpruntLivre {
 
 			public void setNbrExemplaire(int nbrExemplaire) {
 				this.nbrExemplaire = nbrExemplaire;
+			}
+
+
+
+
+			public boolean isProlongéRufusé() {
+				return prolongéRufusé;
+			}
+
+
+
+
+			public void setProlongéRufusé(boolean prolongéRufusé) {
+				this.prolongéRufusé = prolongéRufusé;
 			}
 			
 			

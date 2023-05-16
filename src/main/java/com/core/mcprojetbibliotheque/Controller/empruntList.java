@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
+import com.core.mcprojetbibliotheque.Model.UtilisateurConnecté;
 import com.core.mcprojetbibliotheque.Model.reservation;
 import com.core.mcprojetbibliotheque.Service.EmpruntService;
 import com.core.mcprojetbibliotheque.Service.LivreService;
@@ -56,11 +57,17 @@ public class empruntList implements Initializable{
 						
 					}
 					ObservableList<EmpruntLivre> empruntFiltered = FXCollections.observableArrayList();
+
+					ObservableList<EmpruntLivre> empruntsFiltred2 = FXCollections.observableArrayList();
+
 					for (EmpruntLivre emprunt : list) {
-						if(emprunt.getEmail().equals("lyes")) {
+						if(emprunt.getEmail().equals(UtilisateurConnecté.email)) {
 							empruntFiltered.add(emprunt);	
 						}
-						//TODO FILTRER LES EMPRUNT
+						 empruntsFiltred2 = empruntFiltered
+							    .filtered(e -> e.isDemandeProlonger() == false && e.getDateRestitution() == null && e.isEnRetard() == false && e.isProlongéRufusé()==false);
+							    
+					   
 						
 						
 						
@@ -75,7 +82,7 @@ public class empruntList implements Initializable{
 				   demandeProlongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("demandeProlonger"));
 				   prolongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("prolonge"));
 				   enRetard.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("enRetard"));
-				   abonneEmpruntTableView.setItems(empruntFiltered);
+				   abonneEmpruntTableView.setItems(empruntsFiltred2);
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage()+" emprunt");
@@ -106,26 +113,14 @@ public class empruntList implements Initializable{
 					showAbooneEmprunt();
 					
 				}else {
-					/*Alert alert = new Alert(AlertType.ERROR);
+					Alert alert = new Alert(AlertType.ERROR);
 					alert.setTitle("Erreur");
 					alert.setHeaderText(null);
 					alert.setContentText("Vous ne pouvez pas faire cette demande");
 
 					alert.showAndWait();
-						*/
-					TextInputDialog dialog = new TextInputDialog();
-					dialog.setTitle("Dialog avec champ de texte");
-					dialog.setHeaderText("Entrez votre texte:");
-					dialog.setContentText("Texte:");
-
-					// Afficher la boîte de dialogue et attendre la réponse de l'utilisateur
-					Optional<String> result = dialog.showAndWait();
-
-					// Vérifier si l'utilisateur a cliqué sur OK
-					if (result.isPresent()) {
-					    String texte = result.get();
-					    System.out.println("Le texte saisi est : " + texte);
-					}
+						
+					
 					
 					
 					
