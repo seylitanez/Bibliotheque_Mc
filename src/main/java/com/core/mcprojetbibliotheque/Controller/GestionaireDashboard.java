@@ -72,7 +72,13 @@ public class GestionaireDashboard implements Initializable {
     }
    
     
-    
+    public void prolanger(ActionEvent e) {
+        try {
+            effect.switchStage(e,"DemandeProlongé.fxml");
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
     
     public void exit(ActionEvent e) {
         effect.exit(e);
