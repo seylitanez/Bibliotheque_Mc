@@ -12,23 +12,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
-
-
+import javafx.scene.layout.AnchorPane;
 
 
 public class GestionnaireAbonnes implements Initializable {
 	private WindowEffect effect;
-	
-	
-	
-	
-	
-	
+    @FXML
+    private AnchorPane main;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-    		
-    
- }
+    		effect=new WindowEffect(main);
+    }
     
     public void Reservation (ActionEvent e) throws Exception {
     	

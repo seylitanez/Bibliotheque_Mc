@@ -35,6 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 public class espaceLivre implements Initializable{
 	@FXML 
@@ -110,6 +111,8 @@ public class espaceLivre implements Initializable{
 	public Button Supprimer;
 	@FXML
 	public Button RefuserReservation;
+	@FXML
+	public AnchorPane main;
 	private WindowEffect eff;
 	@FXML
 	public TableView reservationTable;
@@ -136,13 +139,10 @@ public class espaceLivre implements Initializable{
 	public Label labelType;
 	
 	
-	
-	
-	
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			eff=new WindowEffect(main);
 			showLivre();
 			livreTabView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			        // Mettre à jour les TextField avec les informations du livre sélectionné
@@ -150,18 +150,7 @@ public class espaceLivre implements Initializable{
 			//updateSelectedBook();
 			});
 			//ShowEmpruntList();
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			
 			searchTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
 				try {
@@ -203,19 +192,7 @@ public class espaceLivre implements Initializable{
 					}
 				
 			});
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 			//pour TabPane: 
 			reservationChoiceBox.setItems(options);
 			reservationChoiceBox.setValue("listeReservation");
@@ -237,13 +214,6 @@ public class espaceLivre implements Initializable{
 					}
 			    }
 			});
-			
-			
-			
-			
-			
-			
-			
 			
 		
 			} catch (Exception e) {
