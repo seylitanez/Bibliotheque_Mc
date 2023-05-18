@@ -38,6 +38,7 @@ public class Login implements Initializable {
             UtilisateurConnecté.email=email;
             
             
+            
 //            Thread thread= new Thread(()->{
                 try {
                     switch (utilisateur.getCategorie()){

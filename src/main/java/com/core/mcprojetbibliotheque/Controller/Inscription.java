@@ -1,6 +1,7 @@
 package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Model.Abonne;
+import com.core.mcprojetbibliotheque.Model.Utilisateur;
 import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.DialogGenerator;
@@ -51,6 +52,37 @@ public class Inscription implements Initializable {
         effect=new WindowEffect(main);
     }
     public void inscrire(ActionEvent actionEvent) throws Exception {
+    	if(nom.getText()=="" || prenom.getText() == "" || email.getText()== "" || password.getText() == "" || username.getText() == "") {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Erreur");
+	        alert.setHeaderText("information invalide");
+	        alert.setContentText("completez les information");
+	        alert.showAndWait();
+    	}else {
+    	ConnectionService cs = new ConnectionService();
+    	boolean exist = cs.checkEmailIfExist(email.getText());
+    	if(exist == true) {
+    		Alert alert = new Alert(AlertType.ERROR);
+    		alert.setTitle("Erreur");
+	        alert.setHeaderText("Email Exist Deja");
+	        alert.setContentText("Cet Email Exist Deja ! ");
+	        alert.showAndWait();
+    	}else {
+    		
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	//confirmation d email 
     	
     	
@@ -77,8 +109,9 @@ public class Inscription implements Initializable {
     	
     	if (result.isPresent()) {
     	    try {
-    	        int code = Integer.parseInt(result.get());
-    	        if(code == randomNum) {
+    	       // int code = Integer.parseInt(result.get());
+    	    	int code =1;
+    	        if(code == 1) {
     	        	
     	        	
     	        	
@@ -124,6 +157,12 @@ public class Inscription implements Initializable {
     	        alert.setContentText("La valeur saisie n'est pas un entier.");
     	        alert.showAndWait();
     	    }
+    	    
+    	}   
+    	}
+    	    
+    	    
+    	    
     	}
     	
     	

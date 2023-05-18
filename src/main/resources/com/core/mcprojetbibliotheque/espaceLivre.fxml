@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -15,134 +16,168 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="490.0" prefWidth="853.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.espaceLivre">
+<AnchorPane fx:id="espaceLivre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="935.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.espaceLivre">
    <children>
-      <TabPane prefHeight="495.0" prefWidth="830.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab fx:id="livreTab" text="Livre">
-               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="691.0">
-                     <children>
-                        <TableView fx:id="livreTabView" layoutX="224.0" layoutY="62.0" prefHeight="379.0" prefWidth="615.0">
-                          <columns>
-                            <TableColumn fx:id="titre" prefWidth="96.0" text="titre" />
-                            <TableColumn fx:id="auteurLivre" prefWidth="109.0" text="auteur" />
-                              <TableColumn fx:id="nbrExemplaireLivre" prefWidth="97.0" text="nbrExemplaire" />
-                              <TableColumn fx:id="codeRayon" prefWidth="89.0" text="codeRayon" />
-                              <TableColumn fx:id="idLivre" prefWidth="75.0" text="idLivre" />
-                              <TableColumn fx:id="filiere" prefWidth="76.0" text="Filiere" />
-                              <TableColumn fx:id="dateAjouter" prefWidth="72.0" text="DateAjouter" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="79.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouterLivre" prefHeight="23.0" prefWidth="76.0" text="Ajouter" />
-                        <Button layoutX="79.0" layoutY="364.0" mnemonicParsing="false" onAction="#modifierLivre" prefHeight="23.0" prefWidth="76.0" text="modifier" />
-                        <Button layoutX="79.0" layoutY="409.0" mnemonicParsing="false" onAction="#supprimerLivre" prefHeight="23.0" prefWidth="76.0" text="Supprimer" />
-                        <Label fx:id="label" layoutX="286.0" layoutY="321.0" />
-                        <GridPane layoutX="17.0" layoutY="62.0" prefHeight="109.0" prefWidth="81.0">
-                          <columnConstraints>
-                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label text="Titre" GridPane.halignment="RIGHT" />
-                              <Label text="Auteur" GridPane.rowIndex="1" />
-                              <Label text="nbrExempalire" GridPane.rowIndex="2" />
-                              <Label text="CodeRayon" GridPane.rowIndex="3" />
-                              <Label text="Filiere" GridPane.rowIndex="4" />
-                           </children>
-                        </GridPane>
-                        <GridPane layoutX="116.0" layoutY="62.0" prefHeight="114.0" prefWidth="100.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <TextField fx:id="titreTextField" />
-                              <TextField fx:id="auteurTextField" GridPane.rowIndex="1" />
-                              <TextField fx:id="nbrExemplaireTextField" GridPane.rowIndex="2" />
-                              <TextField fx:id="codeRayonTextField" GridPane.rowIndex="3" />
-                              <TextField fx:id="filiereTextField" GridPane.rowIndex="4" />
-                           </children>
-                        </GridPane>
-                        <TextField fx:id="ajouterExemplaireTextField" layoutX="81.0" layoutY="203.0" prefHeight="22.0" prefWidth="70.0" />
-                        <Button layoutX="59.0" layoutY="244.0" mnemonicParsing="false" onAction="#ajouterExemplaire" text="Ajouter Exemplaire" />
-                        <TextField fx:id="searchTextField" layoutX="229.0" layoutY="17.0" prefHeight="27.0" prefWidth="333.0" />
-                        <Label layoutX="18.0" layoutY="13.0" text="Gestione Des Livre">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-          <Tab fx:id="reservationTab" text="Reservation">
-          
-               <content>
-                  <AnchorPane fx:id="reservationAnchor" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="reservationTable" layoutX="216.0" layoutY="59.0" prefHeight="378.0" prefWidth="562.0">
-                           <columns>
-                              <TableColumn fx:id="email" prefWidth="97.0" text="Email" />
-                              <TableColumn fx:id="nom" prefWidth="68.0" text="Nom" />
-                              <TableColumn fx:id="prenom" prefWidth="72.0" text="Prenom" />
-                              <TableColumn fx:id="title" prefWidth="62.0" text="Titlte" />
-                              <TableColumn fx:id="auteur" prefWidth="68.0" text="auteur" />
-                              <TableColumn fx:id="nbrExemplaire" prefWidth="82.0" text="nbrExemplaire" />
-                              <TableColumn fx:id="dateReservation" prefWidth="88.0" text="DateReservation" />
-                              <TableColumn fx:id="EnRetard" prefWidth="75.0" text="EnRetard" />
-                           </columns>
-                        </TableView>
-                        <Label fx:id="labelType" layoutX="62.0" layoutY="28.0" text="Liste Des  Resrvation">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <ChoiceBox fx:id="reservationChoiceBox" layoutX="48.0" layoutY="55.0" prefWidth="150.0" />
-                        <Button fx:id="AccepterResvation" layoutX="81.0" layoutY="92.0" mnemonicParsing="false" onAction="#AccepterResvation" prefHeight="27.0" prefWidth="69.0" text="Accepter" />
-                        <Button fx:id="AjouterDansEmpurnt" layoutX="50.0" layoutY="188.0" mnemonicParsing="false" onAction="#AjouterDansEmpurnt" text="AjouterDansEmpurnt" />
-                        <Button fx:id="Supprimer" layoutX="48.0" layoutY="238.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="29.0" prefWidth="129.0" text="Supprimer" />
-                        <Button fx:id="RefuserReservation" layoutX="81.0" layoutY="133.0" mnemonicParsing="false" onAction="#RefuserReservation" prefHeight="27.0" prefWidth="69.0" text="Refuser" />
-                        <TextField fx:id="searchReservationTextField" layoutX="241.0" layoutY="29.0" prefHeight="24.0" prefWidth="361.0" />
-                     </children></AnchorPane>
-               </content></Tab>
-            <Tab fx:id="empruntTab" text="Emprunt">
-               <content>
-                  <AnchorPane fx:id="empruntAnchor" prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="empruntTableView" layoutX="9.0" layoutY="71.0" prefHeight="368.0" prefWidth="774.0">
-                          <columns>
-                            <TableColumn fx:id="emailEmprunt" prefWidth="99.0" text="Email" />
-                            <TableColumn fx:id="nomEmprunt" prefWidth="123.0" text="Nom" />
-                              <TableColumn fx:id="prenomEmprunt" prefWidth="84.0" text="Prenom" />
-                              <TableColumn fx:id="titreEmprunt" prefWidth="154.0" text="Titre" />
-                              <TableColumn fx:id="auteurEmprunt" prefWidth="104.0" text="Auteur" />
-                              <TableColumn fx:id="numeroEmp" prefWidth="209.0" text="numeroEmp" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="707.0" layoutY="37.0" mnemonicParsing="false" onAction="#restituer" text="Restituer" />
-                        <TextField fx:id="searchEmpruntTextField" layoutX="243.0" layoutY="36.0" prefHeight="27.0" prefWidth="425.0" />
-                        <Label layoutX="14.0" layoutY="32.0" prefHeight="33.0" prefWidth="211.0" text="Liste Des Emprunts">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </content></Tab>
-        </tabs>
-      </TabPane>
+      <AnchorPane layoutX="22.0" layoutY="38.0" prefHeight="547.0" prefWidth="891.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;">
+         <children>
+            <StackPane layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="894.0">
+               <children>
+                  <TabPane prefHeight="459.0" prefWidth="824.0" tabClosingPolicy="UNAVAILABLE">
+                     <tabs>
+                        <Tab fx:id="livreTab" text="Livre">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="691.0">
+                                 <children>
+                                    <TableView fx:id="livreTabView" layoutX="224.0" layoutY="59.0" prefHeight="369.0" prefWidth="659.0">
+                                       <columns>
+                                          <TableColumn fx:id="titre" prefWidth="96.0" text="titre" />
+                                          <TableColumn fx:id="auteurLivre" prefWidth="109.0" text="auteur" />
+                                          <TableColumn fx:id="nbrExemplaireLivre" prefWidth="97.0" text="nbrExemplaire" />
+                                          <TableColumn fx:id="codeRayon" prefWidth="89.0" text="codeRayon" />
+                                          <TableColumn fx:id="idLivre" prefWidth="75.0" text="idLivre" />
+                                          <TableColumn fx:id="filiere" prefWidth="76.0" text="Filiere" />
+                                          <TableColumn fx:id="dateAjouter" prefWidth="116.0" text="DateAjouter" />
+                                       </columns>
+                                    </TableView>
+                                    <Button layoutX="79.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouterLivre" prefHeight="23.0" prefWidth="76.0" text="Ajouter" />
+                                    <Button layoutX="79.0" layoutY="364.0" mnemonicParsing="false" onAction="#modifierLivre" prefHeight="23.0" prefWidth="76.0" text="modifier" />
+                                    <Button layoutX="79.0" layoutY="409.0" mnemonicParsing="false" onAction="#supprimerLivre" prefHeight="23.0" prefWidth="76.0" text="Supprimer" />
+                                    <Label fx:id="label" layoutX="286.0" layoutY="321.0" />
+                                    <GridPane layoutX="17.0" layoutY="62.0" prefHeight="109.0" prefWidth="81.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Titre" GridPane.halignment="RIGHT" />
+                                          <Label text="Auteur" GridPane.rowIndex="1" />
+                                          <Label text="nbrExempalire" GridPane.rowIndex="2" />
+                                          <Label text="CodeRayon" GridPane.rowIndex="3" />
+                                          <Label text="Filiere" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane layoutX="116.0" layoutY="62.0" prefHeight="114.0" prefWidth="100.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <TextField fx:id="titreTextField" />
+                                          <TextField fx:id="auteurTextField" GridPane.rowIndex="1" />
+                                          <TextField fx:id="nbrExemplaireTextField" GridPane.rowIndex="2" />
+                                          <TextField fx:id="codeRayonTextField" GridPane.rowIndex="3" />
+                                          <TextField fx:id="filiereTextField" GridPane.rowIndex="4" />
+                                       </children>
+                                    </GridPane>
+                                    <TextField fx:id="ajouterExemplaireTextField" layoutX="81.0" layoutY="203.0" prefHeight="22.0" prefWidth="70.0" />
+                                    <Button layoutX="59.0" layoutY="244.0" mnemonicParsing="false" onAction="#ajouterExemplaire" text="Ajouter Exemplaire" />
+                                    <TextField fx:id="searchTextField" layoutX="229.0" layoutY="17.0" prefHeight="27.0" prefWidth="333.0" />
+                                    <Label layoutX="18.0" layoutY="13.0" text="Gestione Des Livre">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="reservationTab" text="Reservation">
+                           <content>
+                              <AnchorPane fx:id="reservationAnchor" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="reservationTable" layoutX="216.0" layoutY="62.0" prefHeight="375.0" prefWidth="614.0">
+                                       <columns>
+                                          <TableColumn fx:id="email" prefWidth="97.0" text="Email" />
+                                          <TableColumn fx:id="nom" prefWidth="68.0" text="Nom" />
+                                          <TableColumn fx:id="prenom" prefWidth="72.0" text="Prenom" />
+                                          <TableColumn fx:id="title" prefWidth="62.0" text="Titlte" />
+                                          <TableColumn fx:id="auteur" prefWidth="68.0" text="auteur" />
+                                          <TableColumn fx:id="nbrExemplaire" prefWidth="82.0" text="nbrExemplaire" />
+                                          <TableColumn fx:id="dateReservation" prefWidth="88.0" text="DateReservation" />
+                                          <TableColumn fx:id="EnRetard" prefWidth="75.0" text="EnRetard" />
+                                       </columns>
+                                    </TableView>
+                                    <Label fx:id="labelType" layoutX="62.0" layoutY="28.0" text="Liste Des  Resrvation">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <ChoiceBox fx:id="reservationChoiceBox" layoutX="48.0" layoutY="55.0" prefWidth="150.0" />
+                                    <Button fx:id="AccepterResvation" layoutX="81.0" layoutY="92.0" mnemonicParsing="false" onAction="#AccepterResvation" prefHeight="27.0" prefWidth="69.0" text="Accepter" />
+                                    <Button fx:id="AjouterDansEmpurnt" layoutX="50.0" layoutY="188.0" mnemonicParsing="false" onAction="#AjouterDansEmpurnt" text="AjouterDansEmpurnt" />
+                                    <Button fx:id="Supprimer" layoutX="48.0" layoutY="238.0" mnemonicParsing="false" onAction="#Supprimer" prefHeight="29.0" prefWidth="129.0" text="Supprimer" />
+                                    <Button fx:id="RefuserReservation" layoutX="81.0" layoutY="133.0" mnemonicParsing="false" onAction="#RefuserReservation" prefHeight="27.0" prefWidth="69.0" text="Refuser" />
+                                    <TextField fx:id="searchReservationTextField" layoutX="314.0" layoutY="29.0" prefHeight="24.0" prefWidth="361.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="empruntTab" text="Emprunt">
+                           <content>
+                              <AnchorPane fx:id="empruntAnchor" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="empruntTableView" layoutX="9.0" layoutY="71.0" prefHeight="368.0" prefWidth="774.0">
+                                       <columns>
+                                          <TableColumn fx:id="emailEmprunt" prefWidth="99.0" text="Email" />
+                                          <TableColumn fx:id="nomEmprunt" prefWidth="123.0" text="Nom" />
+                                          <TableColumn fx:id="prenomEmprunt" prefWidth="84.0" text="Prenom" />
+                                          <TableColumn fx:id="titreEmprunt" prefWidth="154.0" text="Titre" />
+                                          <TableColumn fx:id="auteurEmprunt" prefWidth="104.0" text="Auteur" />
+                                          <TableColumn fx:id="numeroEmp" prefWidth="209.0" text="numeroEmp" />
+                                       </columns>
+                                    </TableView>
+                                    <Button layoutX="707.0" layoutY="37.0" mnemonicParsing="false" onAction="#restituer" text="Restituer" />
+                                    <TextField fx:id="searchEmpruntTextField" layoutX="243.0" layoutY="36.0" prefHeight="27.0" prefWidth="425.0" />
+                                    <Label layoutX="14.0" layoutY="32.0" prefHeight="33.0" prefWidth="211.0" text="Liste Des Emprunts">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
+               </children>
+            </StackPane>
+            <Button layoutX="787.0" layoutY="1.0" mnemonicParsing="false" onAction="#cache" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="_" textFill="WHITE">
+               <font>
+                  <Font name="JetBrains Mono Regular" size="9.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="833.0" layoutY="3.0" mnemonicParsing="false" onAction="#exit" prefHeight="11.0" prefWidth="53.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="X" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="9.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="14.0" layoutY="1.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="&lt;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
-</StackPane>
+</AnchorPane>

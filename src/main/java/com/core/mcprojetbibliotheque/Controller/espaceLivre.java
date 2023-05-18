@@ -20,6 +20,7 @@ import com.core.mcprojetbibliotheque.Utils.SendEmail;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -35,11 +36,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
 public class espaceLivre implements Initializable{
 	@FXML 
 	TableView livreTabView;
-	
+	private WindowEffect effect;
+	@FXML
+    private AnchorPane espaceLivre;
 	@FXML
 	private Label label;
 	@FXML
@@ -143,13 +147,14 @@ public class espaceLivre implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			effect=new WindowEffect(espaceLivre);
 			showLivre();
 			livreTabView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			        // Mettre à jour les TextField avec les informations du livre sélectionné
 	       
-			//updateSelectedBook();
+			updateSelectedBook();
 			});
-			//ShowEmpruntList();
+			ShowEmpruntList();
 			
 			
 			
@@ -657,6 +662,16 @@ public void searchReservation() throws Exception {
 
 
 
+	public void exit(ActionEvent e) {
+    effect.exit(e);
+}
+
+public void cache(ActionEvent e) {
+    effect.cache(e);
+}
+public void back(ActionEvent e) throws Exception {
+    effect.switchStage(e,"Login.fxml");
+}
 }
     
 

@@ -9,39 +9,52 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="703.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.empruntEnRetard">
+
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="815.0" style="-fx-background-color: transparent; -fx-border-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.empruntEnRetard">
    <children>
-      <TableView fx:id="empruntEnRetardTableView" layoutX="14.0" layoutY="83.0" prefHeight="354.0" prefWidth="671.0">
-        <columns>
-          <TableColumn fx:id="email" prefWidth="109.0" text="email" />
-          <TableColumn fx:id="nom" prefWidth="128.0" text="nom" />
-            <TableColumn fx:id="prenom" prefWidth="128.0" text="prenom" />
-            <TableColumn fx:id="titre" prefWidth="137.0" text="titre" />
-            <TableColumn fx:id="dernierDelais" prefWidth="168.0" text="dernierDelais" />
-        </columns>
-      </TableView>
-      <Button fx:id="Penaliser" layoutX="551.0" layoutY="43.0" mnemonicParsing="false" onAction="#Penaliser" text="Penaliser" />
-      <Label layoutX="22.0" layoutY="38.0" text="Emprunt EnReatrd">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <TextField fx:id="searchEmpruntTextField" layoutX="228.0" layoutY="43.0" prefHeight="25.0" prefWidth="295.0" />
-      <Button layoutX="650.0" layoutY="4.0" mnemonicParsing="false" onAction="#exit" prefHeight="11.0" prefWidth="53.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="X" textFill="WHITE">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="9.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button layoutX="595.0" layoutY="2.0" mnemonicParsing="false" onAction="#cache" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="_" textFill="WHITE">
-         <font>
-            <Font name="JetBrains Mono Regular" size="9.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
+      <AnchorPane layoutX="67.0" layoutY="43.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="703.0" style="-fx-background-radius: 20; -fx-border-color: #d89b5a; -fx-border-radius: 20; -fx-background-color: white;">
+         <children>
+            <TableView fx:id="empruntEnRetardTableView" layoutX="14.0" layoutY="83.0" prefHeight="354.0" prefWidth="671.0">
+               <columns>
+                  <TableColumn fx:id="email" prefWidth="109.0" text="email" />
+                  <TableColumn fx:id="nom" prefWidth="128.0" text="nom" />
+                  <TableColumn fx:id="prenom" prefWidth="128.0" text="prenom" />
+                  <TableColumn fx:id="titre" prefWidth="137.0" text="titre" />
+                  <TableColumn fx:id="dernierDelais" prefWidth="168.0" text="dernierDelais" />
+               </columns>
+            </TableView>
+            <Button fx:id="Penaliser" layoutX="551.0" layoutY="43.0" mnemonicParsing="false" onAction="#Penaliser" text="Penaliser" />
+            <Label layoutX="22.0" layoutY="38.0" text="Emprunt EnReatrd">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="searchEmpruntTextField" layoutX="228.0" layoutY="43.0" prefHeight="25.0" prefWidth="295.0" />
+            <Button layoutX="650.0" layoutY="4.0" mnemonicParsing="false" onAction="#exit" prefHeight="11.0" prefWidth="53.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="X" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="9.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="595.0" layoutY="2.0" mnemonicParsing="false" onAction="#cache" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="_" textFill="WHITE">
+               <font>
+                  <Font name="JetBrains Mono Regular" size="9.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="&lt;" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

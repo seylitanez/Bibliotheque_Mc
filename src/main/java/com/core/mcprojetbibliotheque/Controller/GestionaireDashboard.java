@@ -86,4 +86,40 @@ public class GestionaireDashboard implements Initializable {
     public void cache(ActionEvent e) {
         effect.cache(e);
     }
+    
+    public void back(ActionEvent e) throws Exception {
+        effect.switchStage(e,"Login.fxml");
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public void showUtilisateur(ActionEvent e) throws Exception {
+    	 effect.switchStage(e,"GestioneDesUtilisateur.fxml");
+    
+    }
+    public void demandeProlonger(ActionEvent e) throws Exception{
+    	try {
+			
+    		effect.switchStage(e,"demandeProlongé.fxml");
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+    
+    }
+    public void empruntRetard(ActionEvent e3) throws Exception{
+    	try {
+			
+    		effect.switchStage(e3,"empruntEnRetard.fxml");
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		}
+    }
+    
+    
 }

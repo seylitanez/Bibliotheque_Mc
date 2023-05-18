@@ -65,6 +65,8 @@ public class AbonnesDashboard implements Initializable {
 
     @FXML
     private Label nbExemplaires;
+    
+    private String Auteur;
     public Label getTitre() {
         return titre;
     }
@@ -163,6 +165,8 @@ public class AbonnesDashboard implements Initializable {
     
     private void selected(Livre livre){
         titre.setText(livre.getTitre());
+        Auteur = livre.getAuteur();
+       
         nbExemplaires.setText(livre.getNbExemplaires()+"");
 
         //asynchrone pour recuperer la photo
@@ -185,6 +189,7 @@ public class AbonnesDashboard implements Initializable {
     }
     public void back(ActionEvent e) throws Exception {
         effect.switchStage(e,"login.fxml");
+        
     }
 
     public void search(ActionEvent actionEvent) throws SQLException, ClassNotFoundException {
@@ -199,6 +204,7 @@ public class AbonnesDashboard implements Initializable {
 }
 
     public void reserver(ActionEvent e)throws Exception {
+    System.out.println(Auteur);
     	connectionService=new ConnectionService();
     	boolean payement = connectionService.checkPayement(UtilisateurConnecté.email);
     	if(payement == true) {
@@ -214,8 +220,7 @@ public class AbonnesDashboard implements Initializable {
         	if(possible==true ) {
         		ConnectionService cs = new ConnectionService();
 
-    			int idLivre = 5;
-    					//cs.getIdLivre(titre.getText());
+    			int idLivre = cs.getIdLivre(titre.getText(),Auteur);
     			int idUtilisateur=cs.getIdUtilisateur(UtilisateurConnecté.email);
     			// vous pouvez faire la meme reservation pour meme livre dana la meme journé;
         		boolean reservationExiste= cs.checkIfReservationExiste(idUtilisateur,idLivre);

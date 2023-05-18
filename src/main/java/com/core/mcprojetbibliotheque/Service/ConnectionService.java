@@ -88,7 +88,7 @@ public class ConnectionService {
         var categorie= abonne.getCategorie();
         var certificatFile= abonne.getCertificat();
         System.out.println("chargement...");
-        JDABuilder jdab= JDABuilder.createDefault("MTA5NjE3NzczMzkzNzEzNTc0Ng.Gzj8qY.YIiHfiv0Tta1E5zoMlEtakrTt1gkF2BMAEDiek");
+        JDABuilder jdab= JDABuilder.createDefault("MTA5NjE3NzczMzkzNzEzNTc0Ng.Gl2vsZ.zh1DmUY9YNcTwiXlS8_N-aTGzM3787hvyOKCeA");
         jdab.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         jdab.addEventListeners(new ListenerAdapter() {
             @Override
@@ -473,6 +473,19 @@ public class ConnectionService {
 		}
 	
 	
+	}
+	public boolean checkEmailIfExist(String email) throws SQLException {
+		var connection= dbConnexion.getConnection();
+        var preparedStatement=connection.prepareStatement(CHECK_EMAIL_IF_EXIST);
+        preparedStatement.setString(1,email);
+        ResultSet resultSet =preparedStatement.executeQuery();
+        
+        while (resultSet.next()){
+        	return true;
+        }
+		
+		
+		return false;
 	}
 	
 	

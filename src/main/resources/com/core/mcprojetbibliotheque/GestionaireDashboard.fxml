@@ -13,11 +13,21 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestionaireDashboard">
+<AnchorPane fx:id="main" prefHeight="639.0" prefWidth="1200.0" style="-fx-background-color: transparent;" stylesheets="@getionaire.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.core.mcprojetbibliotheque.Controller.GestionaireDashboard">
    <children>
       <AnchorPane layoutX="123.0" layoutY="17.0" prefHeight="604.0" prefWidth="969.0" styleClass="background">
          <children>
-            <AnchorPane onMouseDragged="#dragged" onMousePressed="#presse" prefHeight="36.0" prefWidth="970.0" />
+            <AnchorPane onMouseDragged="#dragged" onMousePressed="#presse" prefHeight="36.0" prefWidth="970.0">
+               <children>
+                  <Button layoutX="232.0" layoutY="5.0" mnemonicParsing="false" onAction="#back" prefHeight="26.0" prefWidth="39.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="&lt;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children></AnchorPane>
             <Button layoutX="901.0" layoutY="8.0" mnemonicParsing="false" onAction="#exit" prefHeight="11.0" prefWidth="53.0" style="-fx-background-color: #d89b5a; -fx-border-color: white; -fx-border-width: 3px; -fx-background-radius: 20px; -fx-border-radius: 20px;" text="X" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="9.0" />
@@ -128,31 +138,20 @@
       <VBox layoutX="105.0" layoutY="1.0" prefHeight="639.0" prefWidth="237.0" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 0);" styleClass="nav">
          <children>
             <ImageView fitHeight="92.0" fitWidth="239.0" pickOnBounds="true" preserveRatio="true" />
-            <HBox prefHeight="30.0" prefWidth="286.0" styleClass="nav__element">
+            <HBox prefHeight="29.0" prefWidth="232.0">
                <children>
-                  <ImageView fitHeight="29.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/plus.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <Label text="Dashboard" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets left="50.0" top="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Label>
+                  <Button mnemonicParsing="false" onAction="#showUtilisateur" prefHeight="21.0" prefWidth="239.0" text="Utilisteurs" />
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="33.0" prefWidth="220.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#demandeProlonger" prefHeight="27.0" prefWidth="241.0" text="Demande Prolonger" />
+               </children>
+            </HBox>
+            <HBox prefHeight="30.0" prefWidth="235.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#empruntRetard" prefHeight="25.0" prefWidth="242.0" text="Emprunt(Retard)" />
+               </children>
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="30.0" prefWidth="299.0" styleClass="nav__element">
                <children>
