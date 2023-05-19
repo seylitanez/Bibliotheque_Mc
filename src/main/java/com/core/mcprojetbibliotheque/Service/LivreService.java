@@ -142,14 +142,16 @@ public class LivreService {
 		
 	}
 
-	public void SupprimerLivre(int id)throws SQLException {
+	public boolean SupprimerLivre(int id)throws SQLException {
 		try {
 			var connection= dbConnexion.getConnection();
 	        var preparedStatement=connection.prepareStatement(SUPPRIMER_LIVRE);
 	        preparedStatement.setInt(1,id);
 	        int rows = preparedStatement.executeUpdate();
+	        return true;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 
@@ -175,6 +177,7 @@ public class LivreService {
 		
 			
 				 var connection= dbConnexion.getConnection();
+			
 			        var preparedStatement=connection.prepareStatement(LISTER_EMPRUNT);
 			        ObservableList<EmpruntLivre> list = FXCollections.observableArrayList();
 			        ResultSet resultSet = preparedStatement.executeQuery();
@@ -230,14 +233,7 @@ public class LivreService {
 						          EmpruntLivre emprunt = new EmpruntLivre(resultSet.getInt("idEmprunt"),email,nom,prenom,title,auteur,nbrExemplaire,resultSet.getDate("dateEmprunt").toLocalDate(),null,demandeProlongé,prolongé,prolongéRufusé,false,null,penalisé);
 						          list.add(emprunt);
 						   	}
-						   	
-						   	
-						   	
-						   	
-			          
-			         
-			         
-			         
+				 
 			        }
 			
 			        return list;

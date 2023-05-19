@@ -16,6 +16,7 @@ import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.LivreService;
 import com.core.mcprojetbibliotheque.Service.MyListener;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
+import com.core.mcprojetbibliotheque.Utils.SendEmail;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -204,8 +205,12 @@ public class AbonnesDashboard implements Initializable {
 }
 
     public void reserver(ActionEvent e)throws Exception {
-    System.out.println(Auteur);
+   
     	connectionService=new ConnectionService();
+    	
+    	
+    
+    	
     	boolean payement = connectionService.checkPayement(UtilisateurConnecté.email);
     	if(payement == true) {
     		
@@ -218,13 +223,19 @@ public class AbonnesDashboard implements Initializable {
         	
         	
         	if(possible==true ) {
-        		ConnectionService cs = new ConnectionService();
 
-    			int idLivre = cs.getIdLivre(titre.getText(),Auteur);
+        		ConnectionService cs = new ConnectionService();
+            	int idLivre = cs.getIdLivre(titre.getText(),Auteur);
     			int idUtilisateur=cs.getIdUtilisateur(UtilisateurConnecté.email);
     			// vous pouvez faire la meme reservation pour meme livre dana la meme journé;
         		boolean reservationExiste= cs.checkIfReservationExiste(idUtilisateur,idLivre);
         		if(reservationExiste == false) {
+        			
+        			
+        			boolean nbrExemplaireExist = cs.checkNombreExemplaire(idLivre);
+        			if(nbrExemplaireExist == true) {
+        			
+        			
         		
 
             		
@@ -232,14 +243,14 @@ public class AbonnesDashboard implements Initializable {
            		dialog.setTitle("CONFIRMATION");
            		dialog.setHeaderText("confirmer la reservation");
            		dialog.initModality(Modality.APPLICATION_MODAL);
-           		Label label = new Label("voes etes sur vous voulez reservez le livre");
+           		Label label = new Label("vous etes sur vous voulez reservez le livre");
            		dialog.getDialogPane().setContent(label);
            		ButtonType okButton = new ButtonType("ok",ButtonBar.ButtonData.OK_DONE);
            		ButtonType cancalButton = new ButtonType("cancal",ButtonBar.ButtonData.CANCEL_CLOSE);
            		dialog.getDialogPane().getButtonTypes().addAll(okButton,cancalButton);
            		Optional<ButtonType> result = dialog.showAndWait();
            		if(result.isPresent()&& result.get()==okButton) {
-           			
+           			 
            		 
            			// add to database 
            		
@@ -247,9 +258,32 @@ public class AbonnesDashboard implements Initializable {
            			
            			// update nembre of reservation
            			cs.incrementerNbrReservationUtilisateur(idUtilisateur);
+           			SendEmail sendEmail = new SendEmail();
+           			sendEmail.sendEmailMethode(UtilisateurConnecté.email, "RESERVATON", "vous avez resrvez le livre "+titre.getText());
+           			
+           			
+           			Alert alert = new Alert(AlertType.INFORMATION);
+        	        alert.setTitle("Information");
+        	        alert.setHeaderText("Confirmation Reservation ");
+        	        alert.setContentText("vous avez reservez le livre "+titre.getText()+" avec succes");
+        	        alert.showAndWait();
+           			
+           			
+           			
            			
            			
            		}	
+           		
+           		
+           		
+           		
+        			}else {
+            			Alert alert = new Alert(AlertType.ERROR);
+            	        alert.setTitle("Erreur");
+            	        alert.setHeaderText("Reservation impossible");
+            	        alert.setContentText("il existe pas des exmplaire");
+            	        alert.showAndWait();
+            		}
         			
         			
         		}else {
@@ -262,7 +296,6 @@ public class AbonnesDashboard implements Initializable {
         			
         			
         		}
-        		
         		
         		
         		
@@ -303,6 +336,7 @@ public class AbonnesDashboard implements Initializable {
     		
     		
     	}
+    	
     }
  
     

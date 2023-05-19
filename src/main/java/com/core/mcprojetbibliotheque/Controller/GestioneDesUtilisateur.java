@@ -55,6 +55,7 @@ public class GestioneDesUtilisateur implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
+			seachUtilisateur.setPromptText("Search : email, nom, prenom, categorie");
 			effect=new WindowEffect(main);
 			showUtilisateur();
 			
@@ -105,6 +106,7 @@ public class GestioneDesUtilisateur implements Initializable {
 			 listUtilisateurTableView.setItems(list);
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println(e.getMessage() +"1");
 		}
 		
@@ -157,7 +159,7 @@ public class GestioneDesUtilisateur implements Initializable {
 			SelectionModel<Utilisateur> selectionModel = listUtilisateurTableView.getSelectionModel();
 			Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
 			if(selectedUtililisateur != null) {
-				LocalDate date = LocalDate.of(2000, 1, 1);
+				LocalDate date = null;
 
 				boolean resultat = cs.Payement(selectedUtililisateur.getEmail(),date);
 				

@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import java.net.URL;
@@ -32,26 +33,34 @@ public class Login implements Initializable {
         if(!email.isEmpty() && !password.isEmpty()) {
            // System.out.println(email);
            // System.out.println(password);
-            Utilisateur utilisateur= connectionService.login(email,password);
-            this.email.setText("");
-            this.password.setText("");
-            UtilisateurConnecté.email=email;
-            
-            
-            
-//            Thread thread= new Thread(()->{
-                try {
-                    switch (utilisateur.getCategorie()){
-                        case "Gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
-                        case "Externe","Interne","Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");
-                        break;
-                        case "Bibliothecaire":effect.switchStage(e,"espaceLivre.fxml");break;
-                    }
-                }catch (Exception exception){exception.printStackTrace();}
-//            });
-//            thread.join();
-//            thread.start();
-       
+           try {
+        	   Utilisateur utilisateur= connectionService.login(email,password);
+               this.email.setText("");
+               this.password.setText("");
+               UtilisateurConnecté.email=email;
+               
+               
+               
+//               Thread thread= new Thread(()->{
+                   try {
+                       switch (utilisateur.getCategorie()){
+                           case "Gestionaire":effect.switchStage(e,"GestionaireDashboard.fxml");break;
+                           case "Externe","Interne","Enseignant":effect.switchStage(e,"AbonneDashboard.fxml");
+                           break;
+                           case "Bibliothecaire":effect.switchStage(e,"espaceLivre.fxml");break;
+                       }
+                   }catch (Exception exception){exception.printStackTrace();}
+//               });
+//               thread.join();
+//               thread.start();
+          
+		} catch (Exception e2) {
+			Alert alert = new Alert(AlertType.ERROR);
+	        alert.setTitle("Erreur");
+	        alert.setHeaderText("invalid Information !");
+	        alert.setContentText("les information sont pas valide !");
+	        alert.showAndWait();
+		}
         }
         
        

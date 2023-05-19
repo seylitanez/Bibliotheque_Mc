@@ -140,7 +140,10 @@ public class ConnectionService {
     	  nbrReservation = resultSet.getInt("nbrReservation");
     	  nbrEmprunt =resultSet.getInt("nbrEmprunt");
     	  }
-    	  System.out.println(nbrReservation+" "+nbrEmprunt);
+    	  int total = nbrReservation+nbrEmprunt;
+    	  if(total>=4) {
+    		  return false;
+    	  }
     	 
     	return true;
     }
@@ -193,7 +196,10 @@ public class ConnectionService {
    		  
    	      dateReservation=resultSet.getDate("date").toLocalDate();
    	      accepté=resultSet.getInt("accepté");
-   	      dateAcceptaion=resultSet.getDate("dateAcceptation").toLocalDate();
+   	      if(resultSet.getDate("dateAcceptation") != null) {
+   	    	  
+   	    	  dateAcceptaion=resultSet.getDate("dateAcceptation").toLocalDate();
+   	      }
    	      Boolean estEnRetard=false;
    	      if(accepté==0) {
    	    	acceptéReservation=false;
@@ -205,7 +211,7 @@ public class ConnectionService {
    	      
    	      
    	      reservation reservation = new reservation(email,nom,prenom,title,auteur,Integer.valueOf(nbrExmplaire),dateReservation,acceptéReservation,dateAcceptaion,false);
-   	      
+   	      System.out.println(reservation.getDateAcceptaionOuRefusé());
    	      reservationList.add(reservation);
 	   	   
    	      
@@ -231,7 +237,7 @@ public class ConnectionService {
 	  		 
 	  		 
 	  	 }
-	  	
+	  	System.out.println(titre+" "+auteur+" "+idLivre+"aaaaa");
     	return idLivre ;
 		
     }
@@ -275,7 +281,7 @@ public class ConnectionService {
     		var cnx =dbConnexion.getConnection();
     		try {
    	       PreparedStatement statement = cnx.prepareStatement(UPDATE_RESERVATION);
-   	       statement.setString(1,accepté);
+   	       statement.setString(1,"1");
    	       statement.setInt(2,idUtilisateur);
      	   statement.setInt(3,idLivre);
      	   statement.setDate(4,java.sql.Date.valueOf(dateReservation));
@@ -283,6 +289,7 @@ public class ConnectionService {
    	       int rowsUpdated = statement.executeUpdate();
      	   return true;
 		} catch (Exception e) {
+		   System.out.println(e.getMessage()+"false");
 		   return false;
 		}
     	   
@@ -298,10 +305,15 @@ public class ConnectionService {
 		statement.executeUpdate();
 	}
 	public void decrementerNombreExemplaire(int idLivre) throws SQLException {
-		var cnx =dbConnexion.getConnection();
-		PreparedStatement statement = cnx.prepareStatement(DECREMENTER_NOMBRE_EXEMPLAIRE);
-		statement.setInt(1,idLivre);
-		statement.executeUpdate();
+		try {
+			
+			var cnx =dbConnexion.getConnection();
+			PreparedStatement statement = cnx.prepareStatement(DECREMENTER_NOMBRE_EXEMPLAIRE);
+			statement.setInt(1,idLivre);
+			statement.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	public void incrementerNombreExemplaire(int idLivre) throws SQLException {
 		var cnx =dbConnexion.getConnection();
@@ -310,13 +322,19 @@ public class ConnectionService {
 		statement.executeUpdate();
 		
 	}
-	public void AjouterEmprunt(int idUtilisateur, int idLivre, LocalDate date) throws SQLException {
-		var cnx =dbConnexion.getConnection();
-		PreparedStatement statement = cnx.prepareStatement(AJOUTER_EMPRUNT);	
-		statement.setInt(1,idUtilisateur);
-		statement.setInt(2, idLivre);
-		statement.setDate(3,java.sql.Date.valueOf(date));
-		statement.executeUpdate();
+	public void AjouterEmprunt(int idUtilisateur, int idLivre) throws SQLException {
+		try {
+			var cnx =dbConnexion.getConnection();
+			PreparedStatement statement = cnx.prepareStatement(AJOUTER_EMPRUNT);	
+			statement.setInt(1,idUtilisateur);
+			statement.setInt(2, idLivre);
+			
+			statement.executeUpdate();
+			System.out.println("succes");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("hello");
+		}
 	}
 	public void incrementerNbrReservationUtilisateur(int idUtilisateur) throws SQLException {
 		var cnx =dbConnexion.getConnection();
@@ -358,9 +376,13 @@ public class ConnectionService {
 	        var preparedStatement=connection.prepareStatement(TROUVE_UTILISATEURWITHEMAIL);
 	        preparedStatement.setString(1,email);
 	        ResultSet resultSet = preparedStatement.executeQuery();
+	        LocalDate date = null;
 	        if(resultSet.next()) {
-	        LocalDate date =resultSet.getDate("DateFinPenalisation").toLocalDate();
-	        
+	        	if(resultSet.getDate("DateFinPenalisation")!=null) {
+	        		
+	        		date =resultSet.getDate("DateFinPenalisation").toLocalDate();
+	        		
+	        	}
 	       
 	        if(date == null || date.isBefore(LocalDate.now())) {
 	        	return false;
@@ -373,29 +395,40 @@ public class ConnectionService {
 		return false;
 	}
 	public boolean checkPayement(String email) throws SQLException {
+		try {
+			var connection= dbConnexion.getConnection();
+	        var preparedStatement=connection.prepareStatement(TROUVE_UTILISATEURWITHEMAIL);
+	        preparedStatement.setString(1,email);
+	        ResultSet resultSet = preparedStatement.executeQuery();
+	        LocalDate date = null;
+	        if(resultSet.next()) {
+	        	if(resultSet.getDate("dateFinPyement") != null) {
+	        	
+	        		
+	         date =resultSet.getDate("dateFinPyement").toLocalDate();
+	        	}
+	        
+	        String 	categorie = resultSet.getString("categorie");
+	        if(categorie == "Enseignant") {
+	        	return true;
+	        }else {
+	        	if(date == null  ) {
+	        		return false;
+	        	}else if( LocalDate.now().isAfter(date)){
+	        		return false;
+	        	}else {
+	        		return true;
+	        	}
+	       	
+	        }
+	        }
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 		
-		var connection= dbConnexion.getConnection();
-        var preparedStatement=connection.prepareStatement(TROUVE_UTILISATEURWITHEMAIL);
-        preparedStatement.setString(1,email);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if(resultSet.next()) {
-        LocalDate date =resultSet.getDate("dateFinPyement").toLocalDate();
         
-        String 	categorie = resultSet.getString("categorie");
-        if(categorie == "Enseignant") {
-        	return true;
-        }else {
-        	if(date == null || LocalDate.now().isAfter(date) ) {
-        		return false;
-        	}else {
-        		return true;
-        	}
-       	
-        }
-        }
 		return false;
-        
-		
 		
 		
 		
@@ -444,12 +477,22 @@ public class ConnectionService {
 	public boolean Payement(String email, LocalDate date)throws Exception {
 		try {
 			var connection= dbConnexion.getConnection();
-
-		     var preparedStatement=connection.prepareStatement(UPDATE_PAYEMENT);
-		     preparedStatement.setString(2, email);
-		     preparedStatement.setDate(1,java.sql.Date.valueOf(date) );
-		     preparedStatement.executeUpdate();
-			return true;
+			if(date == null) {
+				 var preparedStatement=connection.prepareStatement(UPDATE_PAYEMENT);
+			     preparedStatement.setString(2, email);
+			     
+			     preparedStatement.executeUpdate();
+				return true;
+			}else {
+				 var preparedStatement=connection.prepareStatement(UPDATE_PAYEMENT2);
+				 preparedStatement.setDate(1, java.sql.Date.valueOf(date));
+				 preparedStatement.setString(2, email);
+			     
+			     
+			     preparedStatement.executeUpdate();
+				return true;
+			}
+		     
 		} catch (Exception e) {
 			
 			System.out.println(e.getMessage());
@@ -486,6 +529,27 @@ public class ConnectionService {
 		
 		
 		return false;
+	}
+	public boolean checkNombreExemplaire(int idLivre) throws SQLException {
+		try {
+			var Connection = dbConnexion.getConnection();
+			var preparedStatement = Connection.prepareStatement(NOMBRE_EXEMPLAIRE);
+			 preparedStatement.setInt(1,idLivre);
+			 int nbrExemplaire=0;
+		     ResultSet resultSet =preparedStatement.executeQuery();
+		     while(resultSet.next()) {
+		    	 nbrExemplaire = resultSet.getInt("nbExemplaires");
+		     }
+		     if(nbrExemplaire==0) {
+		    	 return false;
+		     }else {
+		    	 return true;
+		     }
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 	
 	

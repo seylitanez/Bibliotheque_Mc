@@ -1,6 +1,7 @@
 package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Model.EmpruntLivre;
+import com.core.mcprojetbibliotheque.Model.reservation;
 import com.core.mcprojetbibliotheque.Service.LivreService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.SendEmail;
@@ -10,10 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -58,7 +61,7 @@ public class DemandeProlongé implements Initializable{
 		try {
 			effect=new WindowEffect(main);
 			showDemande();
-			
+			searchDemandeTextField.setPromptText("search : email, nom, prenom, title ");
 			
 			searchDemandeTextField.textProperty().addListener((ObservableList,oldValue,newValue)->{
 				
@@ -91,12 +94,13 @@ public class DemandeProlongé implements Initializable{
 	public void showDemande() throws  SQLException, IOException {
 		LivreService ls = new LivreService();
 		   ObservableList<EmpruntLivre> list = ls.getEmprunt();
-		   for (EmpruntLivre emprunt : list) {
-			   emprunt.dernierDelais();
-		   }
+		 
+		  for(EmpruntLivre emprunt :list) {
+			  emprunt.dernierDelais();
+		  }
 		   // filtrer les emprunt 
 		   ObservableList<EmpruntLivre> empruntsFiltres = list
-				    .filtered(e -> e.isDemandeProlonger() && e.getDateRestitution() == null && e.isEnRetard() == false && e.isProlongéRufusé()==false);
+				    .filtered(e -> (e.isDemandeProlonger() && e.getDateRestitution() == null && e.isEnRetard() == false && e.isProlongéRufusé()==false && e.isProlonge()==false));
 				    
 		   
 		   
@@ -109,42 +113,69 @@ public class DemandeProlongé implements Initializable{
 		   titre.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,String>("titre"));
 		   nbrExemplaire.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Integer>("nbrExemplaire"));
 		   Delais.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,LocalDate>("Delais"));
-		   demandeProlongerTableView.setItems(list);
+		   demandeProlongerTableView.setItems(empruntsFiltres);
 	
 	}
 
 
 
 	public void accepter() throws IOException, SQLException {
+		try {
+			SelectionModel<EmpruntLivre> selectionModel = demandeProlongerTableView.getSelectionModel();
+			EmpruntLivre selectedEmprunt = selectionModel.getSelectedItem();
+			if(selectedEmprunt != null) {
+				
+				LivreService ls =new  LivreService();
+				ls.accepterDemande(selectedEmprunt.getIdEmprunt());
+				
+				showDemande();
+				SendEmail sendEmail = new SendEmail();
+				//sendEmail.sendEmailMethode(selectedEmprunt.getEmail(),"Demande de Prolongé est accepté", "le dernier delais pour restituer livre "+selectedEmprunt.getTitre()+" sera "+selectedEmprunt.getDelais());
+				 Alert alert = new Alert(AlertType.INFORMATION);
+			        alert.setTitle("Information");
+			        alert.setHeaderText("Demande Accepté");
+			        alert.setContentText("Demande est accepté");
+			        alert.showAndWait();
+			
+			
+			}
+		}catch (Exception e) {
+			
+		}
+		
+	
 		
 		
-		SelectionModel<EmpruntLivre> selectionModel = demandeProlongerTableView.getSelectionModel();
-		EmpruntLivre selectedEmprunt = selectionModel.getSelectedItem();
-		if(selectedEmprunt != null) {
-			
-			LivreService ls =new  LivreService();
-			ls.accepterDemande(selectedEmprunt.getIdEmprunt());
-			
-			SendEmail sendEmail = new SendEmail();
-			sendEmail.sendEmailMethode(selectedEmprunt.getEmail(),"Demande de Prolongé est accepté", "le dernier delais pour restituer livre "+selectedEmprunt.getTitre()+" sera "+selectedEmprunt.getDelais());
-			showDemande();
+		
+		
+		
 		}
 		
 		
 		 
 		
 		
-	}
+	
 	public void refuser() throws IOException, SQLException {
-		SelectionModel<EmpruntLivre> selectionModel = demandeProlongerTableView.getSelectionModel();
-		EmpruntLivre selectedEmprunt = selectionModel.getSelectedItem();
-		if(selectedEmprunt != null) {
+		try {
+			SelectionModel<EmpruntLivre> selectionModel = demandeProlongerTableView.getSelectionModel();
+			EmpruntLivre selectedEmprunt = selectionModel.getSelectedItem();
+			if(selectedEmprunt != null) {
+				
+				LivreService ls =new  LivreService();
+				ls.ReffuserDemande(selectedEmprunt.getIdEmprunt());
+				showDemande();
+				SendEmail sendEmail = new SendEmail();
+				sendEmail.sendEmailMethode(selectedEmprunt.getEmail()," Demande de Prolongé est reffusé","Votre deamande de prolonge le delais de restitution le livre "+selectedEmprunt.getTitre()+" est reffusé \n vous devez restituer le livre avant "+selectedEmprunt.getDelais() );
+				 Alert alert = new Alert(AlertType.INFORMATION);
+			        alert.setTitle("Demande Rufusé");
+			        alert.setHeaderText(null);
+			        alert.setContentText("demande est refusé");
+			        alert.showAndWait();
 			
-			LivreService ls =new  LivreService();
-			ls.ReffuserDemande(selectedEmprunt.getIdEmprunt());
-			SendEmail sendEmail = new SendEmail();
-			sendEmail.sendEmailMethode(selectedEmprunt.getEmail()," Demande de Prolongé est reffusé","Votre deamande de prolonge le delais de restitution le livre "+selectedEmprunt.getTitre()+" est reffusé \n vous devez restituer le livre avant "+selectedEmprunt.getDelais() );
-			showDemande();
+			}
+		} catch (Exception e) {
+			
 		}
 	}
 	

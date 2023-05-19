@@ -17,10 +17,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -49,6 +51,7 @@ public class empruntEnRetard implements Initializable {
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			try {
+				searchEmpruntTextField.setPromptText("search : email, nom, prenom, title ");
 				effect=new WindowEffect(main);
 		    	
 				ShowEmpruntEnRetard();
@@ -107,20 +110,31 @@ public class empruntEnRetard implements Initializable {
 	    
 		}
 		public void Penaliser() throws Exception {
-			SelectionModel<EmpruntLivre> selectionModel = empruntEnRetardTableView.getSelectionModel();
-			EmpruntLivre selectedEmprunt = selectionModel.getSelectedItem();
 			
 			
-			if(selectedEmprunt != null) {
+			try {
+				SelectionModel<EmpruntLivre> selectionModel = empruntEnRetardTableView.getSelectionModel();
+				EmpruntLivre selectedEmprunt = selectionModel.getSelectedItem();
 				
-				ConnectionService cs = new ConnectionService();
-				boolean resultat =cs.penaliserUtilisateur(selectedEmprunt.getEmail());
-				LivreService ls = new LivreService();
-				ls.addPenalisation(selectedEmprunt.getIdEmprunt());
-				ShowEmpruntEnRetard();
-				SendEmail sendEmail = new SendEmail();
-				sendEmail.sendEmailMethode(selectedEmprunt.getEmail(),"Penalisation","vous etes penaliser jusque "+LocalDate.now().plusMonths(1)+"car vous n avez pas restituer le livre "+selectedEmprunt.getTitre());
-			
+				
+				if(selectedEmprunt != null) {
+					
+					ConnectionService cs = new ConnectionService();
+					boolean resultat =cs.penaliserUtilisateur(selectedEmprunt.getEmail());
+					LivreService ls = new LivreService();
+					ls.addPenalisation(selectedEmprunt.getIdEmprunt());
+					ShowEmpruntEnRetard();
+					SendEmail sendEmail = new SendEmail();
+					sendEmail.sendEmailMethode(selectedEmprunt.getEmail(),"Penalisation","vous etes penaliser jusque "+LocalDate.now().plusMonths(1)+"car vous n avez pas restituer le livre "+selectedEmprunt.getTitre());
+						Alert alert = new Alert(AlertType.INFORMATION);
+				        alert.setTitle("Information");
+				        alert.setHeaderText("Penalisation");
+				        alert.setContentText("l utilisateur est penalisé");
+				        alert.showAndWait();
+				
+				}
+				} catch (Exception e) {
+				
 			}
 			
 			

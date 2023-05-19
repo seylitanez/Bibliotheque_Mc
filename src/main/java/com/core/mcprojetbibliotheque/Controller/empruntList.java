@@ -75,7 +75,7 @@ public class empruntList implements Initializable{
 							empruntFiltered.add(emprunt);	
 						}
 						 empruntsFiltred2 = empruntFiltered
-							    .filtered(e -> e.isDemandeProlonger() == false && e.getDateRestitution() == null && e.isEnRetard() == false && e.isProlongéRufusé()==false);
+							   .filtered((e ->  e.getDateRestitution() == null && e.isProlongéRufusé()==false));
 							    
 					   
 						
@@ -92,7 +92,7 @@ public class empruntList implements Initializable{
 				   demandeProlongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("demandeProlonger"));
 				   prolongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("prolonge"));
 				   enRetard.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("enRetard"));
-				   abonneEmpruntTableView.setItems(empruntsFiltred2);
+				   abonneEmpruntTableView.setItems(list);
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage()+" emprunt");
@@ -107,7 +107,7 @@ public class empruntList implements Initializable{
 				showAbooneEmprunt();
 				effect=new WindowEffect(main);
 			} catch (IOException | SQLException e) {
-				
+				System.out.println(e.getMessage());
 				e.printStackTrace();
 			}
 			
@@ -118,10 +118,16 @@ public class empruntList implements Initializable{
 			try {
 				SelectionModel<EmpruntLivre> selectionModel = abonneEmpruntTableView.getSelectionModel();
 				EmpruntLivre selectedEmprunt = selectionModel.getSelectedItem();	
-				if(selectedEmprunt != null && selectedEmprunt.isEnRetard() == false && selectedEmprunt.isDemandeProlonger() == false) {
+				if(selectedEmprunt != null && selectedEmprunt.isEnRetard() == false && selectedEmprunt.isDemandeProlonger() == false ) {
 					LivreService ls =new  LivreService();
 					ls.addDemande(selectedEmprunt.getIdEmprunt());
 					showAbooneEmprunt();
+					Alert alert = new Alert(AlertType.INFORMATION);
+					alert.setTitle("INFORMATION");
+					alert.setHeaderText("");
+					alert.setContentText("vous avez fait un demande");
+
+					alert.showAndWait();
 					
 				}else {
 					Alert alert = new Alert(AlertType.ERROR);

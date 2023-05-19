@@ -236,7 +236,7 @@ public class reservattionController implements Initializable {
 			String subject = "Confirmation d'Emprunt";
 			String text ="vous avez empruntez "+selectedReservation.getTitle().toUpperCase()+"/vous devez le restituez avant "+date.plusMonths(1);
 			sendEmail.sendEmailMethode(selectedReservation.getEmail(),subject,text);
-			cs.AjouterEmprunt(idUtilisateur,idLivre,date);
+			cs.AjouterEmprunt(idUtilisateur,idLivre);
 			cs.icrementerNombreEmprunt(idUtilisateur);
 		}
 		
