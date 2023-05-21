@@ -88,7 +88,8 @@ public class ConnectionService {
         var categorie= abonne.getCategorie();
         var certificatFile= abonne.getCertificat();
         System.out.println("chargement...");
-        JDABuilder jdab= JDABuilder.createDefault("MTA5NjE3NzczMzkzNzEzNTc0Ng.Gl2vsZ.zh1DmUY9YNcTwiXlS8_N-aTGzM3787hvyOKCeA");
+        // le token : MTA5NjE3NzczMzkzNzEzNTc0Ng.Gl2vsZ.zh1DmUY9YNcTwiXlS8_N-aTGzM3787hvyOKCeA
+        JDABuilder jdab= JDABuilder.createDefault("");
         jdab.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         jdab.addEventListeners(new ListenerAdapter() {
             @Override
