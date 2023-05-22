@@ -2,6 +2,7 @@ package com.core.mcprojetbibliotheque.Controller;
 
 import com.core.mcprojetbibliotheque.Configuration.PrepareStatementP;
 import com.core.mcprojetbibliotheque.Model.Abonne;
+import com.core.mcprojetbibliotheque.Service.ConnectionService;
 import com.core.mcprojetbibliotheque.Service.WindowEffect;
 import com.core.mcprojetbibliotheque.Utils.ListAdapter;
 import javafx.collections.*;
@@ -19,6 +20,13 @@ import static com.core.mcprojetbibliotheque.Utils.Constantes.*;
 
 public class GestionaireDashboard implements Initializable {
     private ListAdapter listAdapter;
+    @FXML 
+    private Label nombreEns; 
+    @FXML 
+    private Label nombreInterne; 
+    @FXML 
+    private Label nombreExtren; 
+    
     @FXML
     private AnchorPane main;
     private WindowEffect effect;
@@ -58,6 +66,16 @@ public class GestionaireDashboard implements Initializable {
 //        status.setCellValueFactory(new PropertyValueFactory<Abonne,String>("status"));
 //        nom.setCellValueFactory(new PropertyValueFactory<Abonne,String>("nom"));
         effect=new WindowEffect(main);
+        try {
+			ConnectionService cs = new ConnectionService();
+			nombreEns.setText(String.valueOf(cs.nombreUtilisateur("Enseignant")));
+			nombreInterne.setText(String.valueOf(cs.nombreUtilisateur("Interne")));
+			nombreExtren.setText(String.valueOf(cs.nombreUtilisateur("Externe")));
+
+        } catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 //        dernieresInscriptions.setItems(getAbonnes());
 //        dernieresInscriptions.getItems().stream().forEach(System.out::println);
 //        dernieresInscriptions.

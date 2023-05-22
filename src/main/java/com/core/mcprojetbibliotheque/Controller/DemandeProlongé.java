@@ -130,7 +130,7 @@ public class DemandeProlongé implements Initializable{
 				
 				showDemande();
 				SendEmail sendEmail = new SendEmail();
-				//sendEmail.sendEmailMethode(selectedEmprunt.getEmail(),"Demande de Prolongé est accepté", "le dernier delais pour restituer livre "+selectedEmprunt.getTitre()+" sera "+selectedEmprunt.getDelais());
+				sendEmail.sendEmailMethode(selectedEmprunt.getEmail(),"Demande de Prolongé est accepté", "le dernier delais pour restituer livre "+selectedEmprunt.getTitre()+" sera "+selectedEmprunt.getDelais());
 				 Alert alert = new Alert(AlertType.INFORMATION);
 			        alert.setTitle("Information");
 			        alert.setHeaderText("Demande Accepté");

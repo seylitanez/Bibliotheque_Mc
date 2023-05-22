@@ -62,8 +62,9 @@ public class empruntList implements Initializable{
 					
 					
 					for (EmpruntLivre emprunt : list) {
-						emprunt.EstEnRetard();
 						emprunt.dernierDelais();
+						emprunt.EstEnRetard();
+						System.out.println(emprunt.getIdEmprunt());
 						
 					}
 					ObservableList<EmpruntLivre> empruntFiltered = FXCollections.observableArrayList();
@@ -71,11 +72,12 @@ public class empruntList implements Initializable{
 					ObservableList<EmpruntLivre> empruntsFiltred2 = FXCollections.observableArrayList();
 
 					for (EmpruntLivre emprunt : list) {
+						//System.out.println(emprunt.getEmail());
 						if(emprunt.getEmail().equals(UtilisateurConnecté.email)) {
 							empruntFiltered.add(emprunt);	
 						}
 						 empruntsFiltred2 = empruntFiltered
-							   .filtered((e ->  e.getDateRestitution() == null && e.isProlongéRufusé()==false));
+							   .filtered((e ->  e.getDateRestitution() == null));
 							    
 					   
 						
@@ -92,10 +94,11 @@ public class empruntList implements Initializable{
 				   demandeProlongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("demandeProlonger"));
 				   prolongé.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("prolonge"));
 				   enRetard.setCellValueFactory(new PropertyValueFactory<EmpruntLivre,Boolean>("enRetard"));
-				   abonneEmpruntTableView.setItems(list);
+				   abonneEmpruntTableView.setItems(empruntsFiltred2);
 
 			} catch (Exception e) {
 				System.out.println(e.getMessage()+" emprunt");
+				e.printStackTrace();
 			}
 		   }
 

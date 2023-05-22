@@ -139,6 +139,18 @@ public class GestioneDesUtilisateur implements Initializable {
 		Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
 		if(selectedUtililisateur != null) {
 			
+			if(selectedUtililisateur.getCategorie().equals("Enseignant")) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("error ");
+				alert.setHeaderText("vous avez selectionnez un enseignant");
+				
+				
+				
+				
+			}	else {
+			
+			
+			
 			boolean resultat = cs.Payement(selectedUtililisateur.getEmail(),LocalDate.now().plusYears(1));
 			if(resultat == true ) {
 				Alert alert = new Alert(AlertType.INFORMATION);
@@ -151,6 +163,7 @@ public class GestioneDesUtilisateur implements Initializable {
 			showUtilisateur();
 		
 		}
+			}
 		
 	}
 	public void annulerPayement() throws Exception {
@@ -159,6 +172,20 @@ public class GestioneDesUtilisateur implements Initializable {
 			SelectionModel<Utilisateur> selectionModel = listUtilisateurTableView.getSelectionModel();
 			Utilisateur selectedUtililisateur = selectionModel.getSelectedItem();			
 			if(selectedUtililisateur != null) {
+				
+				
+			if(selectedUtililisateur.getCategorie().equals("Enseignant")) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("error ");
+				alert.setHeaderText("vous avez selectionnez un enseignant");
+				
+				
+				
+				
+			}	else {
+				
+				
+				
 				LocalDate date = null;
 
 				boolean resultat = cs.Payement(selectedUtililisateur.getEmail(),date);
@@ -174,7 +201,8 @@ public class GestioneDesUtilisateur implements Initializable {
 					}
 				showUtilisateur();
 				}
-		} catch (Exception e) {
+		}
+			} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 }

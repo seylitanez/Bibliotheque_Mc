@@ -15,20 +15,20 @@
          <font>
             <Font size="24.0" />
          </font></Label>
-      <ImageView fx:id="pdf" fitHeight="433.0" fitWidth="372.0" layoutX="74.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true" />
-      <Label fx:id="nom" layoutX="521.0" layoutY="79.0" text="nom">
+      <ImageView fx:id="pdf" fitHeight="410.0" fitWidth="345.0" layoutX="46.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="nom" layoutX="436.0" layoutY="82.0" text="nom">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="prenom" layoutX="515.0" layoutY="134.0" text="prenom">
+      <Label fx:id="prenom" layoutX="435.0" layoutY="138.0" text="prenom">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="email" layoutX="522.0" layoutY="191.0" text="email">
+      <Label fx:id="email" layoutX="433.0" layoutY="190.0" text="email">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="categorie" layoutX="511.0" layoutY="256.0" text="categorie">
+      <Label fx:id="categorie" layoutX="436.0" layoutY="258.0" text="categorie">
          <font>
             <Font size="18.0" />
          </font></Label>

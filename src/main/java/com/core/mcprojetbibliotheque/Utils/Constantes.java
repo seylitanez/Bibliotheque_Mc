@@ -41,7 +41,7 @@ public class Constantes {
     public static String UPDATE_EMPRUNT_RESTITUTION="UPDATE emprunt set dateRestitution = Now() where idEmprunt = ?;";
     public static String UPDATE_EXEMPLAIRE_NEMBER="UPDATE livre SET nbExemplaires = nbExemplaires + 1 where titre = ? and auteur = ?;";
     public static String DECREMENTER_NOMBRE_EXEMPLAIRE = "UPDATE livre SET nbExemplaires = nbExemplaires - 1 WHERE id = ?";
-    public static String INCREMENTER_NOMBRE_EXEMPLAIRE = "UPDATE livre SET nbExemplaires = nbExemplaires - +1 WHERE id = ?";
+    public static String INCREMENTER_NOMBRE_EXEMPLAIRE = "UPDATE livre SET nbExemplaires = nbExemplaires + 1 WHERE id = ?";
     public static String AJOUTER_EMPRUNT = "INSERT INTO emprunt (idUtilisateur, idLivre, dateEmprunt) VALUES (?, ?, NOW());";
    
     public static String DECREMENTER_NOMBRE_EMPRUNT ="UPDATE utilisateur SET nbrEmprunt = nbrEmprunt - 1 WHERE email = ?;";

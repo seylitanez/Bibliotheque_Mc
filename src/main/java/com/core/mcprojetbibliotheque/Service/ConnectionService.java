@@ -282,7 +282,7 @@ public class ConnectionService {
     		var cnx =dbConnexion.getConnection();
     		try {
    	       PreparedStatement statement = cnx.prepareStatement(UPDATE_RESERVATION);
-   	       statement.setString(1,"1");
+   	       statement.setString(1,accepté);
    	       statement.setInt(2,idUtilisateur);
      	   statement.setInt(3,idLivre);
      	   statement.setDate(4,java.sql.Date.valueOf(dateReservation));
@@ -402,15 +402,19 @@ public class ConnectionService {
 	        preparedStatement.setString(1,email);
 	        ResultSet resultSet = preparedStatement.executeQuery();
 	        LocalDate date = null;
+	        String categorie = null;
 	        if(resultSet.next()) {
+	        	categorie = resultSet.getString("categorie");
 	        	if(resultSet.getDate("dateFinPyement") != null) {
 	        	
-	        		
-	         date =resultSet.getDate("dateFinPyement").toLocalDate();
+	        		date =resultSet.getDate("dateFinPyement").toLocalDate();
 	        	}
-	        
-	        String 	categorie = resultSet.getString("categorie");
-	        if(categorie == "Enseignant") {
+	        }
+	       
+
+
+	        if(categorie.equals("Enseignant")) {
+	        	System.out.println("success");
 	        	return true;
 	        }else {
 	        	if(date == null  ) {
@@ -422,14 +426,15 @@ public class ConnectionService {
 	        	}
 	       	
 	        }
-	        }
+	        
+	        
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
 		}
 		
         
-		return false;
+		
 		
 		
 		
@@ -555,7 +560,22 @@ public class ConnectionService {
 	
 	
 	
-	
+	public int nombreUtilisateur(String categorie) throws SQLException {
+		
+		var Connection = dbConnexion.getConnection();
+		var preparedStatement = Connection.prepareStatement(NOMBRE_ABONNONNES_SELON_TYPE);
+		preparedStatement.setString(1,categorie);
+		ResultSet resultSet =preparedStatement.executeQuery();
+		int nombre = 0;
+		while(resultSet.next()) {
+			nombre = resultSet.getInt(1);
+			
+		}
+		System.out.println(nombre);
+		 return nombre;
+		
+		
+	}
 	
 	
 	}

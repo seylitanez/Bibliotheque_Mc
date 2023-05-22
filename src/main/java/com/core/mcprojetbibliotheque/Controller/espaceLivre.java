@@ -569,11 +569,11 @@ public void AccepterResvation() throws Exception {
 		   System.out.println(dateReservation);
 		  
 		   cs.decrementerNombreExemplaire(idLivre);
-		   cs.incrementerNbrReservationUtilisateur(idUtilisateur);
+		   //cs.incrementerNbrReservationUtilisateur(idUtilisateur);
 		   //Pour email
 		   SendEmail sendEmail = new SendEmail();
 		   LocalDate date = LocalDate.now().plusWeeks(1);
-		   showListResvationAccepté();
+		   showListResvation();
 		   String subject = "Reservation Accepté";
 		   String text ="la reservation de livre "+titre.toUpperCase()+"est accepté\n vous devez prendre votre livre avant"+date;
 		   sendEmail.sendEmailMethode(email,subject,text);
@@ -604,6 +604,8 @@ public void RefuserReservation() throws Exception {
 		   int idUtilisateur=cs.getIdUtilisateur(selectedReservation.getEmail());
 
 		   Boolean bool =cs.UpdateReservation(idUtilisateur,idLivre,dateReservation,"2");
+		   cs.decrementerNbrReservationUtilisateur(idUtilisateur);
+		   
 		   SendEmail sendEmail = new SendEmail();
 		   showListResvation();
 		   LocalDate date = LocalDate.now().plusWeeks(1);
@@ -640,6 +642,7 @@ try {
 		String text ="vous avez empruntez "+selectedReservation.getTitle().toUpperCase()+" vous devez le restituez avant "+date.plusMonths(1);
 		
 		cs.icrementerNombreEmprunt(idUtilisateur);
+		cs.decrementerNbrReservationUtilisateur(idUtilisateur);
 		
 			cs.AjouterEmprunt(idUtilisateur,idLivre);
 			cs.supprimerReservation(idUtilisateur,idLivre,dateReservation);

@@ -212,6 +212,7 @@ public class AbonnesDashboard implements Initializable {
     
     	
     	boolean payement = connectionService.checkPayement(UtilisateurConnecté.email);
+    	
     	if(payement == true) {
     		
     		boolean penalise = connectionService.checkPenalisation(UtilisateurConnecté.email);
@@ -257,6 +258,7 @@ public class AbonnesDashboard implements Initializable {
            			cs.addReservarion(idLivre,idUtilisateur);
            			
            			// update nembre of reservation
+           			//cs.decrementerNombreExemplaire(idLivre);
            			cs.incrementerNbrReservationUtilisateur(idUtilisateur);
            			SendEmail sendEmail = new SendEmail();
            			sendEmail.sendEmailMethode(UtilisateurConnecté.email, "RESERVATON", "vous avez resrvez le livre "+titre.getText());
