@@ -79,7 +79,7 @@ public class Inscription implements Initializable {
          
          try {
         	 SendEmail sendEmail = new SendEmail();
-         	//sendEmail.sendEmailMethode(email.getText(),"Confirmation de votre email", "le code de confirmation est "+randomNum);
+         	sendEmail.sendEmailMethode(email.getText(),"Confirmation de votre email", "le code de confirmation est "+randomNum);
          	
  		} catch (Exception e2) {
  			System.out.println(e2.getMessage());
@@ -96,9 +96,9 @@ public class Inscription implements Initializable {
     	
     	if (result.isPresent()) {
     	    try {
-    	       // int code = Integer.parseInt(result.get());
-    	    	int code =1;
-    	        if(code == 1) {
+    	        int code = Integer.parseInt(result.get());
+    	    	
+    	        if(code == randomNum) {
     	        	
     	        	
     	        	

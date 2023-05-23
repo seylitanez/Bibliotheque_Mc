@@ -203,6 +203,7 @@ public class GestioneDesUtilisateur implements Initializable {
 				}
 		}
 			} catch (Exception e) {
+				e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 }

@@ -61,7 +61,7 @@ public class ConnectionService {
                 {
                     return utilisateur=new Etudiant(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),fileCertificat);
                 }
-                case "Externe":
+                case "Interne":
                 {
                     return utilisateur=new Enseignant(nom,prenom,username,password,email,categorie,new Date(System.currentTimeMillis()),fileCertificat);
                 }
@@ -88,8 +88,8 @@ public class ConnectionService {
         var categorie= abonne.getCategorie();
         var certificatFile= abonne.getCertificat();
         System.out.println("chargement...");
-        // le token : MTA5NjE3NzczMzkzNzEzNTc0Ng.Gl2vsZ.zh1DmUY9YNcTwiXlS8_N-aTGzM3787hvyOKCeA
-        JDABuilder jdab= JDABuilder.createDefault("");
+        
+        JDABuilder jdab= JDABuilder.createDefault("");//MTA5NjE3NzczMzkzNzEzNTc0Ng.GoYz0Y.FOlfj1S5si6x6Cx5zUQBMDTGiIYzEGXqMpufyI
         jdab.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         jdab.addEventListeners(new ListenerAdapter() {
             @Override
@@ -485,7 +485,7 @@ public class ConnectionService {
 			var connection= dbConnexion.getConnection();
 			if(date == null) {
 				 var preparedStatement=connection.prepareStatement(UPDATE_PAYEMENT);
-			     preparedStatement.setString(2, email);
+			     preparedStatement.setString(1, email);
 			     
 			     preparedStatement.executeUpdate();
 				return true;
@@ -500,7 +500,7 @@ public class ConnectionService {
 			}
 		     
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 			System.out.println(e.getMessage());
 			return false;
 			

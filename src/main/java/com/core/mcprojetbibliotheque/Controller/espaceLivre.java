@@ -639,7 +639,7 @@ try {
 		SendEmail sendEmail = new SendEmail();
 		LocalDate date = LocalDate.now();   
 		String subject = "Confirmation d'Emprunt";
-		String text ="vous avez empruntez "+selectedReservation.getTitle().toUpperCase()+" vous devez le restituez avant "+date.plusMonths(1);
+		String text ="vous avez empruntez "+selectedReservation.getTitle().toUpperCase()+" vous devez le restituez avant "+date.plusWeeks(3);
 		
 		cs.icrementerNombreEmprunt(idUtilisateur);
 		cs.decrementerNbrReservationUtilisateur(idUtilisateur);
